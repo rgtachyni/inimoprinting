@@ -3,51 +3,48 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\paymentTransaksi;
+// use App\Models\paymentTransaksi;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\paymentTransaksi;
 use Illuminate\Support\Facades\Auth;
 use Midtrans\Snap;
-use Str;
+use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
-
-    public function createCharge(Request $request)
+    public function process(Request $request)
     {
-
         $data = $request->all();
-
-        $unique_id = 'ORD-' . strtoupper(str::random(8));
 
         $transaction = paymentTransaksi::create([
             'user_id' => Auth::user()->id,
-            'order_id' => $unique_id,
+            'order_id' => rand(),
             'total_price' => $data['amount'],
-            'status' => 'pending'
+            'status' => 'pending',
         ]);
 
+        // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
         \Midtrans\Config::$isProduction = config('midtrans.isProduction');
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;
-        $params = [
-            'transaction_details' => [
+
+        $params = array(
+            'transaction_details' => array(
                 'order_id' => rand(),
-                'gross_amount' => $request->amount,
-            ],
-            'customer_details' => [
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-            ],
-        ];
+                'gross_amount' => $data['amount'],
+            ),
+            'customer_details' => array(
+                'first_name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            ),
+        );
 
+        // $snapToken = \Midtrans\Snap::getSnapToken($params);
         $snapToken = Snap::getSnapToken($params);
-
         $transaction->snap_token = $snapToken;
         $transaction->save();
 
@@ -57,8 +54,22 @@ class PaymentController extends Controller
     public function checkout(paymentTransaksi $transaction)
     {
         $carts = Cart::with('produk')->where('user_id', Auth::id())->get();
-        $transactions = paymentTransaksi::where('user_id', Auth::id())->first();
-        // dd($transactions);
-        return view('app.cart.checkout', compact('carts', 'transactions'));
+        // $transactions = paymentTransaksi::where('user_id', Auth::id())->get();
+        // dd($transaction);
+        $transaction = paymentTransaksi::findOrFail($transaction->id);
+    
+        $total = $transaction->total_price;
+        // dd($transaction);
+        return view('app.cart.checkout', compact('carts', 'transaction', 'total'));
     }
+
+    public function success(PaymentTransaksi $transaction)
+    {
+        $transaction->status = 'success';
+        $transaction->save();
+
+        return view('app.cart.sukses', compact('transaction'));
+    }
+
+   
 }

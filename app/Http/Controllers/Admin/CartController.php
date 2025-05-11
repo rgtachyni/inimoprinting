@@ -84,12 +84,20 @@ class CartController extends Controller
         return view('app.transaction.index', compact('data'));
     }
 
-    public function riwayatPesanan()
+    public function selesai()
     {
-        return view('app.cart.riwayatPesanan');
+        return view('app.cart.selesai');
     }
     public function belumBayar()
     {
         return view('app.cart.belumBayar');
+    }
+    public function sedangProses()
+    {
+        return view('app.cart.sedangProses');
+    }
+    public function dibatalkan()
+    {
+        return view('app.cart.dibatalkan');
     }
 }

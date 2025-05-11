@@ -18,7 +18,7 @@
             </div>
         </div><!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
         <!-- BEGIN: PAGE CONTENT -->
-        <div class="c-content-box c-size-lg  d-flex justify-content-center">
+        <div class="c-content-box c-size-lg  d-flex justify-content-center c-align-center">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-6 ">
@@ -61,24 +61,24 @@
                                     </div>
                                     <div class="col-md-6 c-font-20">
                                         <p class="c-font-bold c-font-30">Rp. <span
-                                                class="c-shipping-total">{{ $transactions->total_price }}</span>
+                                                class="c-shipping-total">{{ $total }}</span>
                                         </p>
                                     </div>
                                 </li>
                                 <li class="row">
 
                                     <div class="form-group col-md-12" role="group">
-                                        <form action="{{ route('prosescheckout') }}" method="POST">
+                                        {{-- <form action="{{ route('prosescheckout') }}" method="POST"> --}}
                                             <div class="c-cart-buttons">
                                                 <button type="button" id="bayar"
                                                     class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Bayar</button>
-                                                <button type="submit"
-                                                    class="btn btn-lg btn-default c-btn-square c-btn-uppercase c-btn-bold">Cancel</button>
+                                                <a href="{{ '/cart' }}"
+                                                    class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Cancel</a>
                                                 {{-- <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre> --}}
                                                 {{-- <a href="#"
                                                 class="btn c-btn btn-lg c-theme-btn c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-r">Checkout</a> --}}
                                             </div>
-                                        </form>
+                                        {{-- </form> --}}
 
 
                                     </div>
@@ -94,27 +94,25 @@
 
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ config('midtrans.clientKey') }}"></script>
-
-    <script type="text/javascript">
-        document.getElementById('bayar').addEventListener('click', function(e) {
-            e.preventDefault(); // mencegah form submit langsung
-            snap.pay('{{ $transactions->snap_token }}', {
-                onSuccess: function(result) {
-                    alert("Pembayaran berhasil!");
-                    window.location = "{{ route('checkout-success', $transactions->id) }}";
-                    console.log(result);
-                    // bisa redirect ke halaman sukses
-                    // window.location.href = "/success";
-                },
-                onPending: function(result) {
-                    alert("Menunggu pembayaran.");
-                    console.log(result);
-                },
-                onError: function(result) {
-                    alert("Pembayaran gagal.");
-                    console.error(result);
-                }
-            });
+     <script type="text/javascript">
+      document.getElementById('bayar').onclick = function(){
+        // SnapToken acquired from previous step
+        snap.pay('{{$transaction->snap_token}}', {
+          // Optional
+          onSuccess: function(result){
+            window.location= "{{route('checkout-success', $transaction->id)}}";
+            
+          },
+          // Optional
+          onPending: function(result){
+          
+            /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+          },
+          // Optional
+          onError: function(result){
+            /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+          }
         });
+      };
     </script>
 @endsection

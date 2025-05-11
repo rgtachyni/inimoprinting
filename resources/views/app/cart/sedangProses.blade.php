@@ -75,7 +75,7 @@
                     <!-- BEGIN: PAGE CONTENT -->
                     <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY -->
                     <div class="c-content-title-1">
-                        <h3 class="c-font-uppercase c-font-bold">Belum Bayar</h3>
+                        <h3 class="c-font-uppercase c-font-bold">Sedang Proses</h3>
                         <div class="c-line-left"></div>
                     </div>
                     <div class="row c-margin-b-40">
@@ -99,8 +99,8 @@
                                         adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
                                         ipsum dolor sit amet.</p>
                                     <p class="c-price c-font-26 c-font-thin">$548</p>
-                                    <button class="btn c-btn btn-lg c-theme-btn">Bayar Sekarang</button>
-                                    <p class="c-payment-type c-font-14 c-font-bold">Bayar sebelum 15-juni-2025 13:00</p>
+                                    <button class="btn c-btn btn-lg c-theme-btn">Hubungi Penjual</button>
+                                    {{-- <p class="c-payment-type c-font-14 c-font-bold">Bayar sebelum 15-juni-2025 13:00</p> --}}
                                 </div>
                             </div>
                         </div>

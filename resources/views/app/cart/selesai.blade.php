@@ -20,7 +20,7 @@
         <div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
             <div class="container">
                 <div class="c-page-title c-pull-left">
-                    <h3 class="c-font-uppercase c-font-sbold">Riwayat Pesanan</h3>
+                    <h3 class="c-font-uppercase c-font-sbold">Pesanan Selesai</h3>
                     <h4 class="">Page Sub Title Goes Here</h4>
                 </div>
                 <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
@@ -49,23 +49,23 @@
                         <li class="c-dropdown c-open">
                             <a href="javascript:;" class="c-toggler">Pesanan saya<span class="c-arrow"></span></a>
                             <ul class="c-dropdown-menu">
-                                {{-- <li class="c-active">
-                                    <a href="shop-customer-dashboard.html">Keranjang</a>
-                                </li> --}}
                                 <li class="c-active">
-                                    <a href="{{'/indexpesanan'}}">Riwayat pesanan</a>
+                                    <a href="/cart">Keranjang</a>
+                                </li>
+                                {{-- <li class="">
+                                    <a href="/riwayatPesanan">Riwayat pesanan</a>
+                                </li> --}}
+                                <li class="">
+                                    <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
                                 <li class="">
-                                    <a href="{{'/pesanan/belumbayar'}}">Belum bayar</a>
+                                    <a href="/pesanan/proses">Sedang di proses</a>
                                 </li>
                                 <li class="">
-                                    <a href="shop-product-wishlist.html">Sedang di proses</a>
+                                    <a href="/pesanan/selesai">Selesai</a>
                                 </li>
                                 <li class="">
-                                    <a href="shop-product-wishlist.html">Selesai</a>
-                                </li>
-                                <li class="">
-                                    <a href="shop-product-wishlist.html">Di batalkan</a>
+                                    <a href="/pesanan/dibatalkan">Di batalkan</a>
                                 </li>
                             </ul>
                         </li>
@@ -75,7 +75,7 @@
                     <!-- BEGIN: PAGE CONTENT -->
                     <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
                     <div class="c-content-title-1">
-                        <h3 class="c-font-uppercase c-font-bold">Order History</h3>
+                        <h3 class="c-font-uppercase c-font-bold">Pesanan Selesai</h3>
                     </div>
                     <div class="row c-margin-b-40 c-order-history-2">
                         <div class="row c-cart-table-title">

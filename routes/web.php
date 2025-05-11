@@ -29,12 +29,18 @@ Route::get('/cart', [App\Http\Controllers\Admin\CartController::class, 'viewCart
 Route::get('/transaction', [App\Http\Controllers\Admin\CartController::class, 'transaction'])->name('transaction.view');
 Route::delete('/cart/remove/{id}', [App\Http\Controllers\Admin\CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cartUpdate');
-Route::get('/pesanan', [CartController::class, 'riwayatPesanan'])->name('riwayatPesanan');
+Route::get('/pesanan/selesai', [CartController::class, 'selesai'])->name('selesia');
 Route::get('/pesanan/belumbayar', [CartController::class, 'belumBayar'])->name('belumBayar');
+Route::get('/pesanan/dibatalkan', [CartController::class, 'dibatalkan'])->name('dibatalkan');
+Route::get('/pesanan/proses', [CartController::class, 'sedangProses'])->name('sedangProses');
 
-Route::post('/prosescheckout', [PaymentController::class, 'createCharge'])->name('prosescheckout');
-Route::get('/checkout/success/{transaction}', [CartController::class, 'success'])->name("checkout-success");
-Route::get('/checkout/{id}', [PaymentController::class, 'checkout'])->name('checkout');
+
+Route::get('/checkout/success/{transaction}', [PaymentController::class, 'success'])->name("checkout-success");
+Route::post('/checkout', [PaymentController::class, 'process'])->name('process');
+Route::get('/checkout/{transaction}', [PaymentController::class, 'checkout'])->name('checkout');
+// Route::get('/checkout/succes/{transaction}', [PaymentController::class, 'succes'])->name("succes");
+// Route::get('/checkout/{id}', [PaymentController::class, 'checkout'])->name('checkout');
+
 
 // Tampilan User
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('index');

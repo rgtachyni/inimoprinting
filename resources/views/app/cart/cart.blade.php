@@ -49,23 +49,23 @@
                         <li class="c-dropdown c-open">
                             <a href="javascript:;" class="c-toggler">Pesanan saya<span class="c-arrow"></span></a>
                             <ul class="c-dropdown-menu">
-                                {{-- <li class="c-active">
-                                    <a href="shop-customer-dashboard.html">Keranjang</a>
-                                </li> --}}
                                 <li class="c-active">
-                                    <a href="{{'/pesanan'}}">Riwayat pesanan</a>
+                                    <a href="/cart">Keranjang</a>
+                                </li>
+                                {{-- <li class="c-active">
+                                    <a href="/riwayatPesanan">Riwayat pesanan</a>
+                                </li> --}}
+                                <li class="">
+                                    <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
                                 <li class="">
-                                    <a href="{{'/pesanan/belumbayar'}}">Belum bayar</a>
+                                    <a href="/pesanan/proses">Sedang di proses</a>
                                 </li>
                                 <li class="">
-                                    <a href="shop-product-wishlist.html">Sedang di proses</a>
+                                    <a href="/pesanan/selesai">Selesai</a>
                                 </li>
                                 <li class="">
-                                    <a href="shop-product-wishlist.html">Selesai</a>
-                                </li>
-                                <li class="">
-                                    <a href="shop-product-wishlist.html">Di batalkan</a>
+                                    <a href="/pesanan/dibatalkan">Di batalkan</a>
                                 </li>
                             </ul>
                         </li>
@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <!-- END: SUBTOTAL ITEM ROW -->
-                    <form action="{{ route('prosescheckout') }}" method="POST">
+                    <form action="{{ route('process') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id">
                         <input type="hidden" name="amount" value="{{ $grandTotal }}">
