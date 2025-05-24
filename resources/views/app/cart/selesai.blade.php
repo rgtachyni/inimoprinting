@@ -59,7 +59,7 @@
                                     <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
                                 <li class="">
-                                    <a href="/pesanan/proses">Sedang di proses</a>
+                                    <a href="{{route('sedangProses')}}">Sedang di proses</a>
                                 </li>
                                 <li class="">
                                     <a href="/pesanan/selesai">Selesai</a>

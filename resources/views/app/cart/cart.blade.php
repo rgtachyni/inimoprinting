@@ -59,7 +59,7 @@
                                     <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
                                 <li class="">
-                                    <a href="/pesanan/proses">Sedang di proses</a>
+                                    <a href="{{ route('sedangProses') }}">Sedang di proses</a>
                                 </li>
                                 <li class="">
                                     <a href="/pesanan/selesai">Selesai</a>
@@ -116,7 +116,8 @@
                                     <div class="c-input-group-btn-vertical">
                                         <button class="btn btn-default" type="button"
                                             data_input="c-item-{{ $item->id }}" data-maximum="10"
-                                            value="{{ $item->jumlah }}"><i class="fa fa-caret-up"></i></button>
+                                            value="{{ $item->jumlah }}" data-price="{{ $item->harga }}"
+                                            oninput="updateTotal(this)"><i class="fa fa-caret-up"></i></button>
                                         <button class="btn btn-default" type="button"
                                             data_input="c-item-{{ $item->id }}" oninput="updateTotal(this)"><i
                                                 class="fa fa-caret-down" value="{{ $item->jumlah }}"></i></button>
@@ -134,14 +135,20 @@
                                 <p class="c-cart-price c-font-bold" id="totalHarga-{{ $item->id }}">Rp.
                                     {{ $item->jumlah * $item->produk->harga }}</p>
                             </div>
-                            <div class="col-md-1 col-sm-12 c-cart-remove">
-                                <a href="#" class="c-theme-link c-cart-remove-desktop">×</a>
-                                <a href="#"
-                                    class="c-cart-remove-mobile btn c-btn c-btn-md c-btn-square c-btn-red c-btn-border-1x c-font-uppercase">Remove
-                                    item from Cart</a>
+                            <div class="col-md-1 col-sm-12">
+                                <form action="{{ route('removeFromCart', $item->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="c-theme-link">
+
+                                        <i class="fa fa-times"></i>
+                                    </button>
+
+                                </form>
                             </div>
                         @endforeach
                     </div>
+
 
                     <div class="row">
                         <div class="c-cart-subtotal-row">
@@ -157,6 +164,9 @@
                     <form action="{{ route('process') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id">
+                        @foreach ($cartIds as $id)
+                            <input type="hidden" name="cart_id[]" value="{{ $id }}">
+                        @endforeach
                         <input type="hidden" name="amount" value="{{ $grandTotal }}">
                         <input type="hidden" name="first_name" value="{{ Auth::user()->name }}">
                         <input type="hidden" name="last_name" value="">

@@ -138,11 +138,38 @@
                                                 <th>Order Id</th>
                                                 <th>Nama Costumer</th>
                                                 <th>Nama Produk</th>
-                                                <th>Jumlah Produk</th>
+                                                <th>Total Harga </th>
                                                 <th>Status</th>
-                                                <th>Prioritas</th>
-                                                <th>Action</th>
+                                                {{-- <th>Prioritas</th> --}}
+                                                {{-- <th>Action</th> --}}
                                             </tr>
+
+                                            @foreach ($data as $key => $v)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $v->order_id }}</td>
+                                                    <td>{{ $v->user->name }}</td>
+                                                    <td>{{ $v->produkDetail }}</td>
+
+                                                    {{-- <td>{{ $v->harga }}</td> --}}
+                                                    <td>{{ $v->total_price }}</td>
+                                                    {{-- <td>{{ $v->deskripsi }}</td> --}}
+
+                                                    <td>
+                                                        {{-- <a href="{{ route('pesanan.show', $v->order_id) }}"
+                                                            class="btn btn-info btn-sm">
+                                                            Detail
+                                                        </a> --}}
+                                                        <a href="javascript:void(0)" data-toggle="tooltip"
+                                                            data-id="{{ $v->id }}" title="Delete" class="deleteData">
+                                                            <button type="button" class="btn btn-primary  btn-sm">
+                                                                Selesai
+                                                                {{-- <i class="fa fa-trash-alt"></i> --}}
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </thead>
                                         <tbody class="datatabel">
                                         </tbody>

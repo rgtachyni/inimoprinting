@@ -97,6 +97,19 @@
                                 {{-- <div class="text-gray-500 fw-semibold fs-6">Your Social Campaigns</div> --}}
                                 <!--end::Subtitle=-->
                             </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        {{-- <li>{{ $errors }}</li> --}}
+
+                                        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+
                             <!--begin::Heading-->
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
@@ -121,7 +134,7 @@
 
                             <div class="fv-row mb-10">
                                 <!--begin::Password-->
-                                <input type="text" placeholder="password" name="password" autocomplete="off"
+                                <input type="password" placeholder="password" name="password" autocomplete="off"
                                     class="form-control bg-transparent" />
                                 <!--end::Password-->
                             </div>
@@ -188,7 +201,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         data: $('#formInput').serialize(),
-                        url: "{{ url('proses-login') }}",
+                        url: "{{ url('registercreate') }}",
                         type: "POST",
                         dataType: 'json',
                         success: function(data) {
@@ -198,7 +211,7 @@
                                 toastr.success("Login sukses!");
 
                             } else if (data.message == 'user') {
-                                window.location.href = "{{ url('akun') }}";
+                                window.location.href = "{{ url('/') }}";
                                 toastr.success("Login sukses!");
 
                             } else if (data.message == 'error') {

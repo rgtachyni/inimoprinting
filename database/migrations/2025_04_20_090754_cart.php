@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('produk_id')->constrained()->onDelete('cascade');
             $table->integer('jumlah')->default(1);
+            $table->string('status')->default('dipilih');
             $table->timestamps();
         });
     }

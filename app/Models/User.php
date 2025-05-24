@@ -50,8 +50,8 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function pelamar()
+    public function customer()
     {
-        return $this->hasOne('App\Models\Pelamar', 'user_id', 'id');
+        return $this->hasOne(Customer::class);
     }
 }

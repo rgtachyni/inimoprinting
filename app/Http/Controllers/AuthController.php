@@ -40,12 +40,10 @@ class AuthController extends Controller
             } else {
                 return response()->json(['message' => 'error']);
             }
-        } 
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->response['message'] = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
             return response()->json($this->response);
         }
-
     }
 
     public function register()
@@ -57,30 +55,36 @@ class AuthController extends Controller
     public function registerCreate(Request $r)
     {
         // dd($r->all());
-        try {
-            // Validasi input
-            $r->validate([
-                'name' => 'required|string|max:255',
-                'username' => 'required|string|max:255',
-                'email' => 'required',
-                'password' => 'required|string|min:6',
-            ]);
+        // try {
+        // Validasi input
+        $r->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|unique:users,username|max:255',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|string|min:6',
+        ]);
 
-            // Simpan user ke database
-            $user = new \App\Models\User();
-            $user->name = $r->name;
-            $user->username = $r->username;
-            $user->email = $r->email;
-            $user->password = bcrypt($r->password);
-            $user->role_id = 1;
-            $user->save();
+        // Simpan user ke database
+        // $user = new \App\Models\User();
+        \App\Models\User::create([
+            'name' => $r->name,
+            'username' => $r->username,
+            'email' => $r->email,
+            'password' => bcrypt($r->password),
+            'role_id' => 1
+
+        ]);
 
 
-            return redirect('/login')->with('succes', 'register berhasil silahkan login');
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage() . ' in file: ' . $e->getFile() . ' line: ' . $e->getLine()
-            ]);
-        }
+        return redirect('/login')->with('succes', 'register berhasil silahkan login');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }

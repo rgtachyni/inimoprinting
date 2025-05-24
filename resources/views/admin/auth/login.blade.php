@@ -96,6 +96,12 @@
                                 {{-- <div class="text-gray-500 fw-semibold fs-6">Your Social Campaigns</div> --}}
                                 <!--end::Subtitle=-->
                             </div>
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
                             <!--begin::Heading-->
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
@@ -135,7 +141,7 @@
                                 </a>
                             </a>
                         </div>
-                        
+
                     </div>
                     <!--end::Wrapper-->
                 </div>

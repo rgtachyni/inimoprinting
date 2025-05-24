@@ -23,6 +23,7 @@ class CartController extends Controller
         $cart = Cart::where('user_id', Auth::id())
             ->where('produk_id', $produk->id)
             ->first();
+        // dd($cart);
 
         if ($cart) {
             $cart->jumlah += 1;
@@ -31,7 +32,7 @@ class CartController extends Controller
             Cart::create([
                 'user_id' => Auth::id(),
                 'produk_id' => $produk->id,
-                'jumlah' => 1
+                'jumlah' => 1,
             ]);
         }
 
@@ -40,11 +41,14 @@ class CartController extends Controller
 
     public function viewCart()
     {
-        $carts = Cart::with('produk')->where('user_id', Auth::id())->get();
+        $carts = Cart::with('produk')->where('user_id', Auth::id())->where('status', 'dipilih')->get();
         $grandTotal = $carts->sum(function ($item) {
             return $item->produk->harga * $item->jumlah;
         });
-        return view('app.cart.cart', compact('carts', 'grandTotal'));
+
+        $cartIds = $carts->pluck('id')->toArray();
+        // dd($carts);
+        return view('app.cart.cart', compact('carts', 'grandTotal', 'cartIds'));
     }
 
     public function removeFromCart($id)
@@ -77,7 +81,7 @@ class CartController extends Controller
 
     public function success(paymentTransaksi $data)
     {
-        dd($data);
+        // dd($data);
         $data->status = 'success';
         $data->save();
 
@@ -90,11 +94,21 @@ class CartController extends Controller
     }
     public function belumBayar()
     {
-        return view('app.cart.belumBayar');
+        $transaction = paymentTransaksi::where('status', 'pending')->get();
+        return view('app.cart.belumBayar', compact('transaction'));
     }
+
     public function sedangProses()
     {
-        return view('app.cart.sedangProses');
+        $transactions = PaymentTransaksi::where('status', 'success')->get();
+
+        foreach ($transactions as $transaction) {
+            $produkIds = explode(',', $transaction->produk_id);
+            $namaProduk = Produk::whereIn('id', $produkIds)->pluck('namaProduk')->toArray();
+            $transaction->produknama = implode(', ', $namaProduk);
+        }
+
+        return view('app.cart.sedangProses', compact('transactions'));
     }
     public function dibatalkan()
     {

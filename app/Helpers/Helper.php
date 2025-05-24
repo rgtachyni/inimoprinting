@@ -10,35 +10,7 @@ use App\Models\UserMenu;
 
 class Helper
 {
-    // public static function getRecentPost($limit)
-    // {
-    //     $data = Article::offset(0)->limit($limit)->orderBy('id', 'desc')->get();
-    //     return $data ?? null;
-    // }
 
-    // public static function getDataLimit($limit, $param)
-    // {
-    //     $data = Article::where('sub_category', $param)->offset(0)->limit($limit)->get();
-    //     return $data ?? null;
-    // }
-
-    // public static function getMostPopulerNew($limit)
-    // {
-    //     $data = Article::offset(0)->limit($limit)->orderBy('rating', 'desc')->get();
-    //     return $data ?? null;
-    // }
-
-    // public static function getMostPopuler($limit, $param, $id)
-    // {
-    //     $data = Article::where('title', '<>', $id)->where('sub_category', $param)->offset(0)->limit($limit)->orderBy('rating', 'desc')->get();
-    //     return $data ?? null;
-    // }
-
-    // public static function getRelated($limit, $param, $id)
-    // {
-    //     $data = Article::where('title', '<>', $id)->where('sub_category', $param)->offset(0)->limit($limit)->get();
-    //     return $data ?? null;
-    // }
 
     public static function title($value)
     {

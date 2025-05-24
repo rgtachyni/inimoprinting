@@ -17,7 +17,8 @@ use Faker\Provider\ar_EG\Payment;
 // Route::get('/auth/login', [Auths::class, 'index']);
 // Route::post('/auth/login', [Auths::class, 'login'])->name('login');
 
-Route::get('/auth/logout', [Auths::class, 'logout'])->name('logout');
+// Route::get('/auth/logout', [Auths::class, 'logout'])->name('logout');
+Route::post('/auth/logout', [Auths::class, 'logout'])->name('logout');
 Route::get('/login', [Authz::class, 'login'])->name('login');
 Route::post('/proses-login', [Authz::class, 'prosesLogin'])->name('prosesLogin');
 Route::get('/register', [Authz::class, 'register'])->name('register');
@@ -26,6 +27,7 @@ Route::post('/register', [Authz::class, 'registerCreate'])->name('registercreate
 // keranjang
 Route::post('/cart/add/{id}', [App\Http\Controllers\Admin\CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart', [App\Http\Controllers\Admin\CartController::class, 'viewCart'])->name('cart.view');
+Route::delete('/cart/{id}', [App\Http\Controllers\Admin\CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::get('/transaction', [App\Http\Controllers\Admin\CartController::class, 'transaction'])->name('transaction.view');
 Route::delete('/cart/remove/{id}', [App\Http\Controllers\Admin\CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cartUpdate');
@@ -33,13 +35,14 @@ Route::get('/pesanan/selesai', [CartController::class, 'selesai'])->name('selesi
 Route::get('/pesanan/belumbayar', [CartController::class, 'belumBayar'])->name('belumBayar');
 Route::get('/pesanan/dibatalkan', [CartController::class, 'dibatalkan'])->name('dibatalkan');
 Route::get('/pesanan/proses', [CartController::class, 'sedangProses'])->name('sedangProses');
+Route::post('/midtrans/notification', [PaymentController::class, 'notificationHandler']);
 
 
 Route::get('/checkout/success/{transaction}', [PaymentController::class, 'success'])->name("checkout-success");
+Route::get('/checkout/pending/{transaction}', [PaymentController::class, 'pending'])->name("checkout-pending");
 Route::post('/checkout', [PaymentController::class, 'process'])->name('process');
 Route::get('/checkout/{transaction}', [PaymentController::class, 'checkout'])->name('checkout');
-// Route::get('/checkout/succes/{transaction}', [PaymentController::class, 'succes'])->name("succes");
-// Route::get('/checkout/{id}', [PaymentController::class, 'checkout'])->name('checkout');
+
 
 
 // Tampilan User
@@ -48,7 +51,9 @@ Route::get('/produk', [App\Http\Controllers\HomeController::class, 'produk'])->n
 Route::get('/store', [App\Http\Controllers\HomeController::class, 'store'])->name('store');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/detailproduk/{id}', [App\Http\Controllers\HomeController::class, 'detailProduk'])->name('detailProduk');
-
+Route::get('/profil', [App\Http\Controllers\HomeController::class, 'profil'])->name('profil');
+Route::get('/ShowEditProfil', [App\Http\Controllers\HomeController::class, 'Showeditprofil'])->name('Showeditprofil');
+Route::post('/editprofil', [App\Http\Controllers\HomeController::class, 'editProfil'])->name('editProfil');
 
 
 Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'middleware' => ['auth']], function () {
@@ -85,7 +90,7 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
             Route::get('/', 'PesananController@index')->name('pesanan');
             Route::get('/data', 'PesananController@data')->name('pesanan.data');
             Route::post('/store', 'PesananController@store')->name('pesanan.store');
-            Route::get('/{id}/edit', 'PesananController@show')->name('pesanan.edit');
+            Route::get('/{order_id}/show', 'PesananController@show')->name('pesanan.show');
             Route::post('/{id}', 'PesananController@update')->name('pesanan.update');
             Route::delete('/{id}', 'PesananController@destroy')->name('pesanan.delete');
         });

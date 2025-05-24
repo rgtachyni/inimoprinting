@@ -59,7 +59,7 @@
                                     <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
                                 <li class="">
-                                    <a href="/pesanan/proses">Sedang di proses</a>
+                                    <a href="{{ route('sedangProses') }}">Sedang di proses</a>
                                 </li>
                                 <li class="">
                                     <a href="/pesanan/selesai">Selesai</a>
@@ -78,32 +78,40 @@
                         <h3 class="c-font-uppercase c-font-bold">Belum Bayar</h3>
                         <div class="c-line-left"></div>
                     </div>
+                    @if (session('pending'))
+                        <div class="alert alert-success">
+                            {{ session('pending') }}
+                        </div>
+                    @endif
                     <div class="row c-margin-b-40">
-                        <div class="c-content-product-2 c-bg-white">
-                            <div class="col-md-4">
-                                <div class="c-content-overlay">
-                                    <div class="c-bg-img-center c-overlay-object" data-height="height"
-                                        style="height: 230px; background-image: url(../../assets/base/img/content/shop3/20.jpg);">
-                                        Gambar
+                        @foreach ($transaction as $item)
+                            <div class="c-content-product-2 c-bg-white">
+                                <div class="col-md-4">
+                                    <div class="c-content-overlay">
+                                        <div class="c-bg-img-center c-overlay-object" data-height="height"
+                                            style="height: 230px; background-image: url(../../assets/base/img/content/shop3/20.jpg);">
+                                            Gambar
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="c-info-list">
+                                        <h3 class="c-title c-font-bold c-font-22 c-font-dark">
+                                            <p class="c-font-14 c-font-thin">Order #: 1107</p>
+                                            <a class="c-theme-link" href="shop-product-details-2.html"></a>
+                                        </h3>
+                                        <p class="c-order-date c-font-14 c-font-thin c-theme-font">21 August 2015</p>
+                                        <p class="c-desc c-font-16 c-font-thin">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                            Lorem
+                                            ipsum dolor sit amet.</p>
+                                        <p class="c-price c-font-26 c-font-thin">$548</p>
+                                        <button class="btn c-btn btn-lg c-theme-btn">Bayar Sekarang</button>
+                                        <p class="c-payment-type c-font-14 c-font-bold">Bayar sebelum 15-juni-2025 13:00</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="c-info-list">
-                                    <h3 class="c-title c-font-bold c-font-22 c-font-dark">
-                                        <p class="c-font-14 c-font-thin">Order #: 1107</p>
-                                        <a class="c-theme-link" href="shop-product-details-2.html">Winter Coat</a>
-                                    </h3>
-                                    <p class="c-order-date c-font-14 c-font-thin c-theme-font">21 August 2015</p>
-                                    <p class="c-desc c-font-16 c-font-thin">Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-                                        ipsum dolor sit amet.</p>
-                                    <p class="c-price c-font-26 c-font-thin">$548</p>
-                                    <button class="btn c-btn btn-lg c-theme-btn">Bayar Sekarang</button>
-                                    <p class="c-payment-type c-font-14 c-font-bold">Bayar sebelum 15-juni-2025 13:00</p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div><!-- END: CONTENT/SHOPS/SHOP-CART-1 -->

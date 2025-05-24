@@ -15,6 +15,8 @@
         @endforeach
     </div> --}}
 
+
+
     <div class="c-layout-page">
         <!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
         <div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
@@ -59,7 +61,7 @@
                                     <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
                                 <li class="">
-                                    <a href="/pesanan/proses">Sedang di proses</a>
+                                    <a href="{{ route('sedangProses') }}">Sedang di proses</a>
                                 </li>
                                 <li class="">
                                     <a href="/pesanan/selesai">Selesai</a>
@@ -78,33 +80,93 @@
                         <h3 class="c-font-uppercase c-font-bold">Sedang Proses</h3>
                         <div class="c-line-left"></div>
                     </div>
-                    <div class="row c-margin-b-40">
-                        <div class="c-content-product-2 c-bg-white">
-                            <div class="col-md-4">
-                                <div class="c-content-overlay">
-                                    <div class="c-bg-img-center c-overlay-object" data-height="height"
-                                        style="height: 230px; background-image: url(../../assets/base/img/content/shop3/20.jpg);">
-                                        Gambar
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <div class="row c-margin-b-40 c-order-history-2">
+                        <div class="row c-cart-table-title">
+                            <div class="col-md-2 c-cart-image">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">No</h3>
+                            </div>
+                            <div class="col-md-1 c-cart-ref">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Order</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 ">Nama Produk</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-price">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Harga</h3>
+                            </div>
+                            <div class="col-md-3 c-cart-total">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Payment Method</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-qty">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Date</h3>
+                            </div>
+                        </div>
+                        <!-- BEGIN: ORDER HISTORY ITEM ROW -->
+                        <div class="row c-cart-table-row">
+                            @foreach ($transactions as $item)
+                                <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
+                                    {{-- <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Order</p> --}}
+                                    <p>{{ $item->order_id }}</p>
+                                </div>
+                                <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc">
+                                    <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Description</p>
+                                    <p><a href="shop-product-details-2.html"
+                                            class="c-font-bold c-theme-link c-font-dark">Camera</a>
+                                    </p>
+                                </div>
+                                <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                                    <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Price</p>
+                                    <p class="c-cart-price c-font-bold">$147.00</p>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-6 c-cart-total">
+                                    <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Payment Method</p>
+                                    <p class="c-cart-price c-font-bold">Credit Cart (MasterCard)</p>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
+                                    <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Date</p>
+                                    <p>2 Sep 2015</p>
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+
+                    {{-- <div class="row c-margin-b-40">
+                        @foreach ($transactions as $item)
+                            <div class="c-content-product-2 c-bg-white">
+                                <div class="col-md-4">
+                                    <div class="c-content-overlay">
+                                        <div class="c-bg-img-center c-overlay-object" data-height="height"
+                                            style="height: 230px; background-image: url(../../assets/base/img/content/shop3/20.jpg);">
+                                            Gambar
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="c-info-list">
+                                        <h3 class="c-title c-font-bold c-font-22 c-font-dark">
+                                            <p class="c-font-14 c-font-thin">Order #: 1107</p>
+                                            <a class="c-theme-link" href="shop-product-details-2.html"></a>
+                                        </h3>
+                                        <p class="c-order-date c-font-14 c-font-thin c-theme-font">21 August 2015</p>
+                                        <p class="c-desc c-font-16 c-font-thin">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                            Lorem
+                                            ipsum dolor sit amet.</p>
+                                        <p class="c-price c-font-26 c-font-thin">$548</p>
+                                        <button class="btn c-btn btn-lg c-theme-btn">Bayar Sekarang</button>
+                                        <p class="c-payment-type c-font-14 c-font-bold">Bayar sebelum 15-juni-2025 13:00</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="c-info-list">
-                                    <h3 class="c-title c-font-bold c-font-22 c-font-dark">
-                                        <p class="c-font-14 c-font-thin">Order #: 1107</p>
-                                        <a class="c-theme-link" href="shop-product-details-2.html">Winter Coat</a>
-                                    </h3>
-                                    <p class="c-order-date c-font-14 c-font-thin c-theme-font">21 August 2015</p>
-                                    <p class="c-desc c-font-16 c-font-thin">Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-                                        ipsum dolor sit amet.</p>
-                                    <p class="c-price c-font-26 c-font-thin">$548</p>
-                                    <button class="btn c-btn btn-lg c-theme-btn">Hubungi Penjual</button>
-                                    {{-- <p class="c-payment-type c-font-14 c-font-bold">Bayar sebelum 15-juni-2025 13:00</p> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    </div> --}}
                 </div>
             </div><!-- END: CONTENT/SHOPS/SHOP-CART-1 -->
 

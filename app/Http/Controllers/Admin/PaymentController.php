@@ -18,11 +18,13 @@ class PaymentController extends Controller
     public function process(Request $request)
     {
         $data = $request->all();
+        $cartIds = implode(',', $data['cart_id']);
 
         $transaction = paymentTransaksi::create([
             'user_id' => Auth::user()->id,
             'order_id' => rand(),
             'total_price' => $data['amount'],
+            'cart_id' => $cartIds,
             'status' => 'pending',
         ]);
 
@@ -57,19 +59,55 @@ class PaymentController extends Controller
         // $transactions = paymentTransaksi::where('user_id', Auth::id())->get();
         // dd($transaction);
         $transaction = paymentTransaksi::findOrFail($transaction->id);
-    
+
         $total = $transaction->total_price;
         // dd($transaction);
         return view('app.cart.checkout', compact('carts', 'transaction', 'total'));
     }
+
+
+
 
     public function success(PaymentTransaksi $transaction)
     {
         $transaction->status = 'success';
         $transaction->save();
 
-        return view('app.cart.sukses', compact('transaction'));
+        Cart::where('user_id', Auth::id())
+            ->where('status', 'dipilih') // atau sesuaikan dengan status sebelumnya
+            ->update(['status' => 'berhasil']);
+
+
+        session()->flash('success', 'PEMBAYARAN BERHASIL');
+        return redirect()->route('sedangProses', $transaction->id);
     }
 
-   
+    public function pending(PaymentTransaksi $transaction)
+    {
+        $transaction->status = 'pending';
+        $transaction->save();
+
+        Cart::where('user_id', Auth::id())
+            ->where('status', 'dipilih') // atau sesuaikan dengan status sebelumnya
+            ->update(['status' => 'pending']);
+
+        session()->flash('pending', 'Silahkan membayar pesanan');
+        return redirect()->route('belumBayar', $transaction->id);
+    }
+
+
+    // public function notificationHandler(Request $request)
+    // {
+    //     $notif = new \Midtrans\Notification();
+
+    //     $transaction = paymentTransaksi::where('order_id', $notif->order_id)->first();
+
+    //     if ($notif->transaction_status == 'settlement') {
+    //         $transaction->status = 'success';
+    //         $transaction->save();
+
+    //         // Hapus keranjang user
+    //         Cart::where('user_id', $transaction->user_id)->delete();
+    //     }
+    // }
 }

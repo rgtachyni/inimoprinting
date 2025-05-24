@@ -69,15 +69,15 @@
 
                                     <div class="form-group col-md-12" role="group">
                                         {{-- <form action="{{ route('prosescheckout') }}" method="POST"> --}}
-                                            <div class="c-cart-buttons">
-                                                <button type="button" id="bayar"
-                                                    class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Bayar</button>
-                                                <a href="{{ '/cart' }}"
-                                                    class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Cancel</a>
-                                                {{-- <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre> --}}
-                                                {{-- <a href="#"
+                                        <div class="c-cart-buttons">
+                                            <button type="button" id="bayar"
+                                                class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Bayar</button>
+                                            <a href="{{ '/cart' }}"
+                                                class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Cancel</a>
+                                            {{-- <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre> --}}
+                                            {{-- <a href="#"
                                                 class="btn c-btn btn-lg c-theme-btn c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-r">Checkout</a> --}}
-                                            </div>
+                                        </div>
                                         {{-- </form> --}}
 
 
@@ -94,25 +94,26 @@
 
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ config('midtrans.clientKey') }}"></script>
-     <script type="text/javascript">
-      document.getElementById('bayar').onclick = function(){
-        // SnapToken acquired from previous step
-        snap.pay('{{$transaction->snap_token}}', {
-          // Optional
-          onSuccess: function(result){
-            window.location= "{{route('checkout-success', $transaction->id)}}";
-            
-          },
-          // Optional
-          onPending: function(result){
-          
-            /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-          },
-          // Optional
-          onError: function(result){
-            /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-          }
-        });
-      };
+    <script type="text/javascript">
+        document.getElementById('bayar').onclick = function() {
+            // SnapToken acquired from previous step
+            snap.pay('{{ $transaction->snap_token }}', {
+                // Optional
+                onSuccess: function(result) {
+                    window.location = "{{ route('checkout-success', $transaction->id) }}";
+
+                },
+                // Optional
+                onPending: function(result) {
+                    window.location ="{{route('checkout-pending', $transaction->id)}}"
+
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                },
+                // Optional
+                onError: function(result) {
+                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                }
+            });
+        };
     </script>
 @endsection

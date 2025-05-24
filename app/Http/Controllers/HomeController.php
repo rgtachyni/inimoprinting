@@ -7,6 +7,7 @@ use App\Http\Services\Repositories\Contracts\PelamarContract;
 use App\Http\Services\Repositories\ProdukRepository;
 use App\Models\Produk;
 use App\Models\Wilayah;
+use App\Models\customer;
 use App\Models\Wisata;
 use App\Traits\Uploadable;
 use Illuminate\Http\Request;
@@ -61,5 +62,42 @@ class HomeController extends Controller
         $produk = Produk::findOrFail($id);
 
         return view('app.produk.detailProduk', compact('produk'));
+    }
+
+    public function profil()
+    {
+        $data=Customer::all()->first();
+        return view('app.profil.index', compact('data'));
+    }
+    public function Showeditprofil()
+    {
+        return view('app.profil.editprofil');
+    }
+
+    public function editProfil(Request $request)
+    {
+        $user = Auth::user();
+
+        $validate = $request->validate([
+            'namaLengkap' => 'required | string | max:255',
+            'noHp' => 'required|string',
+            'tanggalLahir' => 'required|date',
+            'jkel' => 'required|string|in:lakilaki,perempuan',
+            'kabupaten' => 'required|string',
+            'provinsi' => 'required|string',
+            'kodePos' => 'required|integer',
+            'alamat' => 'required|string|max:255'
+        ]);
+
+        // customer::create($validate);
+        $data = array_merge($validate, [
+        'user_id' => $user->id,
+        'username' => $user->username,
+        'email' => $user->email,
+    ]);
+
+        customer::create($data);
+
+        return redirect(route('profil'))->with('success', 'Data berhasil di ubah');
     }
 }

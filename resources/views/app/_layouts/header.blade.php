@@ -87,10 +87,7 @@
                             <a href="{{ '/contact' }}" class="c-link dropdown-toggle">Contact Us<span
                                     class="c-arrow c-toggler"></span></a>
                         </li>
-                        {{-- <li>
-                            <a href="{{ route('indexpesanan') }}" class="c-link dropdown-toggle">Pesanan<span
-                                    class="c-arrow c-toggler"></span></a>
-                        </li> --}}
+
                         <li class="c-cart-toggler-wrapper">
                             <a href="{{ route('cart.view') }}" class="c-btn-icon c-cart-toggler">
                                 <i class="icon-handbag c-cart-icon"></i>
@@ -102,27 +99,44 @@
                                 <i class="icon-heart c-wishlist-icon"></i>
                             </a>
                         </li>
-                        {{-- <li>
-                            <a href="{{ '/login' }}" class="c-link dropdown-toggle">Login<span
-                                    class="c-arrow c-toggler"></span></a>
-                        </li> --}}
+
 
                         <li class="c-cart-toggler-wrapper">
-                            <a href="" class="c-btn-icon c-cart-toggler">
+                            <a href="{{ route('profil') }}" class="c-btn-icon c-cart-toggler">
                                 <i class="icon-user c-login-icon"></i>
                             </a>
                         </li>
+
                         <li class="c-cart-toggler-wrapper">
-                            <a href="" class="c-btn-icon c-cart-toggler">
-                                <i class="icon-logout c-logout-icon"></i>
+                            @auth
+                                <a href="{{ route('logout') }}" class="c-btn-icon c-cart-toggler"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="icon-logout c-logout-icon"></i>
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            <li>
+                                <a href="" class="c-link dropdown-toggle text-red-600">
+                                    Hi {{ Auth::user()->name }} !<span class="c-arrow c-toggler"></span>
+                                </a>
+                            </li>
+                        @endauth
+
+                        @guest
+                            <a href="{{ route('login') }}" class="c-btn-icon c-cart-toggler">
+                                Silahkan login !
                             </a>
+                        @endguest
                         </li>
+
+
                         {{-- <li>
                             <a href="{{route('cart.view')}}" class="c-link dropdown-toggle"><img src="{{ asset('gambar/cart.png') }}"
                                     alt="note" class="w-12 grid items-center bg-yellow-200"></a>
                         </li> --}}
                         {{-- <li> --}}
-                        {{-- <h1 class="c-link dropdown-toggle">Hi {{ Auth::user()->name }}</h1> --}}
+
                         {{-- </li> --}}
 
 

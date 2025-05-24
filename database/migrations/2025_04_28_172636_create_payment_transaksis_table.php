@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('payment_transaksis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-             $table->string('order_id')->unique(); // Wajib untuk Midtrans
-        $table->integer('total_price'); // Total harga semua item
-        $table->string('status')->default('pending'); // Status pembayaran
-        $table->string('snap_token')->nullable(); // Token dari Midtrans
+            $table->string('order_id')->unique(); // Wajib untuk Midtrans
+            $table->foreignId('cart_id')->constrained()->onDelete('cascade');
+            // $table->string('produk_id');
+            $table->integer('total_price'); // Total harga semua item
+            $table->string('status')->default('pending'); // Status pembayaran
+            $table->string('snap_token')->nullable(); // Token dari Midtrans
             $table->timestamps();
         });
     }
