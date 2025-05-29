@@ -15,4 +15,9 @@ class Produk extends Model
         'deskripsi',
         'gambar',
     ];
+
+    public function wishlist()
+    {
+        return $this->hasMany(wishlist::class);
+    }
 }

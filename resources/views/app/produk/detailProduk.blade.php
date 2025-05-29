@@ -27,22 +27,22 @@
                             <div class="c-product-gallery">
                                 <div class="c-product-gallery-content">
                                     <div class="">
-                                        <img src="{{ asset('public/uploads/produk/' . $produk->gambar) }}" alt="1">
+                                        <img src="{{ asset('storage/produk/' . $produk->gambar) }}" alt="1">
                                     </div>
 
                                 </div>
                                 <div class="row c-product-gallery-thumbnail">
                                     <div class="col-xs-3 c-product-thumb">
-                                        <img src="{{ asset('public/uploads/produk/' . $produk->gambar) }}">
+                                        <img src="{{ asset('storage/produk/' . $produk->gambar) }}">
                                     </div>
                                     <div class="col-xs-3 c-product-thumb">
-                                        <img src="{{ asset('public/uploads/produk/' . $produk->gambar) }}">
+                                        <img src="{{ asset('storage/produk/' . $produk->gambar) }}">
                                     </div>
                                     <div class="col-xs-3 c-product-thumb">
-                                        <img src="{{ asset('public/uploads/produk/' . $produk->gambar) }}">
+                                        <img src="{{ asset('storage/produk/' . $produk->gambar) }}">
                                     </div>
                                     <div class="col-xs-3 c-product-thumb c-product-thumb-last">
-                                        <img src="{{ asset('public/uploads/produk/' . $produk->gambar) }}">
+                                        <img src="{{ asset('storage/produk/' . $produk->gambar) }}">
                                     </div>
                                 </div>
                             </div>

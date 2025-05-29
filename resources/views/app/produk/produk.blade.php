@@ -199,7 +199,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="c-bg-img-center c-overlay-object" data-height="height"
-                                                    style="height: 230px; background-image: url({{ asset('public/uploads/produk/' . $produks->gambar) }});">
+                                                    style="height: 230px; background-image: url({{ asset('storage/produk/' . $produks->gambar) }});">
                                                 </div>
                                             </div>
                                             <div class="c-info">
@@ -209,9 +209,17 @@
                                                 </p>
                                             </div>
                                             <div class="btn-group btn-group-justified" role="group">
-                                                <div class="btn-group c-border-top" role="group">
-                                                    <a href="shop-product-wishlist.html"
-                                                        class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Wishlist</a>
+
+                                                <div class="btn-group c-border-left c-border-top" role="group">
+                                                    <form action="{{ route('addWhislist', ['id' => $produks->id]) }}" method="POST">
+                                                        @csrf
+
+                                                        <button type="submit"
+                                                            class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">
+                                                            Wishlist </button>
+
+
+                                                    </form>
                                                 </div>
                                                 <div class="btn-group c-border-left c-border-top" role="group">
                                                     <form action="{{ route('cart.add', ['id' => $produks->id]) }}"
@@ -240,6 +248,7 @@
 
                     </div>
                 </div>
+
             </div>
             <!-- END: PAGE CONTAINER -->
 
@@ -248,8 +257,8 @@
             <!-- BEGIN: LAYOUT/BASE/BOTTOM -->
             <!-- BEGIN: CORE PLUGINS -->
             <!--[if lt IE 9]>
-                                                                                                                                                                                            <script src="../../assets/global/plugins/excanvas.min.js"></script>
-                                                                                                                                                                                            <![endif]-->
+                                                                                                                                                                                                                            <script src="../../assets/global/plugins/excanvas.min.js"></script>
+                                                                                                                                                                                                                            <![endif]-->
             <script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
             <script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
             <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

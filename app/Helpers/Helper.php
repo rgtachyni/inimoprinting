@@ -310,17 +310,17 @@ class Helper
         return $title;
     }
 
-    public static function getKabupaten($id)
-    {
-        $data = DB::table('wilayah')->where('id_wilayah', $id)->orderBy('nama', 'asc')->get();
-        return isset($data) ? $data : null;
-    }
+    // public static function getKabupaten($id)
+    // {
+    //     $data = DB::table('wilayah')->where('id_wilayah', $id)->orderBy('nama', 'asc')->get();
+    //     return isset($data) ? $data : null;
+    // }
 
-    public static function getNamaWilayah($id)
-    {
-        $data = DB::table('wilayah')->where('kode_wilayah', $id)->orderBy('nama', 'asc')->first();
-        return isset($data) ? $data->nama : null;
-    }
+    // public static function getNamaWilayah($id)
+    // {
+    //     $data = DB::table('wilayah')->where('kode_wilayah', $id)->orderBy('nama', 'asc')->first();
+    //     return isset($data) ? $data->nama : null;
+    // }
 
     public static function getKontak($field)
     {
@@ -334,9 +334,9 @@ class Helper
         return isset($data) ? $data->$field : null;
     }
 
-    public static function getKomentar($id)
-    {
-        $data = DB::table('komentar')->where('wisata_id', $id)->get();
-        return isset($data) ? $data : null;
-    }
+    // public static function getKomentar($id)
+    // {
+    //     $data = DB::table('komentar')->where('wisata_id', $id)->get();
+    //     return isset($data) ? $data : null;
+    // }
 }

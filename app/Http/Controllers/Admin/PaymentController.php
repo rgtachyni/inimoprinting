@@ -75,7 +75,7 @@ class PaymentController extends Controller
 
         Cart::where('user_id', Auth::id())
             ->where('status', 'dipilih') // atau sesuaikan dengan status sebelumnya
-            ->update(['status' => 'berhasil']);
+            ->update(['status' => 'success']);
 
 
         session()->flash('success', 'PEMBAYARAN BERHASIL');
@@ -94,20 +94,5 @@ class PaymentController extends Controller
         session()->flash('pending', 'Silahkan membayar pesanan');
         return redirect()->route('belumBayar', $transaction->id);
     }
-
-
-    // public function notificationHandler(Request $request)
-    // {
-    //     $notif = new \Midtrans\Notification();
-
-    //     $transaction = paymentTransaksi::where('order_id', $notif->order_id)->first();
-
-    //     if ($notif->transaction_status == 'settlement') {
-    //         $transaction->status = 'success';
-    //         $transaction->save();
-
-    //         // Hapus keranjang user
-    //         Cart::where('user_id', $transaction->user_id)->delete();
-    //     }
-    // }
+   
 }

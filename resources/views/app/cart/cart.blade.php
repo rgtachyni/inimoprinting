@@ -98,7 +98,7 @@
                                 class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">
                                 Item 1</h2>
                             <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                                <img src="{{ asset('public/uploads/produk/' . $item->produk->gambar) }}" />
+                                <img src="{{ asset('storage/produk/' . $item->produk->gambar) }}" />
                             </div>
                             <div class="col-md-4 col-sm-9 col-xs-7 c-cart-desc">
                                 <h3><a href="shop-product-details-2.html"

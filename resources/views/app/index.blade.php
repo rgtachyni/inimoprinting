@@ -410,7 +410,7 @@
                                                 </div>
                                             </div>
                                             <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
-                                                style="height: 270px; background-image: url({{ asset('public/uploads/produk/' . $produks->gambar) }})">
+                                                style="height: 270px; background-image: url({{ asset('storage/produk/' . $produks->gambar) }})">
                                             </div>
                                         </div>
                                         <div class="c-info">

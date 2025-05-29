@@ -38,7 +38,7 @@
                                  <a href="{{ route('Showeditprofil') }}">Edit Profile</a>
                              </li> --}}
                              <li class="">
-                                 <a href="{{ route('Showeditprofil') }}">Ubah Password</a>
+                                 <a href="{{ route('ShowubahPassword') }}">Ubah Password</a>
                              </li>
 
                          </ul>
@@ -59,14 +59,17 @@
                  </div>
                  <div class="row">
                      <div class="col-md-6 col-sm-6 col-xs-12 c-margin-b-20">
+
                          <h3 class="c-font-uppercase c-font-bold">Hi {{ Auth::user()->name }} </h3>
+                         <img src="{{ asset('storage/customer/' . ($data->gambar ?? 'default.jpg')) }}"
+                             alt="Tambahkan foto profil" width="120" height="120"  style="border-radius: 50%;">
                          <ul class="list-unstyled">
-                             <li>{{ $data->namaLengkap }}</li>
-                             <li>{{ $data->jkel }}</li>
-                             <li>{{ $data->tanggalLahir }}</li>
-                             <li>{{ $data->provinsi }}, {{ $data->kabupaten }}</li>
-                             <li>{{ $data->alamat }}</li>
-                             <li>Phone: {{ $data->noHp }}</li>
+                             <li>{{ $data->namaLengkap ?? '-' }}</li>
+                             <li>{{ $data->jkel ?? '-' }}</li>
+                             <li>{{ $data->tanggalLahir ?? '-' }}</li>
+                             <li>{{ $data->provinsi ?? '-' }}, {{ $data->kabupaten ?? '-'  }}</li>
+                             <li>{{ $data->alamat ?? '-' }}</li>
+                             <li>Phone: {{ $data->noHp ?? '-'  }}</li>
                              <li>Email: <a href="mailto:jango@themehats.com"
                                      class="c-theme-link">{{ Auth::user()->email }}</a>
                              </li>

@@ -79,7 +79,7 @@
                     </div>
                     <!--end:Menu item-->
 
-                    @foreach (Session::get('menu') as $menu)
+                    @foreach (Session::get(key: 'menu') as $menu)
                         @if ($menu['main_menu'] == $main_menu['main_menu'])
                             @if ($menu['index'] == 0)
                                 <div class="menu-item">

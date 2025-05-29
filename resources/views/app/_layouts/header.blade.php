@@ -95,7 +95,7 @@
                             </a>
                         </li>
                         <li class="c-cart-toggler-wrapper">
-                            <a href="" class="c-btn-icon c-cart-toggler">
+                            <a href="{{route('wishlist.index')}}" class="c-btn-icon c-cart-toggler">
                                 <i class="icon-heart c-wishlist-icon"></i>
                             </a>
                         </li>

@@ -33,7 +33,7 @@
                                 <a href="{{ route('profil') }}">My Dashbord</a>
                             </li>
                             <li class="">
-                                <a href="{{ route('Showeditprofil') }}">Edit Profile</a>
+                                <a href="{{ route('ShowubahPassword') }}">Ubah Password</a>
                             </li>
                             {{-- <li class="">
 				<a href="shop-order-history.html">Order History</a>
@@ -64,10 +64,22 @@
                     </div>
                 @endif
 
-                <form class="c-shop-form-1" action="{{ route('editProfil') }}" method="POST">
+                <form class="c-shop-form-1" action="{{ route('editProfil') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!-- BEGIN: ADDRESS FORM -->
+
                     <div class="">
+                        <div class="form-group">
+                            <label>Foto Profil</label><br>
+                            {{-- <img id="preview" src="#" alt="Preview Gambar"
+                                style="max-width: 200px; display: none;"> --}}
+                            <img src="{{ asset('storage/customer/' . $data->gambar) }}" alt="" width="120"
+                                height="120" style="border-radius: 50%;" id="preview">
+                            <br><br>
+                            <input type="file" name="gambar" accept="image/*" onchange="lihatGambar(event)">
+
+
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
 
@@ -83,7 +95,7 @@
                                 {{-- <div class="form-group col-md-6"> --}}
                                 <label class="control-label">Nama Lengkap</label>
                                 <input type="text" class="form-control c-square c-theme" placeholder="" id="namaLengkap"
-                                    name="namaLengkap">
+                                    name="namaLengkap" value="{{ $data->namaLengkap }}">
                                 {{-- </div> --}}
                                 {{-- <div class="col-md-6">
                                         <label class="control-label">Last Name</label>
@@ -96,14 +108,14 @@
                             <div class="form-group col-md-12">
                                 <label class="control-label">Email</label>
                                 <input type="email" class="form-control c-square c-theme" placeholder="" id="email"
-                                    name="email" value="{{ Auth::user()->email }}" readonly>
+                                    name="email" value="{{ Auth::user()->email }}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="control-label">Nomor Telepon</label>
                                 <input type="text" class="form-control c-square c-theme" placeholder="" id="noHp"
-                                    name="noHp">
+                                    name="noHp" value="{{ $data->noHp }}">
                             </div>
                         </div>
 
@@ -111,7 +123,7 @@
                             <div class="form-group col-md-12">
                                 <label class="control-label">Tanggal Lahir</label>
                                 <input type="date" class="form-control c-square c-theme" placeholder="" id="tanggalLahir"
-                                    name="tanggalLahir">
+                                    name="tanggalLahir" value="{{ $data->tanggalLahir }}">
                             </div>
                         </div>
                         <div class="row">
@@ -119,10 +131,12 @@
                                 <label>Jenis Kelamin</label><br>
 
                                 <label class="" id="">
-                                    <input type="radio" name="jkel" id="jkel" value="lakilaki"> Laki-laki
+                                    <input type="radio" name="jkel" id="jkel" value="lakilaki"
+                                        {{ old('jkel', $data->jkel) == 'lakilaki' ? 'checked' : '' }}> Laki-laki
                                 </label> <br>
                                 <label style="">
-                                    <input type="radio" name="jkel" id="jkel" value="perempuan"> Perempuan
+                                    <input type="radio" name="jkel" id="jkel" value="perempuan"
+                                        {{ old('jkel', $data->jkel) == 'perempuan' ? 'checked' : '' }}> Perempuan
                                 </label>
 
                             </div>
@@ -131,10 +145,18 @@
                             <div class="form-group col-md-12">
                                 <label class="control-label">Provinsi</label>
                                 <select class="form-control c-square c-theme" name="provinsi" id="provinsi">
-                                    <option value="sulsel">Sulsesl</option>
-                                    <option value="sulbar">Sulbar</option>
-                                    <option value="papua">Papua</option>
-                                    <option value="Jawa">Jawa</option>
+                                    <option value="sulsel"
+                                        {{ old('provinsi', $data->provinsi) == 'sulsel' ? 'selected' : '' }}>Sulsesl
+                                    </option>
+                                    <option value="sulbar"
+                                        {{ old('provinsi', $data->provinsi) == 'sulbar' ? 'selected' : '' }}>
+                                        Sulbar</option>
+                                    <option value="papua"
+                                        {{ old('provinsi', $data->provinsi) == 'papua' ? 'selected' : '' }}>
+                                        Papua</option>
+                                    <option value="Jawa"
+                                        {{ old('provinsi', $data->provinsi) == 'jawa' ? 'selected' : '' }}>Jawa
+                                    </option>
                                     {{-- <option value="5">China</option> --}}
                                 </select>
                             </div>
@@ -143,10 +165,17 @@
                             <div class="form-group col-md-12">
                                 <label class="control-label">Kabupaten</label>
                                 <select class="form-control c-square c-theme" id="kabupaten" name="kabupaten">
-                                    <option value="makassar">Makassar</option>
-                                    <option value="gowa">Gowa</option>
-                                    <option value="timika">Timika</option>
-                                    <option value="jayapura">Jayapura</option>
+                                    <option value="makassar"
+                                        {{ old('kabupaten', $data->kabupaten) == 'makassar' ? 'selected' : '' }}>Makassar
+                                    </option>
+                                    <option value="gowa"
+                                        {{ old('kabupaten', $data->kabupaten) == 'gowa' ? 'selected' : '' }}>Gowa</option>
+                                    <option value="timika"
+                                        {{ old('kabupaten', $data->kabupaten) == 'timika' ? 'selected' : '' }}>Timika
+                                    </option>
+                                    <option value="jayapura"
+                                        {{ old('kabupaten', $data->kabupaten) == 'jayapura' ? 'selected' : '' }}>Jayapura
+                                    </option>
                                     {{-- <option value="5">China</option> --}}
                                 </select>
                             </div>
@@ -167,14 +196,14 @@
                             <div class="form-group col-md-12">
                                 <label class="control-label">Kode pos</label>
                                 <input type="text" class="form-control c-square c-theme" placeholder=""
-                                    id="kodePos" name="kodePos">
+                                    id="kodePos" name="kodePos" value="{{ old('kodePos', $data->kodePos) }}">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="control-label">Alamat</label>
-                                <textarea id="alamat" name="alamat" rows="4" cols="105"> 
+                                <textarea id="alamat" name="alamat" rows="4" cols="105"> {{ old('alamat', $data->alamat) }}"
 
                                 </textarea>
                             </div>
@@ -213,3 +242,20 @@
         </div>
     </div>
 @endsection
+<script>
+    function lihatGambar(event) {
+        const input = event.target;
+        const preview = document.getElementById('preview');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

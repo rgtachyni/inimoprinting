@@ -8,10 +8,11 @@ use App\Http\Services\Repositories\ProdukRepository;
 use App\Models\Produk;
 use App\Models\Wilayah;
 use App\Models\customer;
-use App\Models\Wisata;
 use App\Traits\Uploadable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class HomeController extends Controller
 {
@@ -66,38 +67,78 @@ class HomeController extends Controller
 
     public function profil()
     {
-        $data=Customer::all()->first();
+        $data = Customer::all()->first();
         return view('app.profil.index', compact('data'));
     }
     public function Showeditprofil()
     {
-        return view('app.profil.editprofil');
+        $data = customer::all()->first();
+        return view('app.profil.editprofil', compact('data'));
     }
-
     public function editProfil(Request $request)
     {
         $user = Auth::user();
 
-        $validate = $request->validate([
-            'namaLengkap' => 'required | string | max:255',
-            'noHp' => 'required|string',
-            'tanggalLahir' => 'required|date',
-            'jkel' => 'required|string|in:lakilaki,perempuan',
-            'kabupaten' => 'required|string',
-            'provinsi' => 'required|string',
-            'kodePos' => 'required|integer',
-            'alamat' => 'required|string|max:255'
+        $validated = $request->validate([
+            'namaLengkap'   => 'required|string|max:255',
+            'noHp'          => 'required|string',
+            'tanggalLahir'  => 'required|date',
+            'jkel'          => 'required|string|in:lakilaki,perempuan',
+            'kabupaten'     => 'required|string',
+            'provinsi'      => 'required|string',
+            'kodePos'       => 'required|integer',
+            'alamat'        => 'required|string|max:255',
+            'email'         => 'required|email',
+            'username'      => 'required|string|max:255',
+            'gambar'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        // customer::create($validate);
-        $data = array_merge($validate, [
-        'user_id' => $user->id,
-        'username' => $user->username,
-        'email' => $user->email,
-    ]);
+        // Update user
+        $user->email = $validated['email'];
+        $user->username = $validated['username'];
+        $user->save();
 
-        customer::create($data);
 
-        return redirect(route('profil'))->with('success', 'Data berhasil di ubah');
+        $customer = Customer::firstOrNew(['user_id' => $user->id]);
+
+
+        $customer->fill($validated);
+        $customer->user_id = $user->id;
+
+
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/customer', $filename);
+            $customer->gambar = $filename;
+        }
+
+        $customer->save();
+
+        return redirect()->route('profil')->with('success', 'Profil berhasil diperbarui');
+    }
+
+    public function ShowubahPassword()
+    {
+        return view('app.profil.ubahpassword');
+    }
+
+    public function ubahPassword(Request $request)
+    {
+        $request->validate([
+            'passwordLama' => 'required',
+            'passwordBaru' => 'required|min:6|confirmed'
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->passwordLama, $user->password)) {
+            return back()->withErrors(['passwordLama' => 'Password lama tidak sesuai ']);
+        }
+
+        $user->password = Hash::make($request->passwordBaru);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil di ubah');
     }
 }

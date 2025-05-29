@@ -20,37 +20,37 @@ class ProdukSeeder extends Seeder
                 'namaProduk' => 'stiker',
                 'harga' => '10000',
                 'deskripsi' => 'pppp',
-                'gambar' => 'gambar/gambar1.png'
+                'gambar' => 'stiker.jpg'
             ],
             [
                 'namaProduk' => 'spanduk',
                 'harga' => '5000',
                 'deskripsi' => 'pppp',
-                'gambar' =>'storage/gambar/spanduk.jpg'
+                'gambar' => 'spanduk.jpg'
             ],
             [
                 'namaProduk' => 'banner',
                 'harga' => '7000',
                 'deskripsi' => 'pppp',
-                'gambar' => 'gambar/banner.jpg'
+                'gambar' => 'stiker.jpg'
             ],
             [
                 'namaProduk' => 'stiker',
                 'harga' => '10000',
                 'deskripsi' => 'pppp',
-                'gambar' => 'gambar/stiker.jpg'
+                'gambar' => 'spanduk.jpg'
             ],
             [
                 'namaProduk' => 'spanduk',
                 'harga' => '5000',
                 'deskripsi' => 'pppp',
-                'gambar' => 'gambar/spanduk.jpg'
+                'gambar' => 'spanduk.jpg'
             ],
             [
                 'namaProduk' => 'banner',
                 'harga' => '7000',
                 'deskripsi' => 'pppp',
-                'gambar' => 'gambar/banner.jpg'
+                'gambar' => 'banner.jpg'
             ]
         ];
         foreach ($produk as $key => $produks) {

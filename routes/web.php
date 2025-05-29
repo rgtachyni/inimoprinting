@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController as Auths;
 use App\Http\Controllers\AuthController as Authz;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\WishlistController;
 use App\Http\Controllers\PesananController;
 use Faker\Provider\ar_EG\Payment;
 
@@ -43,6 +44,11 @@ Route::get('/checkout/pending/{transaction}', [PaymentController::class, 'pendin
 Route::post('/checkout', [PaymentController::class, 'process'])->name('process');
 Route::get('/checkout/{transaction}', [PaymentController::class, 'checkout'])->name('checkout');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add/{id}', [WishlistController::class, 'addWhislist'])->name('addWhislist');
+    Route::delete('/wishlist/delete/{id}', [WishlistController::class, 'hapus'])->name('wishlist.delete');
+});
 
 
 // Tampilan User
@@ -52,8 +58,10 @@ Route::get('/store', [App\Http\Controllers\HomeController::class, 'store'])->nam
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/detailproduk/{id}', [App\Http\Controllers\HomeController::class, 'detailProduk'])->name('detailProduk');
 Route::get('/profil', [App\Http\Controllers\HomeController::class, 'profil'])->name('profil');
-Route::get('/ShowEditProfil', [App\Http\Controllers\HomeController::class, 'Showeditprofil'])->name('Showeditprofil');
+Route::get('/editprofil', [App\Http\Controllers\HomeController::class, 'Showeditprofil'])->name('Showeditprofil');
 Route::post('/editprofil', [App\Http\Controllers\HomeController::class, 'editProfil'])->name('editProfil');
+Route::get('/editpassword', [App\Http\Controllers\HomeController::class, 'ShowubahPassword'])->name('ShowubahPassword');
+Route::post('/editpassword', [App\Http\Controllers\HomeController::class, 'ubahPassword'])->name('ubahPassword');
 
 
 Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'middleware' => ['auth']], function () {

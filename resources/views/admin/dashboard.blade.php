@@ -90,7 +90,7 @@
                                             <!--begin::Stats-->
                                             <div class="m-0">
                                                 <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
-                                                    {{ Helper::getData('wisata')->count() }}
+                                                    {{-- {{ Helper::getData('wisata')->count() }} --}}
                                                 </span>
                                                 <span class="text-gray-500 fw-semibold fs-6">Total Pesanan</span>
                                             </div>
@@ -115,7 +115,7 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
-                                                    {{ Helper::getData('kegiatan')->count() }}
+                                                    {{-- {{ Helper::getData('kegiatan')->count() }} --}}
                                                 </span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
@@ -141,11 +141,11 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
-                                                    {{ Helper::getData('kegiatan')->count() }}
+                                                    {{ Helper::getData('produks')->count() }}
                                                 </span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Total Transaksi</span>
+                                                <span class="text-gray-500 fw-semibold fs-6">Total Produk</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->
