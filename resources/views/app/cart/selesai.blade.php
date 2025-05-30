@@ -49,22 +49,19 @@
                         <li class="c-dropdown c-open">
                             <a href="javascript:;" class="c-toggler">Pesanan saya<span class="c-arrow"></span></a>
                             <ul class="c-dropdown-menu">
-                                <li class="c-active">
+                               <li class="{{ Route::is('cart.view') ? 'c-active' : '' }}">
                                     <a href="/cart">Keranjang</a>
                                 </li>
-                                {{-- <li class="">
-                                    <a href="/riwayatPesanan">Riwayat pesanan</a>
-                                </li> --}}
-                                <li class="">
+                                <li class="{{ Route::is('belumBayar') ? 'c-active' : '' }}">
                                     <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
-                                <li class="">
-                                    <a href="{{route('sedangProses')}}">Sedang di proses</a>
+                                <li class="{{ Route::is('sedangProses') ? 'c-active' : '' }}">
+                                    <a href="{{ route('sedangProses') }}">Sedang di proses</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('selesai') ? 'c-active' : '' }}">
                                     <a href="/pesanan/selesai">Selesai</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
                                     <a href="/pesanan/dibatalkan">Di batalkan</a>
                                 </li>
                             </ul>

@@ -102,7 +102,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                                 <input type="text" class="form-control form-control-solid w-250px ps-14"
-                                    placeholder="Search" id="cari" />
+                                    placeholder="Search" id="pencarian" />
                             </div>
                             <!--end::Search-->
                         </div>
@@ -135,11 +135,11 @@
                                         <thead>
                                             <tr class="fw-bold fs-6 text-gray-800">
                                                 <th>No</th>
-                                                <th>Order Id</th>
-                                                <th>Nama Costumer</th>
-                                                <th>Nama Produk</th>
-                                                <th>Total Harga </th>
-                                                <th>Status</th>
+                                                <th>Username</th>
+                                                <th>Nama Lengkap</th>
+                                                <th>Email</th>
+                                                <th>No hp</th>
+                                                <th>Alamat</th>
                                                 {{-- <th>Prioritas</th> --}}
                                                 {{-- <th>Action</th> --}}
                                             </tr>
@@ -147,27 +147,12 @@
                                             @foreach ($data as $key => $v)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $v->order_id }}</td>
-                                                    <td>{{ $v->user->name }}</td>
-                                                    <td>{{ $v->produkDetail }}</td>
-
-                                                    {{-- <td>{{ $v->harga }}</td> --}}
-                                                    <td>{{ $v->total_price }}</td>
-                                                    {{-- <td>{{ $v->deskripsi }}</td> --}}
-
-                                                    <td>
-                                                        {{-- <a href="{{ route('pesanan.show', $v->order_id) }}"
-                                                            class="btn btn-info btn-sm">
-                                                            Detail
-                                                        </a> --}}
-                                                        <a href="javascript:void(0)" data-toggle="tooltip"
-                                                            data-id="{{ $v->id }}" title="Delete" class="deleteData">
-                                                            <button type="button" class="btn btn-primary  btn-sm">
-                                                                Selesai
-                                                                {{-- <i class="fa fa-trash-alt"></i> --}}
-                                                            </button>
-                                                        </a>
-                                                    </td>
+                                                    <td>{{ $v->username }}</td>
+                                                    <td>{{ $v->namaLengkap }}</td>
+                                                    <td>{{ $v->email }}</td>
+                                                    <td>{{ $v->noHp }}</td>
+                                                    <td>{{ $v->alamat }}, {{ $v->kabupaten }}, {{ $v->provinsi }},
+                                                        {{ $v->kodePos }}</td>
                                                 </tr>
                                             @endforeach
                                         </thead>

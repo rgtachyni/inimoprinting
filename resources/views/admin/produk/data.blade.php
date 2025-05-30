@@ -7,7 +7,7 @@
         <td>
             <div class="d-flex align-items-center">
                 <div class="symbol symbol-50px me-3">
-                    <img src="{{ asset('public/uploads/produk/' . $v->gambar) }}" class="" alt="">
+                    <img src="{{ asset('storage/produk/' . $v->gambar) }}" class="" alt="">
                 </div>
             </div>
         </td>

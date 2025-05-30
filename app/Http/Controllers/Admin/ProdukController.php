@@ -65,11 +65,11 @@ class ProdukController extends Controller
             $req = $request->all();
             // dd($req);
             if ($request->hasFile('gambar')) {
-                $image = $request->file('gambar')->getClientOriginalName();
-                $image_name = pathinfo($image, PATHINFO_FILENAME);
-                // $image = $request->file('gambar')->store('pp', 'public');
-                $image_name = $this->uploadFile2($request->file('gambar'), $this->image_path, '');
-                $req['gambar'] = $image_name;
+                $image = $request->file('gambar');
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/produk', $filename);
+
+                $req['gambar'] = $filename;
             }
             $data = $this->repository->store($req);
             return response()->json($data);

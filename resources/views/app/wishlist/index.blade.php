@@ -98,7 +98,7 @@
 
 
                                             <li class="c-margin-b-10">
-                                                <form action="{{ route('cart.add', $datas->id) }}" method="POST">
+                                                <form action="{{ route('wishlist.cart', $datas->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit"
                                                         class="btn btn-sm btn-default c-btn-square c-btn-uppercase c-btn-bold ">AddCart

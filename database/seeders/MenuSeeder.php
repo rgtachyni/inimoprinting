@@ -20,9 +20,10 @@ class MenuSeeder extends Seeder
             ['name' => 'Produk', 'icon' => ' bi-stack', 'url' => 'produk', 'main_menu' => '', 'index' => 21],
             ['name' => 'Pemesanan', 'icon' => ' bi-stack', 'url' => 'pesanan', 'main_menu' => '', 'index' => 22],
             ['name' => 'Penjadwalan', 'icon' => ' bi-stack', 'url' => 'pembayaran', 'main_menu' => '', 'index' => 23],
+            ['name' => 'Customer', 'icon' => ' bi-stack', 'url' => 'customer', 'main_menu' => '', 'index' => 24],
             // ['name' => 'Pembayaran', 'icon' => ' bi-stack', 'url' => 'pembayaran', 'main_menu' => '', 'index' => 23],
-            ['name' => 'Laporan', 'icon' => ' bi-stack', 'url' => 'laporan', 'main_menu' => '', 'index' => 24],
-            ['name' => 'Pengaturan', 'icon' => ' bi-stack', 'url' => 'pengaturan', 'main_menu' => '', 'index' => 25],
+            ['name' => 'History Pesanan', 'icon' => ' bi-stack', 'url' => 'History Pesanan', 'main_menu' => '', 'index' => 25],
+            ['name' => 'Pengaturan', 'icon' => ' bi-stack', 'url' => 'pengaturan', 'main_menu' => '', 'index' => 26],
             // ['name' => 'Rawr', 'icon' => ' bi-stack', 'url' => 'rawr', 'main_menu' => '', 'index' => 26],
 
             // ['name' => 'Report', 'icon' => ' bi-clipboard2-data-fill', 'url' => 'report', 'index' => 2, 'main_menu' => 'REPORT'],

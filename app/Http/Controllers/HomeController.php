@@ -34,6 +34,16 @@ class HomeController extends Controller
         $produk = Produk::all();
         return view('app.produk.produk', compact('produk'));
     }
+    public function cariProduk(Request $request)
+    {
+        $query  = Produk::query();
+        if ($request->has('cari')) {
+            $query->where('namaProduk', 'like', '%' . $request->cari . '%');
+        }
+        $produk = $query->get();
+
+        return view('app.produk.produk', compact('produk'));
+    }
     public function store(Request $r)
     {
         $produk = Produk::all();
@@ -73,6 +83,11 @@ class HomeController extends Controller
     public function Showeditprofil()
     {
         $data = customer::all()->first();
+        if (!$data) {
+            $data = (object)[
+                'gambar' => 'default.jpg'
+            ];
+        }
         return view('app.profil.editprofil', compact('data'));
     }
     public function editProfil(Request $request)

@@ -49,71 +49,103 @@
                         <li class="c-dropdown c-open">
                             <a href="javascript:;" class="c-toggler">Belum Bayar<span class="c-arrow"></span></a>
                             <ul class="c-dropdown-menu">
-                                <li class="c-active">
+                                <li class="{{ Route::is('cart.view') ? 'c-active' : '' }}">
                                     <a href="/cart">Keranjang</a>
                                 </li>
-                                {{-- <li class="">
-                                    <a href="/riwayatPesanan">Riwayat pesanan</a>
-                                </li> --}}
-                                <li class="">
+                                <li class="{{ Route::is('belumBayar') ? 'c-active' : '' }}">
                                     <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('sedangProses') ? 'c-active' : '' }}">
                                     <a href="{{ route('sedangProses') }}">Sedang di proses</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('selesai') ? 'c-active' : '' }}">
                                     <a href="/pesanan/selesai">Selesai</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
                                     <a href="/pesanan/dibatalkan">Di batalkan</a>
                                 </li>
                             </ul>
                         </li>
                     </ul><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-DASHBOARD -->
                 </div>
-                <div class="c-layout-sidebar-content ">
-                    <!-- BEGIN: PAGE CONTENT -->
-                    <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY -->
-                    <div class="c-content-title-1">
-                        <h3 class="c-font-uppercase c-font-bold">Belum Bayar</h3>
-                        <div class="c-line-left"></div>
-                    </div>
-                    @if (session('pending'))
-                        <div class="alert alert-success">
-                            {{ session('pending') }}
-                        </div>
-                    @endif
-                    <div class="row c-margin-b-40">
-                        @foreach ($transaction as $item)
-                            <div class="c-content-product-2 c-bg-white">
-                                <div class="col-md-4">
-                                    <div class="c-content-overlay">
-                                        <div class="c-bg-img-center c-overlay-object" data-height="height"
-                                            style="height: 230px; background-image: url(../../assets/base/img/content/shop3/20.jpg);">
-                                            Gambar
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="c-info-list">
-                                        <h3 class="c-title c-font-bold c-font-22 c-font-dark">
-                                            <p class="c-font-14 c-font-thin">Order #: 1107</p>
-                                            <a class="c-theme-link" href="shop-product-details-2.html"></a>
-                                        </h3>
-                                        <p class="c-order-date c-font-14 c-font-thin c-theme-font">21 August 2015</p>
-                                        <p class="c-desc c-font-16 c-font-thin">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Lorem
-                                            ipsum dolor sit amet.</p>
-                                        <p class="c-price c-font-26 c-font-thin">$548</p>
-                                        <button class="btn c-btn btn-lg c-theme-btn">Bayar Sekarang</button>
-                                        <p class="c-payment-type c-font-14 c-font-bold">Bayar sebelum 15-juni-2025 13:00</p>
-                                    </div>
-                                </div>
+                @if ($transaction->isEmpty())
+                    <div class="c-content-box c-size-lg">
+                        <div class="container">
+                            <div class="c-shop-cart-page-1 c-center">
+                                <i class="fa fa-frown-o c-font-dark c-font-50 c-font-thin "></i>
+                                <h2 class="c-font-thin c-center">Empty, Let's Go Shopping</h2>
+                                <a href="{{ route('produk.view') }}"
+                                    class="btn c-btn btn-lg c-btn-dark c-btn-square c-font-white c-font-bold c-font-uppercase">Continue
+                                    Shopping</a>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="c-layout-sidebar-content ">
+                        <!-- BEGIN: PAGE CONTENT -->
+                        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY -->
+                        <div class="c-content-title-1">
+                            <h3 class="c-font-uppercase c-font-bold">Belum Bayar</h3>
+                            <div class="c-line-left"></div>
+                        </div>
+                        @if (session('pending'))
+                            <div class="alert alert-success">
+                                {{ session('pending') }}
+                            </div>
+                        @endif
+                        <div class="row c-margin-b-40 c-order-history-2">
+                            <div class="row c-cart-table-title">
+
+                                <div class="col-md-2 c-cart-ref">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Order</h3>
+                                </div>
+                                <div class="col-md-3 c-cart-desc">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 ">Nama Produk</h3>
+                                </div>
+                                <div class="col-md-4 c-cart-price">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Total price</h3>
+                                </div>
+
+
+                            </div>
+                            <!-- BEGIN: ORDER HISTORY ITEM ROW -->
+                            @foreach ($transaction as $item)
+                                <div class="row c-cart-table-row">
+
+
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
+
+                                        <p>{{ $item->order_id }}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
+
+                                        <p>{{ $item->produknama }}</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-3 col-xs-6 c-cart-ref text-center">
+
+                                        <p>Rp. {{ $item->total_price }}</p>
+                                    </div>
+
+
+                                    <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
+                                        <a href="{{ route('detailBelumBayar', $item->id) }}"
+                                            class="btn btn-danger btn-sm  w-100">Bayar</a>
+                                    </div>
+
+                                    <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
+                                        <a href="https://wa.me/6285244194760?text=Halo%20saya%20ingin%20bertanya%20tentang%20pesanan%20dengan%20Order%20ID%20{{ $item->order_id }}"
+                                            class="btn btn-primary btn-sm w-100 ">
+                                            Penjual</a>
+
+
+                                    </div>
+
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                @endif
             </div><!-- END: CONTENT/SHOPS/SHOP-CART-1 -->
 
 
@@ -121,4 +153,5 @@
 
             <!-- END: PAGE CONTENT -->
         </div>
+    
     @endsection

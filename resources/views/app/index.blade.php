@@ -405,7 +405,7 @@
                                                 Sale</div> --}}
                                             <div class="c-overlay-wrapper">
                                                 <div class="c-overlay-content">
-                                                    <a href="shop-product-details-2.html"
+                                                    <a href=""
                                                         class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Explore</a>
                                                 </div>
                                             </div>
@@ -421,12 +421,27 @@
                                         </div>
                                         <div class="btn-group btn-group-justified" role="group">
                                             <div class="btn-group c-border-top" role="group">
-                                                <a href="shop-product-wishlist.html"
-                                                    class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Wishlist</a>
+                                                <form action="{{ route('addWhislist', ['id' => $produks->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="btn btn-sm c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">
+                                                        Wishlist </button>
+
+                                                    {{-- <a href="shop-product-wishlist.html"
+                                                    class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Wishlist</a> --}}
+                                                </form>
                                             </div>
                                             <div class="btn-group c-border-left c-border-top" role="group">
-                                                <a href="shop-cart.html"
-                                                    class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Cart</a>
+                                                <form action="{{ route('cart.add', ['id' => $produks->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Cart
+                                                    </button>
+                                                    {{-- <a href="shop-cart.html"
+                                                        class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Cart</a> --}}
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

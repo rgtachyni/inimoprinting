@@ -102,7 +102,7 @@
                                 </span>
                                 <!--end::Svg Icon-->
                                 <input type="text" class="form-control form-control-solid w-250px ps-14"
-                                    placeholder="Search" id="pencarian" />
+                                    placeholder="Search" id="cari" />
                             </div>
                             <!--end::Search-->
                         </div>
@@ -261,8 +261,8 @@
             }
 
             // $("#pencarian, #show").keyup(function (event) {
-            $("#pencarian, #jumlah").on('keyup change', function(event) {
-                let cari = $('#pencarian').val();
+            $("#cari, #jumlah").on('keyup change', function(event) {
+                let cari = $('#cari').val();
                 let jml = $('#jumlah').val();
                 loadpage(cari, jml);
             });

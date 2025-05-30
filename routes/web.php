@@ -27,15 +27,19 @@ Route::post('/register', [Authz::class, 'registerCreate'])->name('registercreate
 
 // keranjang
 Route::post('/cart/add/{id}', [App\Http\Controllers\Admin\CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/jumlah', [App\Http\Controllers\Admin\CartController::class, 'jumlah'])->name('jumlah');
 Route::get('/cart', [App\Http\Controllers\Admin\CartController::class, 'viewCart'])->name('cart.view');
 Route::delete('/cart/{id}', [App\Http\Controllers\Admin\CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::get('/transaction', [App\Http\Controllers\Admin\CartController::class, 'transaction'])->name('transaction.view');
 Route::delete('/cart/remove/{id}', [App\Http\Controllers\Admin\CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cartUpdate');
-Route::get('/pesanan/selesai', [CartController::class, 'selesai'])->name('selesia');
+
+Route::get('/pesanan/selesai', [CartController::class, 'selesai'])->name('selesai');
 Route::get('/pesanan/belumbayar', [CartController::class, 'belumBayar'])->name('belumBayar');
 Route::get('/pesanan/dibatalkan', [CartController::class, 'dibatalkan'])->name('dibatalkan');
 Route::get('/pesanan/proses', [CartController::class, 'sedangProses'])->name('sedangProses');
+Route::get('/pesanan/detailProses', [CartController::class, 'detailProses'])->name('detailProses');
+Route::get('/pesanan/detailBelumBayar/{id}', [CartController::class, 'detailBelumBayar'])->name('detailBelumBayar');
 Route::post('/midtrans/notification', [PaymentController::class, 'notificationHandler']);
 
 
@@ -47,13 +51,14 @@ Route::get('/checkout/{transaction}', [PaymentController::class, 'checkout'])->n
 Route::middleware(['auth'])->group(function () {
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::post('/wishlist/add/{id}', [WishlistController::class, 'addWhislist'])->name('addWhislist');
+    Route::post('/wishlist/cart/{id}', [WishlistController::class, 'cart'])->name('wishlist.cart');
     Route::delete('/wishlist/delete/{id}', [WishlistController::class, 'hapus'])->name('wishlist.delete');
 });
 
 
 // Tampilan User
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('index');
-Route::get('/produk', [App\Http\Controllers\HomeController::class, 'produk'])->name('produk');
+Route::get('/produk', [App\Http\Controllers\HomeController::class, 'produk'])->name('produk.view');
 Route::get('/store', [App\Http\Controllers\HomeController::class, 'store'])->name('store');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/detailproduk/{id}', [App\Http\Controllers\HomeController::class, 'detailProduk'])->name('detailProduk');
@@ -85,6 +90,14 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
             Route::get('/{id}/edit', 'TransaksiController@show')->name('transaksi.edit');
             Route::post('/{id}', 'TransaksiController@update')->name('transaksi.update');
             Route::delete('/{id}', 'TransaksiController@destroy')->name('transaksi.delete');
+        });
+        Route::group(['prefix' => '/customer'], function () {
+            Route::get('/', 'CustomerController@index')->name('customer');
+            Route::get('/data', 'CustomerController@data')->name('customer.data');
+            Route::post('/store', 'CustomerController@store')->name('customer.store');
+            Route::get('/{id}/edit', 'CustomerController@show')->name('customer.edit');
+            Route::post('/{id}', 'CustomerController@update')->name('customer.update');
+            Route::delete('/{id}', 'CustomerController@destroy')->name('customer.delete');
         });
         Route::group(['prefix' => '/pembayaran'], function () {
             Route::get('/', 'PaymentController@index')->name('pembayaran');

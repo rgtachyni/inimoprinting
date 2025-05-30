@@ -14,10 +14,11 @@ use Midtrans\Transaction;
 
 class CartController extends Controller
 {
-    public function addToCart($id)
+    public function addToCart(Request $request, $id)
     {
 
         $produk = Produk::findOrFail($id);
+        $jumlah = $request->input('jumlah', 1);
         // $produk = Produk::all();
 
         $cart = Cart::where('user_id', Auth::id())
@@ -32,7 +33,7 @@ class CartController extends Controller
             Cart::create([
                 'user_id' => Auth::id(),
                 'produk_id' => $produk->id,
-                'jumlah' => 1,
+                'jumlah' => $jumlah,
             ]);
         }
 
@@ -72,6 +73,27 @@ class CartController extends Controller
         return response()->json(['success' => false], 404);
     }
 
+    public function jumlah(Request $request)
+    {
+        $request->validate([
+            'cart_id' => 'required|integer|exists:carts,id',
+            'jumlah' => 'required|integer|min:1|max:10',
+        ]);
+        $cart = Cart::find($request->cart_id);
+        $cart->jumlah = $request->jumlah;
+        $cart->save();
+
+        $totalharga = $cart->jumlah * $cart->produk->harga;
+        $grandTotal = Cart::where('user_id', auth()->id())->get()->reduce(function ($carry, $item) {
+            return $carry + ($item->jumlah * $item->produk->harga);
+        }, 0);
+
+        return response()->json([
+            'totalHargaItem' => $totalharga,
+            'grandTotal' => $grandTotal,
+        ]);
+    }
+
     public function transaction()
     {
         $data = paymentTransaksi::where('user_id', Auth::id())->get();
@@ -94,7 +116,14 @@ class CartController extends Controller
     }
     public function belumBayar()
     {
+
         $transaction = paymentTransaksi::where('status', 'pending')->get();
+
+        foreach ($transaction as $transactions) {
+            $produkIds = explode(',', $transactions->cart_id);
+            $namaProduk = Produk::whereIn('id', $produkIds)->pluck('namaProduk')->toArray();
+            $transactions->produknama = implode(', ', $namaProduk);
+        }
         return view('app.cart.belumBayar', compact('transaction'));
     }
 
@@ -102,8 +131,9 @@ class CartController extends Controller
     {
         $transactions = PaymentTransaksi::where('status', 'success')->get();
 
+
         foreach ($transactions as $transaction) {
-            $produkIds = explode(',', $transaction->produk_id);
+            $produkIds = explode(',', $transaction->cart_id);
             $namaProduk = Produk::whereIn('id', $produkIds)->pluck('namaProduk')->toArray();
             $transaction->produknama = implode(', ', $namaProduk);
         }
@@ -113,5 +143,25 @@ class CartController extends Controller
     public function dibatalkan()
     {
         return view('app.cart.dibatalkan');
+    }
+
+    public function detailProses()
+    {
+        return view('app.cart.detailSedangProses');
+    }
+
+    public function detailBelumBayar($id)
+    {
+        $transaction = paymentTransaksi::where('id', $id)->where('status', 'pending')->first();
+
+        // if (!$transaction) {
+        //     abort(404, 'Transaksi tidak ditemukan atau tidak berstatus pending.');
+        // }
+
+        // $produkIds = explode(',', $transaction->cart_id);
+        // $namaProduk = Produk::whereIn('id', $produkIds)->pluck('namaProduk')->toArray();
+        // $transaction->produknama = implode(', ', $namaProduk);
+
+        return view('app.cart.bayar', compact('transaction'));
     }
 }

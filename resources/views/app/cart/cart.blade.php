@@ -49,133 +49,147 @@
                         <li class="c-dropdown c-open">
                             <a href="javascript:;" class="c-toggler">Pesanan saya<span class="c-arrow"></span></a>
                             <ul class="c-dropdown-menu">
-                                <li class="c-active">
+                                <li class="{{ Route::is('cart.view') ? 'c-active' : '' }}">
                                     <a href="/cart">Keranjang</a>
                                 </li>
-                                {{-- <li class="c-active">
-                                    <a href="/riwayatPesanan">Riwayat pesanan</a>
-                                </li> --}}
-                                <li class="">
+                                <li class="{{ Route::is('belumBayar') ? 'c-active' : '' }}">
                                     <a href="/pesanan/belumbayar">Belum bayar</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('sedangProses') ? 'c-active' : '' }}">
                                     <a href="{{ route('sedangProses') }}">Sedang di proses</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('selesai') ? 'c-active' : '' }}">
                                     <a href="/pesanan/selesai">Selesai</a>
                                 </li>
-                                <li class="">
+                                <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
                                     <a href="/pesanan/dibatalkan">Di batalkan</a>
                                 </li>
                             </ul>
                         </li>
                     </ul><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-DASHBOARD -->
                 </div>
-                <div class="c-shop-cart-page-1 c-layout-sidebar-content ">
-                    <div class="row c-cart-table-title  ">
-                        <div class="col-md-2 c-cart-image">
-                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Image</h3>
+                @if ($carts->isEmpty())
+                    <div class="c-content-box c-size-lg">
+                        <div class="container">
+                            <div class="c-shop-cart-page-1 c-center">
+                                <i class="fa fa-frown-o c-font-dark c-font-50 c-font-thin "></i>
+                                <h2 class="c-font-thin c-center">Your Shopping Cart is Empty</h2>
+                                <a href="{{ route('produk.view') }}"
+                                    class="btn c-btn btn-lg c-btn-dark c-btn-square c-font-white c-font-bold c-font-uppercase">Continue
+                                    Shopping</a>
+                            </div>
                         </div>
-                        <div class="col-md-4 c-cart-desc">
-                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Description</h3>
-                        </div>
-
-                        <div class="col-md-1 c-cart-qty">
-                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Qty</h3>
-                        </div>
-                        <div class="col-md-2 c-cart-price">
-                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Unit Price</h3>
-                        </div>
-                        <div class="col-md-1 c-cart-total">
-                            <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Total</h3>
-                        </div>
-                        <div class="col-md-1 c-cart-remove"></div>
                     </div>
-                    <!-- BEGIN: SHOPPING CART ITEM ROW -->
-                    <div class="row c-cart-table-row">
-                        @foreach ($carts as $item)
-                            <h2
-                                class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">
-                                Item 1</h2>
-                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                                <img src="{{ asset('storage/produk/' . $item->produk->gambar) }}" />
+                @else
+                    <div class="c-shop-cart-page-1 c-layout-sidebar-content ">
+                        <div class="row c-cart-table-title  ">
+                            <div class="col-md-2 c-cart-image">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Image</h3>
                             </div>
-                            <div class="col-md-4 col-sm-9 col-xs-7 c-cart-desc">
-                                <h3><a href="shop-product-details-2.html"
-                                        class="c-font-bold c-theme-link c-font-22 c-font-dark">{{ $item->produk->namaProduk }}</a>
-                                </h3>
-                                <p>Color: Blue</p>
-                                <p>Size: S</p>
+                            <div class="col-md-4 c-cart-desc">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Description</h3>
                             </div>
 
-                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">QTY</p>
-                                <div class="c-input-group c-spinner">
-                                    <input type="text" class="form-control c-item-{{ $item->id }}"
-                                        value="{{ $item->jumlah }}" oninput="updateTotal(this)">
-                                    <div class="c-input-group-btn-vertical">
-                                        <button class="btn btn-default" type="button"
-                                            data_input="c-item-{{ $item->id }}" data-maximum="10"
-                                            value="{{ $item->jumlah }}" data-price="{{ $item->harga }}"
-                                            oninput="updateTotal(this)"><i class="fa fa-caret-up"></i></button>
-                                        <button class="btn btn-default" type="button"
-                                            data_input="c-item-{{ $item->id }}" oninput="updateTotal(this)"><i
-                                                class="fa fa-caret-down" value="{{ $item->jumlah }}"></i></button>
+                            <div class="col-md-1 c-cart-qty">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Qty</h3>
+                            </div>
+                            <div class="col-md-2 c-cart-price">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Unit Price</h3>
+                            </div>
+                            <div class="col-md-1 c-cart-total">
+                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Total</h3>
+                            </div>
+                            <div class="col-md-1 c-cart-remove"></div>
+                        </div>
+                        <!-- BEGIN: SHOPPING CART ITEM ROW -->
+                        <div class="row c-cart-table-row">
+                            @foreach ($carts as $item)
+                                <h2
+                                    class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">
+                                    Item 1</h2>
+                                <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
+                                    <img src="{{ asset('storage/produk/' . $item->produk->gambar) }}" />
+                                </div>
+                                <div class="col-md-4 col-sm-9 col-xs-7 c-cart-desc">
+                                    <h3><a href="shop-product-details-2.html"
+                                            class="c-font-bold c-theme-link c-font-22 c-font-dark">{{ $item->produk->namaProduk }}</a>
+                                    </h3>
+                                    <p>Color: Blue</p>
+                                    <p>Size: S</p>
+                                </div>
+
+                                <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
+                                    <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">QTY</p>
+                                    <div class="c-input-group c-spinner">
+                                        <input type="text" class="form-control c-item-{{ $item->id }}"
+                                            value="{{ $item->jumlah }}" readonly>
+                                        <div class="c-input-group-btn-vertical">
+                                            <button class="btn btn-default" type="button"
+                                                data-item-id="{{ $item->id }}" data-price="{{ $item->produk->harga }}"
+                                                onclick="changeQty('{{ $item->id }}', 1)"><i
+                                                    class="fa fa-caret-up"></i></button>
+                                            <button class="btn btn-default" type="button"
+                                                data-item-id="{{ $item->id }}"
+                                                onclick="changeQty('{{ $item->id }}', -1)"><i
+                                                    class="fa fa-caret-down"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Unit Price</p>
-                                <p class="c-cart-price c-font-bold"id="price-{{ $item->harga }}">Rp.
-                                    {{ $item->produk->harga }}</p>
-                            </div>
-                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-total">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">
-                                </p>
-                                <p class="c-cart-price c-font-bold" id="totalHarga-{{ $item->id }}">Rp.
-                                    {{ $item->jumlah * $item->produk->harga }}</p>
-                            </div>
-                            <div class="col-md-1 col-sm-12">
-                                <form action="{{ route('removeFromCart', $item->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="c-theme-link">
+                                <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                                    <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Unit Price</p>
+                                    <p class="c-cart-price c-font-bold"id="price-{{ $item->harga }}">Rp.
+                                        {{ $item->produk->harga }}</p>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
 
-                                        <i class="fa fa-times"></i>
-                                    </button>
+                                    <p class="c-cart-price c-font-bold" id="totalHarga-{{ $item->id }}">Rp.
+                                        {{ number_format($item->jumlah * $item->produk->harga, 0, ',', '.') }}</p>
 
-                                </form>
-                            </div>
-                        @endforeach
-                    </div>
+                                </div>
+                                <div class="col-md-1 col-sm-12">
+                                    <form action="{{ route('removeFromCart', $item->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="c-theme-link">
+
+                                            <i class="fa fa-times"></i>
+                                        </button>
+
+                                    </form>
+                                </div>
+                            @endforeach
+                        </div>
 
 
-                    <div class="row">
-                        <div class="c-cart-subtotal-row">
-                            <div class="col-md-2 col-md-offset-9 col-sm-4 col-xs-4 c-cart-subtotal-border">
-                                <h3 class="c-font-uppercase c-font-bold c-right c-font-16 c-font-grey-2">Grand Total</h3>
-                            </div>
-                            <div class="col-md-1 col-sm-4 col-xs-4 c-cart-subtotal-border">
-                                <h3 class="c-font-bold c-font-16">Rp. {{ $grandTotal }}</h3>
+                        <div class="row">
+                            <div class="c-cart-subtotal-row ">
+                                <div class="col-md-3 col-md-offset-7 col-sm-4 col-xs-4 c-cart-subtotal-border">
+                                    <h3 class="c-font-uppercase c-font-bold c-right c-font-16 c-font-grey-2">Grand Total
+                                    </h3>
+                                </div>
+                                <div class="col-md-2 col-sm-4 col-xs-4 c-cart-subtotal-border ">
+                                    <h3 class="c-font-bold c-font-16" id="grandTotal">Rp.
+                                        {{ number_format($grandTotal, 0, ',', '.') }}</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- END: SUBTOTAL ITEM ROW -->
-                    <form action="{{ route('process') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="id">
-                        @foreach ($cartIds as $id)
-                            <input type="hidden" name="cart_id[]" value="{{ $id }}">
-                        @endforeach
-                        <input type="hidden" name="amount" value="{{ $grandTotal }}">
-                        <input type="hidden" name="first_name" value="{{ Auth::user()->name }}">
-                        <input type="hidden" name="last_name" value="">
-                        <input type="hidden" name="email" value="{{ Auth::user()->email }}">
-                        <input type="hidden" name="phone" value="{{ Auth::user()->phone }}">
-                        <button type="submit" id="bayar" class="btn c-btn btn-lg c-theme-btn">Checkout</button>
-                    </form>
+                        <!-- END: SUBTOTAL ITEM ROW -->
+                        <form action="{{ route('process') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id">
+                            @foreach ($cartIds as $id)
+                                <input type="hidden" name="cart_id[]" value="{{ $id }}">
+                            @endforeach
+                            <input type="hidden" name="amount" value="{{ $grandTotal }}">
+                            <input type="hidden" name="first_name" value="{{ Auth::user()->name }}">
+                            <input type="hidden" name="last_name" value="">
+                            <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+                            <input type="hidden" name="phone" value="{{ Auth::user()->phone }}">
+                            <button type="submit" id="bayar" class="btn c-btn btn-lg c-theme-btn">Checkout</button>
+                        </form>
 
-                </div>
+                    </div>
+                @endif
             </div>
         </div><!-- END: CONTENT/SHOPS/SHOP-CART-1 -->
 
@@ -185,3 +199,46 @@
         <!-- END: PAGE CONTENT -->
     </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function formatRupiah(angka) {
+        return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function changeQty(id, delta) {
+        let input = document.querySelector(`.c-item-${id}`);
+        let currentQty = parseInt(input.value);
+        let newQty = currentQty + delta;
+
+        if (newQty < 1) newQty = 1;
+        if (newQty > 10) newQty = 10;
+
+
+        $.ajax({
+            url: '{{ route('jumlah') }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                cart_id: id,
+                jumlah: newQty
+            },
+            success: function(response) {
+
+                input.value = newQty;
+
+
+                document.getElementById(`totalHarga-${id}`).innerText = 'Rp. ' + formatRupiah(response
+                    .totalHargaItem);
+
+
+                document.getElementById('grandTotal').innerText = 'Rp. ' + formatRupiah(response
+                    .grandTotal);
+            },
+            error: function(xhr) {
+                alert('Gagal update quantity');
+                console.log(xhr.responseText);
+            }
+        });
+    }
+</script>

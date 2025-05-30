@@ -150,42 +150,39 @@
                             </div><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-MENU -->
                     </div>
                     <div class="c-layout-sidebar-content ">
-                        <!-- BEGIN: PAGE CONTENT -->
-                        <!-- BEGIN: CONTENT/SHOPS/SHOP-RESULT-FILTER-1 -->
-                        <div class="c-shop-result-filter-1 clearfix form-inline">
-                            <div class="c-filter">
-                                <label class="control-label c-font-16">Show:</label>
-                                <select class="form-control c-square c-theme c-input">
-                                    <option value="#?limit=24" selected="selected">24</option>
-                                    <option value="#?limit=25">25</option>
-                                    <option value="#?limit=50">50</option>
-                                    <option value="#?limit=75">75</option>
-                                    <option value="#?limit=100" selected>100</option>
-                                </select>
+                        <div class="card-title">
+                            <!--begin::Search-->
+                            {{-- <form action="{{ route('cari.produk') }}" method="POST"> --}}
+                            <div class="c-shop-result-filter-1 clearfix form-inline">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
+                                            rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                        <path
+                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+
+                                <!--end::Svg Icon-->
+                                <input type="text" class="form-control form-control-solid w-300px ps-14"
+                                    placeholder="Search" id="cari" name="cari" />
+                                {{-- <button type="submit" class="btn btn-primary">Seacrh</button> --}}
                             </div>
-                            {{-- <div class="c-filter">
-                                <label class="control-label c-font-16">Sort&nbsp;By:</label>
-                                <select class="form-control c-square c-theme c-input">
-                                    <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                                    <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                                    <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                                    <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                                    <option value="#?sort=p.price&amp;order=DESC" selected>Price (High &gt; Low)</option>
-                                    <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                                    <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                                    <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                                    <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
-                                </select>
-                            </div> --}}
-                        </div><!-- END: CONTENT/SHOPS/SHOP-RESULT-FILTER-1 -->
+
+                            <!--end::Search-->
+                        </div>
+
 
                         <div class="c-margin-t-20"></div>
 
 
                         <div class="c-bs-grid-small-space">
-                            <div class="row">
+                            <div class="row" id="tableProduk">
                                 @foreach ($produk as $produks)
-                                    <div class="col-md-3 col-sm-6 c-margin-b-20">
+                                    <div class="col-md-3 col-sm-6 c-margin-b-20 produk-item">
                                         <div class="c-content-product-2 c-bg-white c-border">
                                             <div class="c-content-overlay">
 
@@ -201,9 +198,14 @@
                                                 <div class="c-bg-img-center c-overlay-object" data-height="height"
                                                     style="height: 230px; background-image: url({{ asset('storage/produk/' . $produks->gambar) }});">
                                                 </div>
+                                                {{-- <div class="c-bg-img-center c-overlay-object" data-height="height"
+                                                    style="height: 230px, background-size:cover">
+                                                    <img src="{{ asset('storage/produk/' . $produks->gambar) }}">
+                                                </div> --}}
                                             </div>
                                             <div class="c-info">
-                                                <p class="c-title c-font-16 c-font-slim">{{ $produks->namaProduk }}</p>
+                                                <p class="c-title c-font-16 c-font-slim namaProduk">
+                                                    {{ $produks->namaProduk }}</p>
                                                 <p class="c-price c-font-14 c-font-slim">Rp. {{ $produks->harga }}
 
                                                 </p>
@@ -211,7 +213,8 @@
                                             <div class="btn-group btn-group-justified" role="group">
 
                                                 <div class="btn-group c-border-left c-border-top" role="group">
-                                                    <form action="{{ route('addWhislist', ['id' => $produks->id]) }}" method="POST">
+                                                    <form action="{{ route('addWhislist', ['id' => $produks->id]) }}"
+                                                        method="POST">
                                                         @csrf
 
                                                         <button type="submit"
@@ -250,46 +253,94 @@
                 </div>
 
             </div>
-            <!-- END: PAGE CONTAINER -->
 
-            <!-- BEGIN: LAYOUT/FOOTERS/FOOTER-6 -->
+            <script src="../../assets/global/plugins/excanvas.min.js"></script>
+            <![endif]-->
+                            <script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+                            <script src="../../assets/demos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
 
-            <!-- BEGIN: LAYOUT/BASE/BOTTOM -->
-            <!-- BEGIN: CORE PLUGINS -->
-            <!--[if lt IE 9]>
-                                                                                                                                                                                                                            <script src="../../assets/global/plugins/excanvas.min.js"></script>
-                                                                                                                                                                                                                            <![endif]-->
-            <script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
-            <script src="../../assets/demos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+                            <!-- END: CORE PLUGINS -->
 
-            <!-- END: CORE PLUGINS -->
+                            <!-- BEGIN: LAYOUT PLUGINS -->
+                            <script src="../../assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+                            <script src="../../assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
+                            <!-- END: LAYOUT PLUGINS -->
 
-            <!-- BEGIN: LAYOUT PLUGINS -->
-            <script src="../../assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
-            <script src="../../assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
-            <!-- END: LAYOUT PLUGINS -->
+                            <!-- BEGIN: THEME SCRIPTS -->
+                            <script src="../../assets/base/js/components.js" type="text/javascript"></script>
+                            <script src="../../assets/base/js/components-shop.js" type="text/javascript"></script>
+                            <script src="../../assets/base/js/app.js" type="text/javascript"></script>
+                            <script>
+                                $(document).ready(function() {
+                                    App.init(); // init core    
+                                });
+                            </script>
+                            <!-- END: THEME SCRIPTS -->
 
-            <!-- BEGIN: THEME SCRIPTS -->
-            <script src="../../assets/base/js/components.js" type="text/javascript"></script>
-            <script src="../../assets/base/js/components-shop.js" type="text/javascript"></script>
-            <script src="../../assets/base/js/app.js" type="text/javascript"></script>
-            <script>
-                $(document).ready(function() {
-                    App.init(); // init core    
+                            <!-- END: LAYOUT/BASE/BOTTOM -->
+                        </body>
+                    </div>
+                    {{-- <script>
+            document.getElementById('cari').addEventListener('keyup', function() {
+                let filter = this.value.toLowerCase();
+                let items = document.querySelectorAll('#tableProduk .produk-item');
+
+                items.forEach(item => {
+                    let nama = item.querySelector('.namaProduk').textContent.toLowerCase();
+                    if (nama.includes(filter)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
                 });
-            </script>
-            <!-- END: THEME SCRIPTS -->
+            });
+        </script> --}}
+                    <script>
+                        document.getElementById('cari').addEventListener('keyup', function() {
+                            let filter = this.value.toLowerCase();
+                            let items = document.querySelectorAll('#tableProduk .produk-item');
+                            let found = false;
 
-            <!-- END: LAYOUT/BASE/BOTTOM -->
-        </body>
-    </div>
+                            items.forEach(item => {
+                                let nama = item.querySelector('.namaProduk').textContent.toLowerCase();
+                                if (nama.includes(filter)) {
+                                    item.style.display = '';
+                                    found = true;
+                                } else {
+                                    item.style.display = 'none';
+                                }
+                            });
+
+
+                            let messageId = 'noResultMessage';
+                            let existingMessage = document.getElementById(messageId);
+
+                            if (!found) {
+
+                                if (!existingMessage) {
+                                    let noResult = document.createElement('div');
+                                    noResult.id = messageId;
+                                    noResult.style.padding = '20px';
+                                    noResult.style.textAlign = 'center';
+                                    noResult.style.fontSize = '18px';
+                                    noResult.innerText = 'Pencarian tidak ada';
+                                    document.getElementById('tableProduk').appendChild(noResult);
+                                }
+                            } else {
+
+                                if (existingMessage) {
+                                    existingMessage.remove();
+                                }
+                            }
+                        });
+                    </script>
 @endsection

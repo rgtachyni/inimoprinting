@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Produk;
 use App\Models\wishlist;
 use Illuminate\Http\Request;
@@ -37,15 +38,27 @@ class WishlistController extends Controller
         return redirect('/wishlist')->with('success', 'Produk berhasil ditambahkan ke wishlist.');
     }
 
-    // public function addWhislist($produkId)
-    // {
-    //     Wishlist::firstOrCreate([
-    //         'user_id' => Auth::id(),
-    //         'produk_id' => $produkId
-    //     ]);
+    public function cart($id)
+    {
+        $wishlist = wishlist::findOrFail($id);
 
-    //     return redirect('/wishlist')->with('success', 'Produk ditambahkan ke wishlist!');
-    // }
+        $cart = Cart::where('user_id', Auth()->id())
+            ->where('produk_id', $wishlist->produk_id)->first();
+
+        if ($cart) {
+            $cart->jumlah += 1;
+            $cart->save();
+        } else {
+            Cart::create([
+                'user_id' => auth()->id(),
+                'produk_id' => $wishlist->produk_id,
+                'jumlah' => 1,
+            ]);
+        }
+
+        $wishlist->delete();
+        return redirect()->route('cart.view')->with('success', 'produk berhasil di tambahkan');
+    }
 
     public function hapus($id)
     {
