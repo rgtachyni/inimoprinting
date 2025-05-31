@@ -21,17 +21,9 @@ class MenuSeeder extends Seeder
             ['name' => 'Pemesanan', 'icon' => ' bi-stack', 'url' => 'pesanan', 'main_menu' => '', 'index' => 22],
             ['name' => 'Penjadwalan', 'icon' => ' bi-stack', 'url' => 'pembayaran', 'main_menu' => '', 'index' => 23],
             ['name' => 'Customer', 'icon' => ' bi-stack', 'url' => 'customer', 'main_menu' => '', 'index' => 24],
-            // ['name' => 'Pembayaran', 'icon' => ' bi-stack', 'url' => 'pembayaran', 'main_menu' => '', 'index' => 23],
-            ['name' => 'History Pesanan', 'icon' => ' bi-stack', 'url' => 'History Pesanan', 'main_menu' => '', 'index' => 25],
+            ['name' => 'History Pesanan', 'icon' => ' bi-stack', 'url' => 'history', 'main_menu' => '', 'index' => 25],
             ['name' => 'Pengaturan', 'icon' => ' bi-stack', 'url' => 'pengaturan', 'main_menu' => '', 'index' => 26],
-            // ['name' => 'Rawr', 'icon' => ' bi-stack', 'url' => 'rawr', 'main_menu' => '', 'index' => 26],
-
-            // ['name' => 'Report', 'icon' => ' bi-clipboard2-data-fill', 'url' => 'report', 'index' => 2, 'main_menu' => 'REPORT'],
-            // ['name' => 'User', 'icon' => ' bi-stack', 'url' => 'report-user', 'index' => 21],
-
-            // ['name' => 'Manajemen Web', 'icon' => ' bi-stack', 'url' => 'manajemen-web', 'index' => 3],
-            // ['name' => 'Gallery Photo', 'icon' => ' bi-stack', 'url' => 'gallery-photos', 'index' => 35],
-
+            
             ['name' => 'User Setting', 'icon' => ' bi-people-fill', 'url' => 'user-settings', 'index' => 4, 'main_menu' => 'USERS'],
             // ['name' => 'Role', 'icon' => ' bi-stack', 'url' => 'roles', 'index' => 41, 'main_menu' => ''],
             // ['name' => 'Menu', 'icon' => ' bi-stack', 'url' => 'menus', 'index' => 42, 'main_menu' => ''],

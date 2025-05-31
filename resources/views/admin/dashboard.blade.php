@@ -90,9 +90,9 @@
                                             <!--begin::Stats-->
                                             <div class="m-0">
                                                 <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
-                                                    {{-- {{ Helper::getData('wisata')->count() }} --}}
+                                                    {{ $totalCustomer }}
                                                 </span>
-                                                <span class="text-gray-500 fw-semibold fs-6">Total Pesanan</span>
+                                                <span class="text-gray-500 fw-semibold fs-6">Total Customer</span>
                                             </div>
                                             <!--end::Stats-->
                                         </div>
@@ -115,7 +115,7 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
-                                                    {{-- {{ Helper::getData('kegiatan')->count() }} --}}
+                                                    {{ $totalProduk }}
                                                 </span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
@@ -141,11 +141,11 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
-                                                    {{ Helper::getData('produks')->count() }}
+                                                    {{ $totalPesananSelesai }}
                                                 </span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Total Produk</span>
+                                                <span class="text-gray-500 fw-semibold fs-6">Total Pesanan Selesai</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->
@@ -169,10 +169,10 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">
-                                                    {{ Helper::getData('users')->count() }}</span>
+                                                    {{ $totalPesananProses }}</span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Jumlah Admin
+                                                <span class="text-gray-500 fw-semibold fs-6">Total Pesanan Proses
                                                 </span>
                                                 <!--end::Desc-->
                                             </div>

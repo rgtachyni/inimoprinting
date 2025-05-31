@@ -103,7 +103,7 @@
                     $('#saveBtn').hide();
                     $('#updateBtn').show();
                     $('#formId').val(data.id);
-                    $('#nama').val(data.namaProduk);
+                    $('#namaProduk').val(data.namaProduk);
                     $('#harga').val(data.harga);
                     $('#deskripsi').val(data.deskripsi);
                     $('#gambar_old').val(data.gambar);

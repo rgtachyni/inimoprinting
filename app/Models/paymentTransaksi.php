@@ -15,6 +15,7 @@ class paymentTransaksi extends Model
         'cart_id',
         'total_price',
         'status',
+        'metode_pembayaran',
         'snap_token',
     ];
 
@@ -23,7 +24,13 @@ class paymentTransaksi extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function cart(){
-        return $this->belongsTo(Cart::class, 'cart_id');
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class, 'payment_transaksi_carts', 'payment_transaksi_id', 'cart_id');
     }
+    // public function carts()
+    // {
+    //     return $this->hasMany(Cart::class, 'order_id', 'order_id');
+    // }
 }

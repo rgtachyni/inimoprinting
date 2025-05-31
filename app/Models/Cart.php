@@ -11,11 +11,18 @@ class Cart extends Model
 
     protected $fillable = ['user_id', 'produk_id', 'jumlah'];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function produk(){
-        return $this->belongsTo(Produk::class);
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'produk_id');
+    }
+
+    public function paymentTransaksis()
+    {
+        return $this->belongsToMany(PaymentTransaksi::class, 'payment_transaksi_carts');
     }
 }

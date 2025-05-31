@@ -18,16 +18,21 @@ class PaymentController extends Controller
     public function process(Request $request)
     {
         $data = $request->all();
-        $cartIds = implode(',', $data['cart_id']);
+        // $cartIds = implode(',', $data['cart_id']);
+        $cartIds = $data['cart_id'];
+        $orderid = uniqid();
+        $metodePembayaran = $data['jenis_transaksi'] ?? null;
 
         $transaction = paymentTransaksi::create([
             'user_id' => Auth::user()->id,
-            'order_id' => rand(),
+            'order_id' => $orderid,
             'total_price' => $data['amount'],
-            'cart_id' => $cartIds,
+            // 'cart_id' => $cartIds,
             'status' => 'pending',
+            'metode_pembayaran' => $metodePembayaran
         ]);
-
+        // pi
+        $transaction->carts()->attach($cartIds);
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
         \Midtrans\Config::$isProduction = config('midtrans.isProduction');
@@ -36,13 +41,15 @@ class PaymentController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => rand(),
+                // 'order_id' => rand(),
+                'order_id' => $orderid,
                 'gross_amount' => $data['amount'],
             ),
             'customer_details' => array(
                 'first_name' => Auth::user()->name,
                 'email' => Auth::user()->email,
             ),
+            'notification_url' => route('paymentNotification')
         );
 
         // $snapToken = \Midtrans\Snap::getSnapToken($params);
@@ -55,17 +62,30 @@ class PaymentController extends Controller
 
     public function checkout(paymentTransaksi $transaction)
     {
-        $carts = Cart::with('produk')->where('user_id', Auth::id())->get();
-        // $transactions = paymentTransaksi::where('user_id', Auth::id())->get();
-        // dd($transaction);
+        $carts = Cart::with('produk')->where('user_id', Auth::id())
+            ->where('status', 'dipilih')
+            ->get();
+
         $transaction = paymentTransaksi::findOrFail($transaction->id);
 
         $total = $transaction->total_price;
-        // dd($transaction);
+
         return view('app.cart.checkout', compact('carts', 'transaction', 'total'));
     }
 
+    public function paymentNotification(Request $request)
+    {
+        $notif = new \Midtrans\Notification();
 
+        $order_id = $notif->order_id;
+        $transaction = paymentTransaksi::where('order_id', $order_id)->first();
+        // dd($notif);
+        if ($transaction) {
+            $transaction->status = $notif->transaction_status;
+            $transaction->metode_pembayaran = $notif->payment_type;  // dapat dari Midtrans
+            $transaction->save();
+        }
+    }
 
 
     public function success(PaymentTransaksi $transaction)
@@ -74,8 +94,9 @@ class PaymentController extends Controller
         $transaction->save();
 
         Cart::where('user_id', Auth::id())
-            ->where('status', 'dipilih') // atau sesuaikan dengan status sebelumnya
+            ->where('status', 'dipilih')
             ->update(['status' => 'success']);
+        // ->delete();
 
 
         session()->flash('success', 'PEMBAYARAN BERHASIL');
@@ -88,11 +109,11 @@ class PaymentController extends Controller
         $transaction->save();
 
         Cart::where('user_id', Auth::id())
-            ->where('status', 'dipilih') // atau sesuaikan dengan status sebelumnya
+            ->where('status', 'dipilih')
             ->update(['status' => 'pending']);
+        // ->delete();
 
         session()->flash('pending', 'Silahkan membayar pesanan');
         return redirect()->route('belumBayar', $transaction->id);
     }
-   
 }

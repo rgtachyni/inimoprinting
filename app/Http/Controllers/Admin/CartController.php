@@ -19,21 +19,26 @@ class CartController extends Controller
 
         $produk = Produk::findOrFail($id);
         $jumlah = $request->input('jumlah', 1);
-        // $produk = Produk::all();
 
+        // $cart = Cart::where('user_id', Auth::id())
+        //     ->where('produk_id', $produk->id)
+        //     ->first();
+        // dd($cart);
         $cart = Cart::where('user_id', Auth::id())
             ->where('produk_id', $produk->id)
+            ->where('status', 'dipilih')
             ->first();
-        // dd($cart);
 
         if ($cart) {
             $cart->jumlah += 1;
             $cart->save();
         } else {
+
             Cart::create([
                 'user_id' => Auth::id(),
                 'produk_id' => $produk->id,
                 'jumlah' => $jumlah,
+                'status' => 'dipilih', // tambahkan status default
             ]);
         }
 
@@ -112,31 +117,30 @@ class CartController extends Controller
 
     public function selesai()
     {
-        return view('app.cart.selesai');
+        $transaction = PaymentTransaksi::with('carts.produk')
+            ->where('status', 'done')
+            ->where('user_id', Auth::id())
+            ->get();
+
+        return view('app.cart.selesai', compact('transaction'));
     }
     public function belumBayar()
     {
 
-        $transaction = paymentTransaksi::where('status', 'pending')->get();
+        $transaction = PaymentTransaksi::with('carts.produk')
+            ->where('status', 'pending')
+            ->where('user_id', Auth::id())
+            ->get();
 
-        foreach ($transaction as $transactions) {
-            $produkIds = explode(',', $transactions->cart_id);
-            $namaProduk = Produk::whereIn('id', $produkIds)->pluck('namaProduk')->toArray();
-            $transactions->produknama = implode(', ', $namaProduk);
-        }
         return view('app.cart.belumBayar', compact('transaction'));
     }
 
     public function sedangProses()
     {
-        $transactions = PaymentTransaksi::where('status', 'success')->get();
-
-
-        foreach ($transactions as $transaction) {
-            $produkIds = explode(',', $transaction->cart_id);
-            $namaProduk = Produk::whereIn('id', $produkIds)->pluck('namaProduk')->toArray();
-            $transaction->produknama = implode(', ', $namaProduk);
-        }
+        $transactions = PaymentTransaksi::with('carts.produk')
+            ->where('status', 'success')
+            ->where('user_id', Auth::id())
+            ->get();
 
         return view('app.cart.sedangProses', compact('transactions'));
     }
@@ -152,16 +156,19 @@ class CartController extends Controller
 
     public function detailBelumBayar($id)
     {
-        $transaction = paymentTransaksi::where('id', $id)->where('status', 'pending')->first();
+        $transaction = paymentTransaksi::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->where('status', 'pending')
+            ->firstOrFail();
 
-        // if (!$transaction) {
-        //     abort(404, 'Transaksi tidak ditemukan atau tidak berstatus pending.');
-        // }
+        if (!$transaction->snap_token) {
+            return redirect()->back()->with('error', 'Snap token belum dibuat.');
+        }
 
-        // $produkIds = explode(',', $transaction->cart_id);
-        // $namaProduk = Produk::whereIn('id', $produkIds)->pluck('namaProduk')->toArray();
-        // $transaction->produknama = implode(', ', $namaProduk);
-
-        return view('app.cart.bayar', compact('transaction'));
+        // Kirim ke view
+        return view('app.cart.bayar', [
+            'transaction' => $transaction,
+            'snapToken' => $transaction->snap_token,
+        ]);
     }
 }

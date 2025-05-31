@@ -17,8 +17,13 @@
 @endpush
 
 @section('content')
+    <style>
+        .nowrap {
+            white-space: nowrap;
+            vertical-align: top;
+        }
+    </style>
     <!--begin::Content wrapper-->
-
     <div class="d-flex flex-column flex-column-fluid">
         <!--begin::Toolbar-->
         <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -134,7 +139,7 @@
                                     <table class="table table-row-dashed table-row-gray-300 gy-4">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-gray-800">
-                                                <th>No</th>
+                                                {{-- <th>No</th> --}}
                                                 <th>Order Id</th>
                                                 <th>Nama Costumer</th>
                                                 <th>Nama Produk</th>
@@ -145,30 +150,36 @@
                                             </tr>
 
                                             @foreach ($data as $key => $v)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $v->order_id }}</td>
-                                                    <td>{{ $v->user->name }}</td>
-                                                    <td>{{ $v->produkDetail }}</td>
+                                                @if ($v->status == 'success')
+                                                    <tr>
+                                                        {{-- <td>{{ $loop->iteration }}</td> --}}
+                                                        <td class="nowrap">{{ $v->order_id }}</td>
+                                                        <td class="nowrap">{{ $v->user->name }}</td>
+                                                        <td class="nowrap">
+                                                            <ul class="list-unstyled mb-0">
+                                                                @foreach ($v->carts as $carts)
+                                                                    <li>{{ $carts->produk->namaProduk }} x
+                                                                        {{ $carts->jumlah }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </td>
+                                                        <td class="nowrap">{{ $v->total_price }}</td>
 
-                                                    {{-- <td>{{ $v->harga }}</td> --}}
-                                                    <td>{{ $v->total_price }}</td>
-                                                    {{-- <td>{{ $v->deskripsi }}</td> --}}
 
-                                                    <td>
-                                                        {{-- <a href="{{ route('pesanan.show', $v->order_id) }}"
-                                                            class="btn btn-info btn-sm">
-                                                            Detail
-                                                        </a> --}}
-                                                        <a href="javascript:void(0)" data-toggle="tooltip"
-                                                            data-id="{{ $v->id }}" title="Delete" class="deleteData">
-                                                            <button type="button" class="btn btn-primary  btn-sm">
-                                                                Selesai
-                                                                {{-- <i class="fa fa-trash-alt"></i> --}}
-                                                            </button>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                        <td>
+
+                                                            <form action="{{ route('pesanan.selesai', $v->id) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-primary  btn-sm">
+                                                                    Selesai
+
+                                                                </button>
+                                                            </form>
+
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                         </thead>
                                         <tbody class="datatabel">

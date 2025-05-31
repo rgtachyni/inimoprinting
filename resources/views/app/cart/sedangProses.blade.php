@@ -63,9 +63,9 @@
                                 <li class="{{ Route::is('selesai') ? 'c-active' : '' }}">
                                     <a href="/pesanan/selesai">Selesai</a>
                                 </li>
-                                <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
+                                {{-- <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
                                     <a href="/pesanan/dibatalkan">Di batalkan</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                     </ul><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-DASHBOARD -->
@@ -115,41 +115,48 @@
                                 </div>
                             </div>
                             <!-- BEGIN: ORDER HISTORY ITEM ROW -->
-                            <div class="row c-cart-table-row">
-                                @foreach ($transaction as $item)
-                                    {{-- <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
+                            @foreach ($transactions as $transaction)
+                                
+                                    <div class="row c-cart-table-row">
+
+                                        {{-- <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
                                     <img src="../../assets/base/img/content/shop3/20.jpg" />
                                 </div> --}}
-                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
+                                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
 
-                                        <p>{{ $item->order_id }}</p>
+                                            <p>{{ $transaction->order_id }}</p>
+                                        </div>
+                                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
+                                            @foreach ($transaction->carts as $carts)
+
+                                            <p>{{ $carts->produk->namaProduk }} x {{ $carts->jumlah }}</p>
+                                             @endforeach
+                                        </div>
+                                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref text-center">
+
+                                            <p>{{ $transaction->total_price }}</p>
+                                        </div>
+
+                                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref text-end">
+
+                                            <p>{{ \Carbon\Carbon::parse($carts->created_at)->addDays(5)->format('d M Y') }}
+                                            </p>
+                                        </div>
+                                        <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
+                                            <a href="{{ route('detailProses', $transaction->id) }}"
+                                                class="btn btn-danger btn-sm  w-100">Detail</a>
+                                        </div>
+                                        <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
+                                            <a href="https://wa.me/6285244194760?text=Halo%20saya%20ingin%20bertanya%20tentang%20pesanan%20dengan%20Order%20ID%20{{ $carts->order_id }}"
+                                                class="btn btn-primary btn-sm w-100 ">
+                                                Penjual</a>
+
+
+                                        </div>
+
                                     </div>
-                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
-
-                                        <p>{{ $item->produknama }}</p>
-                                    </div>
-                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref text-center">
-
-                                        <p>{{ $item->total_price }}</p>
-                                    </div>
-
-                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref text-end">
-
-                                        <p>{{ \Carbon\Carbon::parse($item->created_at)->addDays(5)->format('d M Y') }}</p>
-                                    </div>
-                                    <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
-                                        <a href="{{ route('detailProses') }}"
-                                            class="btn btn-danger btn-sm  w-100">Detail</a>
-                                    </div>
-                                    <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
-                                        <a href="https://wa.me/6285244194760?text=Halo%20saya%20ingin%20bertanya%20tentang%20pesanan%20dengan%20Order%20ID%20{{ $item->order_id }}"
-                                            class="btn btn-primary btn-sm w-100 ">
-                                            Penjual</a>
-
-
-                                    </div>
-                                @endforeach
-                            </div>
+                               
+                            @endforeach
 
                         </div>
 

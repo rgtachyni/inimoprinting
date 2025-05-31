@@ -28,7 +28,23 @@
                                 <span class="required">Nama</span>
                             </label>
                             <div class="position-relative">
-                                <input type="text" class="form-control" name="nama" id="nama" />
+                                <input type="text" class="form-control" name="namaProduk" id="namaProduk" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Harga</span>
+                            </label>
+                            <div class="position-relative">
+                                <input type="text" class="form-control" name="harga" id="harga" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Deskripsi</span>
+                            </label>
+                            <div class="position-relative">
+                                <textarea class="form-control" name="deskripsi" id="deskripsi" rows="4"></textarea>
                             </div>
                         </div>
 
@@ -87,7 +103,8 @@
                     $('#saveBtn').hide();
                     $('#updateBtn').show();
                     $('#formId').val(data.id);
-                    $('#nama').val(data.nama_budaya);
+                    $('#nama').val(data.namaProduk);
+                    $('#harga').val(data.harga);
                     $('#deskripsi').val(data.deskripsi);
                     $('#gambar_old').val(data.gambar);
                 },

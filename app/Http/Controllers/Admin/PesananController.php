@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\historyPesanan;
 use App\Models\paymentTransaksi;
 use App\Models\Produk;
 use Illuminate\Http\Request;
@@ -13,21 +14,10 @@ class PesananController extends Controller
     public function index()
     {
         $title = 'pesanan';
-        // $data = paymentTransaksi::all();
-        $data = paymentTransaksi::with('user')->get();
-        foreach ($data as $d) {
-            $cartIds = explode(',', $d->cart_id); // pisahkan id cart
-            $carts = Cart::with('produk')->whereIn('id', $cartIds)->get();
-
-            // Ambil nama produk dan jumlah dari masing-masing cart
-            $produkList = [];
-            foreach ($carts as $cart) {
-                $produkList[] = $cart->produk->namaProduk . ' (x' . $cart->jumlah . ')';
-            }
-
-            // Gabungkan dalam satu string
-            $d->produkDetail = implode(', ', $produkList);
-        }
+        $data = PaymentTransaksi::with('carts.produk')
+            ->where('status', 'success')
+            // ->where('user_id')
+            ->get();
 
 
         // dd($data);

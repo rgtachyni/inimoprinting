@@ -81,11 +81,15 @@
                         </div> --}}
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <a href="{{ route('logout') }}" class="menu-link px-5">Sign Out</a>
-                        </div>
+
                         <div class="menu-item px-5">
                             <a href="{{ route('index') }}" class="menu-link px-5">Halaman User</a>
+                        </div>
+                        <div class="menu-item px-5">
+
+                            <a href="{{ route('logout') }}" class="menu-link px-5">Logout</a>
+
+
                         </div>
                         <!--end::Menu item-->
                     </div>

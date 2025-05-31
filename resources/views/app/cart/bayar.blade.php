@@ -26,21 +26,6 @@
                             {{-- <img src="" alt=""> --}}
                             <h1 class="c-font-bold c-font-uppercase c-font-24 text-center">Silahkan Bayar</h1>
                             <ul class="c-order list-unstyled">
-                                {{-- <li class="row c-margin-b-15">
-                                    <div class="col-md-6 c-font-20">
-                                        <h2>Product</h2>
-                                    </div>
-                                    <div class="col-md-6 c-font-20">
-                                        <h2>Total</h2>
-                                    </div>
-                                </li> --}}
-                                {{-- <li class="row c-border-bottom"></li>
-                                <li class="row c-margin-b-15 c-margin-t-15">
-
-                                    <div class="col-md-6 c-font-20"><a href="shop-product-details.html"
-                                            class="c-theme-link">{{ $transaction->produknama }}x
-                                        </a>
-                                    </div> --}}
                                 <div class="col-md-6 c-font-20">
                                     <p class=""></p>
                                 </div>
@@ -86,4 +71,28 @@
         </div>
         <!-- END: PAGE CONTENT -->
     </div>
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('midtrans.clientKey') }}"></script>
+    <script type="text/javascript">
+        document.getElementById('bayar').addEventListener('click', function() {
+
+            snap.pay('{{ $snapToken }}', {
+                onSuccess: function(result) {
+                    console.log('Payment Success:', result);
+                    window.location.href = "{{ route('sedangProses') }}";
+                },
+                onPending: function(result) {
+                    console.log('Payment Pending:', result);
+                    window.location.href = "{{ route('belumBayar') }}";
+                },
+                onError: function(result) {
+                    console.log('Payment Error:', result);
+                    alert('Pembayaran gagal, silakan coba lagi.');
+                },
+                onClose: function() {
+                    alert('Kamu belum menyelesaikan pembayaran.');
+                }
+            });
+        });
+    </script>
 @endsection

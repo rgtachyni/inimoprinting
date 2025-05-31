@@ -40,7 +40,7 @@ Route::get('/pesanan/dibatalkan', [CartController::class, 'dibatalkan'])->name('
 Route::get('/pesanan/proses', [CartController::class, 'sedangProses'])->name('sedangProses');
 Route::get('/pesanan/detailProses', [CartController::class, 'detailProses'])->name('detailProses');
 Route::get('/pesanan/detailBelumBayar/{id}', [CartController::class, 'detailBelumBayar'])->name('detailBelumBayar');
-Route::post('/midtrans/notification', [PaymentController::class, 'notificationHandler']);
+Route::post('/midtrans/notification', [PaymentController::class, 'paymentNotification'])->name('paymentNotification');
 
 
 Route::get('/checkout/success/{transaction}', [PaymentController::class, 'success'])->name("checkout-success");
@@ -107,6 +107,15 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
             Route::post('/{id}', 'PaymentController@update')->name('pembayaran.update');
             Route::delete('/{id}', 'PaymentController@destroy')->name('pembayaran.delete');
         });
+        Route::group(['prefix' => '/history'], function () {
+            Route::get('/', 'HistoryController@index')->name('history');
+            Route::get('/data', 'HistoryController@data')->name('History.data');
+            Route::post('/store', 'HistoryControllerstory@store')->name('History.store');
+            Route::get('/{id}/edit', 'HistoryController@show')->name('History.edit');
+            Route::post('/{id}', 'HistoryController@update')->name('History.update');
+            Route::delete('/{id}', 'HistoryController@destroy')->name('History.delete');
+            Route::post('/selesai/{id}', 'HistoryController@selesai')->name('pesanan.selesai');
+        });
         Route::group(['prefix' => '/pesanan'], function () {
             Route::get('/', 'PesananController@index')->name('pesanan');
             Route::get('/data', 'PesananController@data')->name('pesanan.data');
@@ -114,6 +123,7 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
             Route::get('/{order_id}/show', 'PesananController@show')->name('pesanan.show');
             Route::post('/{id}', 'PesananController@update')->name('pesanan.update');
             Route::delete('/{id}', 'PesananController@destroy')->name('pesanan.delete');
+            // Route::post('/selesai/{id}', 'PesananController@selesai')->name('pesanan.selesai');
         });
         Route::group(['prefix' => '/laporan'], function () {
             Route::get('/', 'LaporanController@index')->name('laporan');

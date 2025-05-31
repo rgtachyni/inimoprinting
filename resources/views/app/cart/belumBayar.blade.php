@@ -61,9 +61,9 @@
                                 <li class="{{ Route::is('selesai') ? 'c-active' : '' }}">
                                     <a href="/pesanan/selesai">Selesai</a>
                                 </li>
-                                <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
+                                {{-- <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
                                     <a href="/pesanan/dibatalkan">Di batalkan</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                     </ul><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-DASHBOARD -->
@@ -109,31 +109,34 @@
 
                             </div>
                             <!-- BEGIN: ORDER HISTORY ITEM ROW -->
-                            @foreach ($transaction as $item)
+                            @foreach ($transaction as $transactions)
+                                {{-- @foreach ($transactions->carts as $carts) --}}
                                 <div class="row c-cart-table-row">
 
 
                                     <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
 
-                                        <p>{{ $item->order_id }}</p>
+                                        <p>{{ $transactions->order_id }}</p>
                                     </div>
                                     <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
-
-                                        <p>{{ $item->produknama }}</p>
+                                        @foreach ($transactions->carts as $carts)
+                                            <p>{{ $carts->produk->namaProduk }} x {{ $carts->jumlah }}</p>
+                                        @endforeach
                                     </div>
+
                                     <div class="col-md-4 col-sm-3 col-xs-6 c-cart-ref text-center">
 
-                                        <p>Rp. {{ $item->total_price }}</p>
+                                        <p>Rp. {{ $transactions->total_price }}</p>
                                     </div>
 
 
                                     <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
-                                        <a href="{{ route('detailBelumBayar', $item->id) }}"
+                                        <a href="{{ route('detailBelumBayar', $transactions->id) }}"
                                             class="btn btn-danger btn-sm  w-100">Bayar</a>
                                     </div>
 
                                     <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
-                                        <a href="https://wa.me/6285244194760?text=Halo%20saya%20ingin%20bertanya%20tentang%20pesanan%20dengan%20Order%20ID%20{{ $item->order_id }}"
+                                        <a href="https://wa.me/6285244194760?text=Halo%20saya%20ingin%20bertanya%20tentang%20pesanan%20dengan%20Order%20ID%20{{ $carts->order_id }}"
                                             class="btn btn-primary btn-sm w-100 ">
                                             Penjual</a>
 
@@ -141,6 +144,7 @@
                                     </div>
 
                                 </div>
+                                {{-- @endforeach --}}
                             @endforeach
 
                         </div>
@@ -153,5 +157,5 @@
 
             <!-- END: PAGE CONTENT -->
         </div>
-    
+
     @endsection

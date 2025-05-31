@@ -69,8 +69,59 @@
 
                 <!--begin::Tables Widget 11-->
                 <div class="card mb-5 mb-xl-8">
+                    <div class="card-header align-items-center py-5 gap-2 gap-md-5">
 
-                    @include('admin._card.action')
+                        {{-- <div class="w-100 mw-150px">
+                            <!--begin::Select2-->
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Per Page" id="jumlah">
+                                <option value=""></option>
+                                <option>5</option>
+                                <option>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                            <!--end::Select2-->
+                        </div> --}}
+
+                        <!--begin::Card title-->
+                        <div class="card-title">
+                            <!--begin::Search-->
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
+                                            rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                        <path
+                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <input type="text" class="form-control form-control-solid w-250px ps-14"
+                                    placeholder="Search" id="pencarian" />
+                            </div>
+                            <!--end::Search-->
+                        </div>
+                        <!--end::Card title-->
+
+                        <!--begin::Card toolbar-->
+                        {{-- <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                            <!--begin::Add product-->
+                            <a onclick="createForm()" class="btn btn-primary">
+                                <span class="btn-label">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+                                Add New
+                            </a>
+                            <!--end::Add product-->
+                        </div> --}}
+                        <!--end::Card toolbar-->
+                    </div>
+
 
                     <!--begin::Body-->
                     <div class="card-body py-3">
@@ -83,15 +134,40 @@
                                     <table class="table table-row-dashed table-row-gray-300 gy-4">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-gray-800">
-                                                <th>No</th>
-                                                <th>Nama</th>
-                                                <th>gambar</th>
-                                                <th>Action</th>
+                                                <th>Order Id</th>
+                                                <th>Username</th>
+                                                <th>Produk</th>
+                                                <th>Total Harga</th>
+                                                {{-- <th>Pembayaran</th> --}}
+                                                <th>Waktu</th>
+
                                             </tr>
+
+                                            @foreach ($history as $key => $v)
+                                                <tr>
+
+                                                    <td>{{ $v->paymentTransaksi->order_id }}</td>
+                                                    <td>{{ $v->paymentTransaksi->user->name }}</td>
+                                                    <td class="nowrap">
+                                                        <ul class="list-unstyled mb-0">
+                                                            @foreach ($v->paymentTransaksi->carts as $carts)
+                                                                <li>{{ $carts->produk->namaProduk }} x
+                                                                    {{ $carts->jumlah }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+
+                                                    <td>Rp. {{ $v->paymentTransaksi->total_price }}</td>
+                                                    <td>{{ $v->created_at }}</td>
+
+                                                </tr>
+                                            @endforeach
                                         </thead>
                                         <tbody class="datatabel">
                                         </tbody>
                                     </table>
+
+                                    {{ $history->links() }}
                                 </div>
                             </div>
 
@@ -134,85 +210,108 @@
     @include('admin._layouts.js.js')
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            loadpage('', 5);
+        function loadData() {
+            let jml = $('#jumlah').val();
+            let search = $('#pencarian').val();
 
-            var $pagination = $('.twbs-pagination');
-            var defaultOpts = {
-                totalPages: 1,
-                prev: '&#8672;',
-                next: '&#8674;',
-                first: '&#8676;',
-                last: '&#8677;',
-            };
-            $pagination.twbsPagination(defaultOpts);
-
-            function loaddata(page, cari, jml) {
-                $.ajax({
-                    url: '{{ route($title . '.data') }}',
-                    data: {
-                        "page": page,
-                        "cari": cari,
-                        "jml": jml
-                    },
-                    type: "GET",
-                    datatype: "json",
-                    success: function(data) {
-                        $(".datatabel").html(data.html);
-                    }
-                });
-            }
-
-            function loadpage(cari, jml) {
-                $.ajax({
-                    url: '{{ route($title . '.data') }}',
-                    data: {
-                        "cari": cari,
-                        "jml": jml
-                    },
-                    type: "GET",
-                    datatype: "json",
-                    success: function(response) {
-                        console.log(response);
-                        if ($pagination.data("twbs-pagination")) {
-                            $pagination.twbsPagination('destroy');
-                            $(".datatabel").html('<tr><td colspan="4">Data not found</td></tr>');
-                        }
-                        $pagination.twbsPagination($.extend({}, defaultOpts, {
-                            startPage: 1,
-                            totalPages: response.total_page,
-                            visiblePages: 8,
-                            prev: '&#8672;',
-                            next: '&#8674;',
-                            first: '&#8676;',
-                            last: '&#8677;',
-                            onPageClick: function(event, page) {
-                                if (page == 1) {
-                                    var to = 1;
-                                } else {
-                                    var to = page * jml - (jml - 1);
-                                }
-                                if (page == response.total_page) {
-                                    var end = response.total_data;
-                                } else {
-                                    var end = page * jml;
-                                }
-                                $('#contentx').text('Showing ' + to + ' to ' + end +
-                                    ' of ' +
-                                    response.total_data + ' entries');
-                                loaddata(page, cari, jml);
-                            }
-                        }));
-                    }
-                });
-            }
-
-            // $("#pencarian, #show").keyup(function (event) {
-            $("#pencarian, #jumlah").on('keyup change', function(event) {
-                let cari = $('#pencarian').val();
-                let jml = $('#jumlah').val();
-                loadpage(cari, jml);
+            $.ajax({
+                url: '{{ route('history') }}',
+                type: 'GET',
+                data: {
+                    jml: jml,
+                    search: search
+                },
+                success: function(res) {
+                    $('#tableContainer').html(res);
+                }
             });
+        }
+
+        // Trigger saat select jumlah diubah
+        $('#jumlah').on('change', function() {
+            loadData();
+        });
+
+        // Trigger saat search diketik
+        $('#pencarian').on('keyup', function() {
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(function() {
+                loadData();
+            }, 500);
+        });
+
+        // Pagination click
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            let url = $(this).attr('href');
+            let jml = $('#jumlah').val();
+            let search = $('#pencarian').val();
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {
+                    jml: jml,
+                    search: search
+                },
+                success: function(res) {
+                    $('#tableContainer').html(res);
+                }
+            });
+        });
+        $(document).ready(function() {
+
+
+            // function loadpage(cari, jml) {
+            //     $.ajax({
+            //         url: '{{ route($title . '.data') }}',
+            //         data: {
+            //             "cari": cari,
+            //             "jml": jml
+            //         },
+            //         type: "GET",
+            //         datatype: "json",
+            //         success: function(response) {
+            //             console.log(response);
+            //             if ($pagination.data("twbs-pagination")) {
+            //                 $pagination.twbsPagination('destroy');
+            //                 $(".datatabel").html('<tr><td colspan="4">Data not found</td></tr>');
+            //             }
+            //             $pagination.twbsPagination($.extend({}, defaultOpts, {
+            //                 startPage: 1,
+            //                 totalPages: response.total_page,
+            //                 visiblePages: 8,
+            //                 prev: '&#8672;',
+            //                 next: '&#8674;',
+            //                 first: '&#8676;',
+            //                 last: '&#8677;',
+            //                 onPageClick: function(event, page) {
+            //                     if (page == 1) {
+            //                         var to = 1;
+            //                     } else {
+            //                         var to = page * jml - (jml - 1);
+            //                     }
+            //                     if (page == response.total_page) {
+            //                         var end = response.total_data;
+            //                     } else {
+            //                         var end = page * jml;
+            //                     }
+            //                     $('#contentx').text('Showing ' + to + ' to ' + end +
+            //                         ' of ' +
+            //                         response.total_data + ' entries');
+            //                     loaddata(page, cari, jml);
+            //                 }
+            //             }));
+            //         }
+            //     });
+            // }
+
+            // // $("#pencarian, #show").keyup(function (event) {
+            // $("#pencarian, #jumlah").on('keyup change', function(event) {
+            //     let cari = $('#pencarian').val();
+            //     let jml = $('#jumlah').val();
+            //     loadpage(cari, jml);
+            // });
 
             // proses simpan
             $('#saveBtn').click(function(e) {

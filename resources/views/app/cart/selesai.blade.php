@@ -49,7 +49,7 @@
                         <li class="c-dropdown c-open">
                             <a href="javascript:;" class="c-toggler">Pesanan saya<span class="c-arrow"></span></a>
                             <ul class="c-dropdown-menu">
-                               <li class="{{ Route::is('cart.view') ? 'c-active' : '' }}">
+                                <li class="{{ Route::is('cart.view') ? 'c-active' : '' }}">
                                     <a href="/cart">Keranjang</a>
                                 </li>
                                 <li class="{{ Route::is('belumBayar') ? 'c-active' : '' }}">
@@ -61,203 +61,101 @@
                                 <li class="{{ Route::is('selesai') ? 'c-active' : '' }}">
                                     <a href="/pesanan/selesai">Selesai</a>
                                 </li>
-                                <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
+                                {{-- <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
                                     <a href="/pesanan/dibatalkan">Di batalkan</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                     </ul><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-DASHBOARD -->
                 </div>
-                <div class="c-layout-sidebar-content ">
-                    <!-- BEGIN: PAGE CONTENT -->
-                    <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
-                    <div class="c-content-title-1">
-                        <h3 class="c-font-uppercase c-font-bold">Pesanan Selesai</h3>
+                @if ($transaction->isEmpty())
+                    <div class="c-content-box c-size-lg">
+                        <div class="container">
+                            <div class="c-shop-cart-page-1 c-center">
+                                <i class="fa fa-frown-o c-font-dark c-font-50 c-font-thin "></i>
+                                <h2 class="c-font-thin c-center">Empty, Let's Go Shopping</h2>
+                                <a href="{{ route('produk.view') }}"
+                                    class="btn c-btn btn-lg c-btn-dark c-btn-square c-font-white c-font-bold c-font-uppercase">Continue
+                                    Shopping</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row c-margin-b-40 c-order-history-2">
-                        <div class="row c-cart-table-title">
-                            <div class="col-md-2 c-cart-image">
-                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Image</h3>
-                            </div>
-                            <div class="col-md-1 c-cart-ref">
-                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Product</h3>
-                            </div>
-                            <div class="col-md-2 c-cart-desc">
-                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 ">Qty</h3>
-                            </div>
-                            <div class="col-md-2 c-cart-price">
-                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Price</h3>
-                            </div>
-                            <div class="col-md-3 c-cart-total">
-                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Payment Method</h3>
-                            </div>
-                            <div class="col-md-2 c-cart-qty">
-                                <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Date</h3>
-                            </div>
+                @else
+                    <div class="c-layout-sidebar-content ">
+                        <!-- BEGIN: PAGE CONTENT -->
+                        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY -->
+                        <div class="c-content-title-1">
+                            <h3 class="c-font-uppercase c-font-bold">Selesai</h3>
+                            <div class="c-line-left"></div>
                         </div>
-                        <!-- BEGIN: ORDER HISTORY ITEM ROW -->
-                        <div class="row c-cart-table-row">
-                            <h2
-                                class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">
-                                Item 1</h2>
-                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                                <img src="../../assets/base/img/content/shop3/20.jpg" />
+
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
                             </div>
-                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Order</p>
-                                <p>#1103</p>
+                        @endif
+
+                        <div class="row c-margin-b-40 c-order-history-2">
+                            <div class="row c-cart-table-title">
+
+                                <div class="col-md-2 c-cart-ref">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Order</h3>
+                                </div>
+                                <div class="col-md-2 c-cart-desc">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2 ">Nama Produk</h3>
+                                </div>
+                                <div class="col-md-2 c-cart-price">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Total price</h3>
+                                </div>
+
+                                {{-- <div class="col-md-3 c-cart-qty">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Metode Pembayaran</h3>
+                                </div> --}}
+                                <div class="col-md-3 c-cart-qty">
+                                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Waktu Selesai</h3>
+                                </div>
                             </div>
-                            <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Description</p>
-                                <p><a href="shop-product-details-2.html"
-                                        class="c-font-bold c-theme-link c-font-dark">Camera</a>
-                                </p>
+                            <!-- BEGIN: ORDER HISTORY ITEM ROW -->
+                            <div class="row c-cart-table-row">
+                                @foreach ($transaction as $item)
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
+
+                                        <p>{{ $item->order_id }}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
+                                        @foreach ($item->carts as $carts)
+                                            <p>{{ $carts->produk->namaProduk }} x {{ $carts->jumlah }}</p>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref text-center">
+
+                                        <p>Rp. {{ $item->total_price }}</p>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref text-end">
+
+                                        <p>{{ \Carbon\Carbon::parse($item->created_at)->addDays(5)->format('d M Y') }}</p>
+                                    </div>
+                                    {{-- <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
+                                        <a href="{{ route('detailProses') }}"
+                                            class="btn btn-danger btn-sm  w-100">Detail</a>
+                                    </div>
+                                    <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref text-center">
+                                        <a href="https://wa.me/6285244194760?text=Halo%20saya%20ingin%20bertanya%20tentang%20pesanan%20dengan%20Order%20ID%20{{ $item->order_id }}"
+                                            class="btn btn-primary btn-sm w-100 ">
+                                            Penjual</a>
+
+
+                                    </div> --}}
+                                @endforeach
                             </div>
-                            <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Price</p>
-                                <p class="c-cart-price c-font-bold">$147.00</p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 c-cart-total">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Payment Method</p>
-                                <p class="c-cart-price c-font-bold">Credit Cart (MasterCard)</p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Date</p>
-                                <p>2 Sep 2015</p>
-                            </div>
+
                         </div>
-                        <!-- END: ORDER HISTORY ITEM ROW -->
-                        <!-- BEGIN: ORDER HISTORY ITEM ROW -->
-                        <div class="row c-cart-table-row">
-                            <h2 class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title">Item 2</h2>
-                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                                <img src="../../assets/base/img/content/shop3/10.jpg" />
-                            </div>
-                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Order</p>
-                                <p>#1106</p>
-                            </div>
-                            <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Description</p>
-                                <p><a href="shop-product-details-2.html" class="c-font-bold c-theme-link c-font-dark">Winter
-                                        Hood</a></p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Price</p>
-                                <p class="c-cart-price c-font-bold">$99.00</p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 c-cart-total">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Payment Method</p>
-                                <p class="c-cart-price c-font-bold">PayPal</p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Date</p>
-                                <p>5 Sep 2015</p>
-                            </div>
-                        </div>
-                        <!-- END: ORDER HISTORY ITEM ROW -->
-                        <!-- BEGIN: ORDER HISTORY ITEM ROW -->
-                        <div class="row c-cart-table-row">
-                            <h2
-                                class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">
-                                Item 3</h2>
-                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                                <img src="../../assets/base/img/content/shop3/22.jpg" />
-                            </div>
-                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Order</p>
-                                <p>#1107</p>
-                            </div>
-                            <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Description</p>
-                                <p><a href="shop-product-details-2.html"
-                                        class="c-font-bold c-theme-link c-font-dark">Winter
-                                        Coat</a></p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Price</p>
-                                <p class="c-cart-price c-font-bold">$82.00</p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 c-cart-total">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Payment Method</p>
-                                <p class="c-cart-price c-font-bold">Credit Cart (MasterCard)</p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Date</p>
-                                <p>7 Sep 2015</p>
-                            </div>
-                        </div>
-                        <!-- END: ORDER HISTORY ITEM ROW -->
-                        <!-- BEGIN: ORDER HISTORY ITEM ROW -->
-                        <div class="row c-cart-table-row">
-                            <h2
-                                class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">
-                                Item 4</h2>
-                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                                <img src="../../assets/base/img/content/shop3/21.jpg" />
-                            </div>
-                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Order</p>
-                                <p>#1123</p>
-                            </div>
-                            <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Description</p>
-                                <p><a href="shop-product-details-2.html"
-                                        class="c-font-bold c-theme-link c-font-dark">Cotton
-                                        Top</a></p>
-                            </div>
-                            <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Price</p>
-                                <p class="c-cart-price c-font-bold">$54.00</p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 c-cart-total">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Payment Method</p>
-                                <p class="c-cart-price c-font-bold">PayPal</p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Date</p>
-                                <p>8 Sep 2015</p>
-                            </div>
-                        </div>
-                        <!-- END: ORDER HISTORY ITEM ROW -->
-                        <!-- BEGIN: ORDER HISTORY ITEM ROW -->
-                        <div class="row c-cart-table-row">
-                            <h2
-                                class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">
-                                Item 5</h2>
-                            <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                                <img src="../../assets/base/img/content/shop3/23.jpg" />
-                            </div>
-                            <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Order</p>
-                                <p>#1136</p>
-                            </div>
-                            <div class="col-md-2 col-sm-6 col-xs-6 c-cart-desc">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Description</p>
-                                <p><a href="shop-product-details-2.html"
-                                        class="c-font-bold c-theme-link c-font-dark">Winter
-                                        Jacket</a></p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Price</p>
-                                <p class="c-cart-price c-font-bold">$135.00</p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6 c-cart-total">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Payment Method</p>
-                                <p class="c-cart-price c-font-bold">Credit Cart (Visa)</p>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
-                                <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Date</p>
-                                <p>10 Sep 2015</p>
-                            </div>
-                        </div>
-                        <!-- END: ORDER HISTORY ITEM ROW -->
+
 
                     </div>
-
-                    <!-- END: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
-                    <!-- END: PAGE CONTENT -->
-                </div>
+                @endif
             </div>
         </div><!-- END: CONTENT/SHOPS/SHOP-CART-1 -->
 

@@ -32,6 +32,7 @@ class ProdukController extends Controller
     {
         try {
             $title = $this->title;
+
             return view('admin.' . $title . '.index', compact('title'));
         } catch (\Exception $e) {
             return $this->_error($e);
@@ -41,10 +42,12 @@ class ProdukController extends Controller
     public function data(Request $request)
     {
         try {
+            // dd($request->all());
             $title = $this->title;
             $data = $this->repository->paginated($request->all());
             $produk = $this->repository->all();
             $perPage = $request->jml == '' ? 5 : $request->jml;
+
             $view = view('admin.' . $title . '.data', compact('data', 'title', 'produk'))->with('i', ($request->input('page', 1) -
                 1) * $perPage)->render();
             return response()->json([
@@ -59,25 +62,55 @@ class ProdukController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        try {
-            $req = $request->all();
-            // dd($req);
-            if ($request->hasFile('gambar')) {
-                $image = $request->file('gambar');
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/produk', $filename);
+    // public function data(Request $request)
+    // {
+    //     try {
+    //         $title = $this->title;
+    //         $perPage = $request->filled('jml') ? (int) $request->jml : 5;
+    //         $data = $this->repository->paginated($request->all());
+    //         $produk = $this->repository->all();
 
-                $req['gambar'] = $filename;
-            }
-            $data = $this->repository->store($req);
-            return response()->json($data);
-        } catch (\Exception $e) {
-            $message = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
-            return response()->json($message);
-        }
-    }
+    //         $view = view('admin.' . $title . '.data', compact('data', 'title', 'produk'))
+    //             ->with('i', ($request->input('page', 1) - 1) * $perPage)
+    //             ->render();
+
+    //         return response()->json([
+    //             "total_page" => $data->lastPage(),
+    //             "total_data" => $data->total(),
+    //             "html"       => $view,
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         \Log::error('Error in HistoryController@data: ' . $e->getMessage(), [
+    //             'file' => $e->getFile(),
+    //             'line' => $e->getLine(),
+    //         ]);
+
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Terjadi kesalahan saat memuat data.',
+    //         ], 500);
+    //     }
+    // }
+
+    // public function store(Request $request)
+    // {
+    //     try {
+    //         $req = $request->all();
+    //         // dd($req);
+    //         if ($request->hasFile('gambar')) {
+    //             $image = $request->file('gambar');
+    //             $filename = time() . '_' . $image->getClientOriginalName();
+    //             $image->storeAs('public/produk', $filename);
+
+    //             $req['gambar'] = $filename;
+    //         }
+    //         $data = $this->repository->store($req);
+    //         return response()->json($data);
+    //     } catch (\Exception $e) {
+    //         $message = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
+    //         return response()->json($message);
+    //     }
+    // }
 
     public function show($id)
     {

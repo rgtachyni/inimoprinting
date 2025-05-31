@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('order_id')->unique(); // Wajib untuk Midtrans
-            $table->foreignId('cart_id')->constrained()->onDelete('cascade');
-            // $table->string('produk_id');
-            $table->integer('total_price'); // Total harga semua item
-            $table->string('status')->default('pending'); // Status pembayaran
+            // $table->foreignId('cart_id')->constrained()->onDelete('cascade');
+            $table->integer('total_price'); 
+            $table->string('status')->default('pending'); 
+            $table->string('metode_pembayaran')->nullable(); // Status pembayaran
             $table->string('snap_token')->nullable(); // Token dari Midtrans
             $table->timestamps();
         });

@@ -2,12 +2,12 @@
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $v->namaProduk }}</td>
-        <td>{{ $v->harga }}</td>
-        <td class="text-wrap" style="max-width: 150px;text-align:justify;">{{ $v->deskripsi }}</td>
+        <td>{{ $v->total_price }}</td>
+        <td>{{ $v->deskripsi }}</td>
         <td>
             <div class="d-flex align-items-center">
                 <div class="symbol symbol-50px me-3">
-                    <img src="{{ asset('storage/produk/' . $v->gambar) }}" class="" alt="">
+                    <img src="{{ asset('public/uploads/produk/' . $v->gambar) }}" class="" alt="">
                 </div>
             </div>
         </td>

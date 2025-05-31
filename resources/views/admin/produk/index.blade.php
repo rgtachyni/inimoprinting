@@ -75,12 +75,12 @@
                             <!--begin::Select2-->
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Per Page" id="jumlah">
-                                <option value=""></option>
-                                <option>5</option>
-                                <option>10</option>
-                                <option>25</option>
-                                <option>50</option>
-                                <option>100</option>
+                                {{-- <option value=""></option> --}}
+                                <option value="5" selected>5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
                             </select>
                             <!--end::Select2-->
                         </div>
@@ -263,7 +263,7 @@
             // $("#pencarian, #show").keyup(function (event) {
             $("#cari, #jumlah").on('keyup change', function(event) {
                 let cari = $('#cari').val();
-                let jml = $('#jumlah').val();
+                let jml = $('#jumlah').val() || 5;
                 loadpage(cari, jml);
             });
 
