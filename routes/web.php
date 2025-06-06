@@ -69,7 +69,7 @@ Route::get('/editpassword', [App\Http\Controllers\HomeController::class, 'Showub
 Route::post('/editpassword', [App\Http\Controllers\HomeController::class, 'ubahPassword'])->name('ubahPassword');
 
 
-Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'middleware' => ['auth']], function () {
+Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'middleware' => ['auth', 'admin']], function () {
     Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/', 'DashboardController@index')->name('dashboard');

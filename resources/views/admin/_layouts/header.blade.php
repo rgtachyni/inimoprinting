@@ -86,8 +86,12 @@
                             <a href="{{ route('index') }}" class="menu-link px-5">Halaman User</a>
                         </div>
                         <div class="menu-item px-5">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
 
-                            <a href="{{ route('logout') }}" class="menu-link px-5">Logout</a>
+                                <button type="submit">logout</button>
+                            </form>
+                            {{-- <a href="{{ route('logout') }}" class="menu-link px-5">Logout</a> --}}
 
 
                         </div>

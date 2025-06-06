@@ -18,6 +18,7 @@ class Role
     public function handle(Request $request, Closure $next, $menu = null)
     {
         if (auth()->check()) {
+
             $arr = Session::get('roles');
             $roles = $arr[$menu];
             $flag = explode('/', url()->current());
@@ -35,4 +36,6 @@ class Role
         }
         return $next($request);
     }
+
+    
 }

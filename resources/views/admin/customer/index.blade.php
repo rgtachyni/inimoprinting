@@ -71,7 +71,7 @@
                 <div class="card mb-5 mb-xl-8">
                     <div class="card-header align-items-center py-5 gap-2 gap-md-5">
 
-                        <div class="w-100 mw-150px">
+                        {{-- <div class="w-100 mw-150px">
                             <!--begin::Select2-->
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Per Page" id="jumlah">
@@ -83,7 +83,7 @@
                                 <option>100</option>
                             </select>
                             <!--end::Select2-->
-                        </div>
+                        </div> --}}
 
                         <!--begin::Card title-->
                         <div class="card-title">

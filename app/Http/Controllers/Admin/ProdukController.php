@@ -92,25 +92,25 @@ class ProdukController extends Controller
     //     }
     // }
 
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         $req = $request->all();
-    //         // dd($req);
-    //         if ($request->hasFile('gambar')) {
-    //             $image = $request->file('gambar');
-    //             $filename = time() . '_' . $image->getClientOriginalName();
-    //             $image->storeAs('public/produk', $filename);
+    public function store(Request $request)
+    {
+        try {
+            $req = $request->all();
+            // dd($req);
+            if ($request->hasFile('gambar')) {
+                $image = $request->file('gambar');
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/produk', $filename);
 
-    //             $req['gambar'] = $filename;
-    //         }
-    //         $data = $this->repository->store($req);
-    //         return response()->json($data);
-    //     } catch (\Exception $e) {
-    //         $message = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
-    //         return response()->json($message);
-    //     }
-    // }
+                $req['gambar'] = $filename;
+            }
+            $data = $this->repository->store($req);
+            return response()->json($data);
+        } catch (\Exception $e) {
+            $message = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
+            return response()->json($message);
+        }
+    }
 
     public function show($id)
     {
