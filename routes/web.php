@@ -83,13 +83,13 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
             Route::delete('/{id}', 'ProdukController@destroy')->name('produk.delete');
         });
 
-        Route::group(['prefix' => '/transaksi'], function () {
-            Route::get('/', 'TransaksiController@index')->name('transaksi');
-            Route::get('/data', 'TransaksiController@data')->name('transaksi.data');
-            Route::post('/store', 'TransaksiController@store')->name('transaksi.store');
-            Route::get('/{id}/edit', 'TransaksiController@show')->name('transaksi.edit');
-            Route::post('/{id}', 'TransaksiController@update')->name('transaksi.update');
-            Route::delete('/{id}', 'TransaksiController@destroy')->name('transaksi.delete');
+        Route::group(['prefix' => '/penjadwalan'], function () {
+            Route::get('/', 'PenjadwalanController@index')->name('penjadwalan');
+            Route::get('/data', 'PenjadwalanController@data')->name('penjadwalan.data');
+            Route::post('/store', 'PenjadwalanController@store')->name('penjadwalan.store');
+            Route::get('/{id}/edit', 'PenjadwalanController@show')->name('penjadwalan.edit');
+            Route::post('/{id}', 'PenjadwalanController@update')->name('penjadwalan.update');
+            Route::delete('/{id}', 'PenjadwalanController@destroy')->name('penjadwalan.delete');
         });
         Route::group(['prefix' => '/customer'], function () {
             Route::get('/', 'CustomerController@index')->name('customer');
@@ -154,12 +154,3 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
 
 
 
-// Route::get('/cc', function () {
-//     // Artisan::call('migrate');
-//     // Artisan::call('migrate:fresh');
-//     // Artisan::call('db:seed');
-//     Artisan::call('optimize:clear');
-//     Artisan::call('config:cache');
-//     Artisan::call('view:clear');
-//     Artisan::call('route:clear');
-// });

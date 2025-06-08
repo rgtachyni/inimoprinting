@@ -78,7 +78,9 @@ class PaymentController extends Controller
         $notif = new \Midtrans\Notification();
 
         $order_id = $notif->order_id;
+        dump($order_id);
         $transaction = paymentTransaksi::where('order_id', $order_id)->first();
+        dd($transaction);
         // dd($notif);
         if ($transaction) {
             $transaction->status = $notif->transaction_status;

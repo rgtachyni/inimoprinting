@@ -17,13 +17,8 @@
 @endpush
 
 @section('content')
-    <style>
-        .nowrap {
-            white-space: nowrap;
-            vertical-align: top;
-        }
-    </style>
     <!--begin::Content wrapper-->
+
     <div class="d-flex flex-column flex-column-fluid">
         <!--begin::Toolbar-->
         <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -60,9 +55,7 @@
                         <!--end::Item-->
                     </ul>
                     <!--end::Breadcrumb-->
-
                 </div>
-
                 <!--end::Page title-->
             </div>
             <!--end::Toolbar container-->
@@ -77,9 +70,11 @@
                 <!--begin::Tables Widget 11-->
                 <div class="card mb-5 mb-xl-8">
                     <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                        <div>
+                            <button class="border-0 p-4  btn btn-primary">Setel ulang jadwal</button>
+                        </div>
 
-
-                        <div class="w-100 mw-150px">
+                        {{-- <div class="w-100 mw-150px">
                             <!--begin::Select2-->
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Per Page" id="jumlah">
@@ -91,10 +86,10 @@
                                 <option>100</option>
                             </select>
                             <!--end::Select2-->
-                        </div>
+                        </div> --}}
 
                         <!--begin::Card title-->
-                        <div class="card-title">
+                        {{-- <div class="card-title">
                             <!--begin::Search-->
                             <div class="d-flex align-items-center position-relative my-1">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
@@ -110,10 +105,10 @@
                                 </span>
                                 <!--end::Svg Icon-->
                                 <input type="text" class="form-control form-control-solid w-250px ps-14"
-                                    placeholder="Search" id="cari" />
+                                    placeholder="Search" id="pencarian" />
                             </div>
                             <!--end::Search-->
-                        </div>
+                        </div> --}}
                         <!--end::Card title-->
 
                         <!--begin::Card toolbar-->
@@ -128,72 +123,40 @@
                             <!--end::Add product-->
                         </div> --}}
                         <!--end::Card toolbar-->
-
                     </div>
 
 
                     <!--begin::Body-->
                     <div class="card-body py-3">
 
-
                         <!--begin::Table container-->
                         <div class="table-responsive">
-                            {{-- <div> --}}
-                            <button class="border-0 p-4  btn btn-primary">Setel ulang jadwal</button>
-                            {{-- </div> --}}
                             <!--begin::Table-->
                             <div class="py-5">
                                 <div class="table-responsive">
                                     <table class="table table-row-dashed table-row-gray-300 gy-4">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-gray-800">
-                                                {{-- <th>No</th> --}}
-                                                <th>Order Id</th>
+                                                <th>Order id</th>
                                                 <th>Username</th>
-                                                <th>Alamat</th>
-                                                <th>Nama Produk</th>
-                                                <th>Total Harga </th>
-                                                {{-- <th>Status</th> --}}
-                                                {{-- <th>Prioritas</th> --}}
-                                                {{-- <th>Action</th> --}}
+                                                <th>Nama produk</th>
+                                                <th>Prioritas</th>
+                                                <th>Status</th>
+
+
                                             </tr>
 
-                                            @foreach ($data as $key => $v)
-                                                @if ($v->status == 'success')
-                                                    <tr>
-                                                        {{-- <td>{{ $loop->iteration }}</td> --}}
-                                                        <td class="nowrap">{{ $v->order_id }}</td>
-                                                        <td class="nowrap">{{ $v->user->name }}</td>
-                                                        <td class="nowrap">
-                                                            <ul class="list-unstyled mb-0">
-                                                                @foreach ($v->carts as $carts)
-                                                                    <li>{{ $carts->produk->namaProduk }} x
-                                                                        {{ $carts->jumlah }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </td>
-                                                        <td class="nowrap">Rp. {{ $v->total_price }}</td>
-
-
-                                                        <td class="nowrap">
-
-                                                            <form action="{{ route('pesanan.selesai', $v->id) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-primary  btn-sm">
-                                                                    Selesai
-
-                                                                </button>
-                                                                <button type="submit" class="btn btn-danger  btn-sm">
-                                                                    Pembeli
-
-                                                                </button>
-                                                            </form>
-
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
+                                            {{-- @foreach ($data as $key => $v)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $v->username }}</td>
+                                                    <td>{{ $v->namaLengkap }}</td>
+                                                    <td>{{ $v->email }}</td>
+                                                    <td>{{ $v->noHp }}</td>
+                                                    <td>{{ $v->alamat }}, {{ $v->kabupaten }}, {{ $v->provinsi }},
+                                                        {{ $v->kodePos }}</td>
+                                                </tr>
+                                            @endforeach --}}
                                         </thead>
                                         <tbody class="datatabel">
                                         </tbody>

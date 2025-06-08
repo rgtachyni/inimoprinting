@@ -23,7 +23,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 ">
                         <div class="c-content-bar-1 c-align-center c-bordered c-theme-border c-shadow ">
-                            {{-- <img src="" alt=""> --}}
+                            {{-- <img src="{{ asset('logo2.png') }}" alt="" style="w-2"> --}}
                             <h1 class="c-font-bold c-font-uppercase c-font-24 text-center">Your Order</h1>
                             <ul class="c-order list-unstyled">
                                 <li class="row c-margin-b-15">
@@ -66,6 +66,16 @@
                                         </p>
                                     </div>
                                 </li>
+                                <li class="row ">
+                                    <label for="urgensi">Urgensi Pesanan:</label>
+                                    <div class="form-group">
+                                        <input type="radio" id="normal" name="normal" value="normal">
+                                        <label for="normal">Normal</label><br>
+                                        <input type="radio" id="express" name="express" value="express">
+                                        <label for="express">Express</label><br>
+
+                                    </div>
+                                </li>
                                 <li class="row">
 
                                     <div class="form-group col-md-12" role="group">
@@ -101,18 +111,22 @@
             snap.pay('{{ $transaction->snap_token }}', {
                 // Optional
                 onSuccess: function(result) {
+                    console.log(result);
                     window.location = "{{ route('checkout-success', $transaction->id) }}";
 
                 },
                 // Optional
                 onPending: function(result) {
+                    console.log(result);
                     window.location = "{{ route('checkout-pending', $transaction->id) }}"
 
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                 },
                 // Optional
                 onError: function(result) {
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    console.log(result);
+                    console.log('{{ $transaction->snap_token }}');
+                    // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                 }
             });
         };
