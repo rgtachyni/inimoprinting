@@ -6,14 +6,14 @@
         <div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
             <div class="container">
                 <div class="c-page-title c-pull-left">
-                    <h3 class="c-font-uppercase c-font-sbold">Contact Page - 3</h3>
+                    <h3 class="c-font-uppercase c-font-sbold">Contact Us</h3>
                 </div>
                 <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
                     <li><a href="#">Pages</a></li>
                     <li>/</li>
-                    <li><a href="page-contact-3.html">Contact Us 3</a></li>
+                    <li><a href="page-contact-3.html">Contact Us </a></li>
                     <li>/</li>
-                    <li class="c-state_active">Jango Components</li>
+                    <li class="c-state_active">Inimo Printing</li>
 
                 </ul>
             </div>
@@ -30,7 +30,8 @@
                                 </div>
                                 <div class="c-section">
                                     <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">Address</div>
-                                    <p>Jl. Klp. Tiga No.44, Balla Parang, Kec. Rappocini, Kota Makassar, Sulawesi Selatan 90232</p>
+                                    <p>Jl. Klp. Tiga No.44, Balla Parang, Kec. Rappocini, Kota Makassar, Sulawesi Selatan
+                                        90232</p>
                                 </div>
                                 <div class="c-section">
                                     <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">Contacts</div>
@@ -59,7 +60,7 @@
         </div> <!-- END: CONTENT/CONTACT/CONTACT-1 -->
 
         <!-- BEGIN: CONTENT/CONTACT/FEEDBACK-1 -->
-        <div class="c-content-box c-size-md c-bg-white">
+        {{-- <div class="c-content-box c-size-md c-bg-white">
             <div class="container">
                 <div class="c-content-feedback-1 c-option-1">
                     <div class="row">
@@ -131,6 +132,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection

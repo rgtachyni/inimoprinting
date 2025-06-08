@@ -20,10 +20,7 @@ class CartController extends Controller
         $produk = Produk::findOrFail($id);
         $jumlah = $request->input('jumlah', 1);
 
-        // $cart = Cart::where('user_id', Auth::id())
-        //     ->where('produk_id', $produk->id)
-        //     ->first();
-        // dd($cart);
+
         $cart = Cart::where('user_id', Auth::id())
             ->where('produk_id', $produk->id)
             ->where('status', 'dipilih')
@@ -78,24 +75,53 @@ class CartController extends Controller
         return response()->json(['success' => false], 404);
     }
 
-    public function jumlah(Request $request)
+    // public function jumlah(Request $request)
+    // {
+    //     $request->validate([
+    //         'cart_id' => 'required|integer|exists:carts,id',
+    //         'jumlah' => 'required|integer|min:1|max:10',
+    //     ]);
+    //     $cart = Cart::find($request->cart_id)->where('status', 'dipilih')->first();
+    //     dd($cart);
+    //     $cart->jumlah = $request->jumlah;
+    //     $cart->save();
+
+    //     $totalharga = $cart->jumlah * $cart->produk->harga;
+    //     $grandTotal = Cart::where('user_id', auth()->id())->get()->reduce(function ($carry, $item) {
+    //         return $carry + ($item->jumlah * $item->produk->harga);
+    //     }, 0);
+
+    //     return response()->json([
+    //         'totalHargaItem' => $totalharga,
+    //         'grandTotal' => $grandTotal,
+    //     ]);
+    // }
+
+    public function qty(Request  $request)
     {
         $request->validate([
-            'cart_id' => 'required|integer|exists:carts,id',
-            'jumlah' => 'required|integer|min:1|max:10',
+            'cart_id' => 'required|exists:carts,id',
+            'jumlah' => 'required|integer|min:1',
         ]);
-        $cart = Cart::find($request->cart_id);
+
+        $cart = Cart::where('id', $request->cart_id)
+            ->where('user_id', auth()->id()) // Hindari akses dari user lain
+            ->firstOrFail();
+
         $cart->jumlah = $request->jumlah;
         $cart->save();
 
-        $totalharga = $cart->jumlah * $cart->produk->harga;
-        $grandTotal = Cart::where('user_id', auth()->id())->get()->reduce(function ($carry, $item) {
-            return $carry + ($item->jumlah * $item->produk->harga);
-        }, 0);
+        // Hitung ulang grand total
+        $total = Cart::where('user_id', auth()->id())
+            ->with('produk')
+            ->get()
+            ->sum(function ($item) {
+                return $item->produk->harga * $item->jumlah;
+            });
 
         return response()->json([
-            'totalHargaItem' => $totalharga,
-            'grandTotal' => $grandTotal,
+            'success' => true,
+            'grand_total' => $total
         ]);
     }
 

@@ -21,7 +21,9 @@
         <div class="c-content-box c-size-lg col-md-offset-3">
             <div class="container">
                 <div class="row justify-content-center">
+
                     <div class="col-md-6 ">
+
                         <div class="c-content-bar-1 c-align-center c-bordered c-theme-border c-shadow ">
                             {{-- <img src="{{ asset('logo2.png') }}" alt="" style="w-2"> --}}
                             <h1 class="c-font-bold c-font-uppercase c-font-24 text-center">Your Order</h1>
@@ -38,21 +40,17 @@
                                 <li class="row c-margin-b-15 c-margin-t-15">
                                     @foreach ($carts as $item)
                                         <div class="col-md-6 c-font-20"><a href="shop-product-details.html"
-                                                class="c-theme-link">{{ $item->produk->namaProduk }}x
+                                                class="c-theme-link">{{ $item->produk->namaProduk }} x
                                                 {{ $item->jumlah }}</a>
                                         </div>
                                         <div class="col-md-6 c-font-20">
-                                            <p class="">{{ $item->jumlah * $item->produk->harga }}</p>
+                                            <p class="">Rp.
+                                                {{ number_format($item->jumlah * $item->produk->harga, 0, ',', '.') }}
+                                            </p>
                                         </div>
                                     @endforeach
                                 </li>
-                                {{-- <li class="row c-margin-b-15 c-margin-t-15">
-                                <div class="col-md-6 c-font-20"><a href="shop-product-details-2.html"
-                                        class="c-theme-link">Sports Wear x 1</a></div>
-                                <div class="col-md-6 c-font-20">
-                                    <p class="">$30.99</p>
-                                </div>
-                            </li> --}}
+
 
                                 <li class="row c-border-top c-margin-b-15"></li>
 
@@ -62,40 +60,34 @@
                                     </div>
                                     <div class="col-md-6 c-font-20">
                                         <p class="c-font-bold c-font-30">Rp. <span
-                                                class="c-shipping-total">{{ $total }}</span>
+                                                class="c-shipping-total">{{ number_format($total, 0, ',', '.') }}</span>
                                         </p>
                                     </div>
                                 </li>
-                                <li class="row ">
-                                    <label for="urgensi">Urgensi Pesanan:</label>
-                                    <div class="form-group">
-                                        <input type="radio" id="normal" name="normal" value="normal">
-                                        <label for="normal">Normal</label><br>
-                                        <input type="radio" id="express" name="express" value="express">
-                                        <label for="express">Express</label><br>
 
-                                    </div>
+                                {{-- <li><input type="hidden" name="metode_pembayaran" value="midtrans"> --}}
+
                                 </li>
                                 <li class="row">
 
                                     <div class="form-group col-md-12" role="group">
-                                        {{-- <form action="{{ route('prosescheckout') }}" method="POST"> --}}
+
                                         <div class="c-cart-buttons">
-                                            <button type="button" id="bayar"
+                                            <button type="submit" id="bayar"
                                                 class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Bayar</button>
                                             <a href="{{ '/cart' }}"
                                                 class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Cancel</a>
-                                            {{-- <pre><div id="result-json">JSON result will appear here after payment:<br></div></pre> --}}
-                                            {{-- <a href="#"
-                                                class="btn c-btn btn-lg c-theme-btn c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-r">Checkout</a> --}}
                                         </div>
-                                        {{-- </form> --}}
+
 
 
                                     </div>
                                 </li>
+
                             </ul>
+
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -107,6 +99,7 @@
         data-client-key="{{ config('midtrans.clientKey') }}"></script>
     <script type="text/javascript">
         document.getElementById('bayar').onclick = function() {
+            //  document.querySelector('form').submit();
             // SnapToken acquired from previous step
             snap.pay('{{ $transaction->snap_token }}', {
                 // Optional

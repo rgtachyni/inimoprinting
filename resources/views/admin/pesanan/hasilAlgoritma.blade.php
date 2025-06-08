@@ -138,85 +138,106 @@
 
                         <!--begin::Table container-->
                         <div class="table-responsive">
-
-                            <form action="{{ route('hitungSkorPrioritas') }}" method="post">
+                            {{-- <div> --}}
+                            {{-- <form action="{{ route('hitungSkorPrioritas') }}" method="post">
                                 @csrf
                                 <button type="submit" class="border-0 p-4  btn btn-primary">Setel ulang jadwal</button>
-                            </form>
-
-
-                            <div class="py-5">
-                                <div class="table-responsive">
+                            </form> --}}
+                            <a href="{{ route('pesanan') }}" class="border-0 p-4  btn btn-danger">Kembali</a>
+                            {{-- </div> --}}
+                            <!--begin::Table-->
+                            <div class="py-5 ">
+                                <div class="table-responsive ">
                                     <table class="table table-row-dashed table-row-gray-300 gy-4 align-middle">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-gray-800 text-center">
+                                                {{-- <th>No</th> --}}
                                                 <th>Order Id</th>
                                                 <th>Username</th>
-                                                <th>Alamat</th>
+                                                {{-- <th>Alamat</th> --}}
                                                 <th>Nama Produk</th>
-                                                <th>Waktu pemesanan</th>
+                                                {{-- <th>Total Harga </th> --}}
+                                                <th>Urgensi</th>
+                                                <th>Waktu Pengerjaan</th>
+                                                <th>Total skor</th>
+                                                <th>Rangking</th>
+                                                {{-- <th>Action</th> --}}
                                             </tr>
 
-                                            {{-- <div class="d-flex justify-center items-center"> --}}
+
                                             @foreach ($data as $key => $v)
-                                                @if ($v->status == 'success')
-                                                    <tr class="text-center">
-                                                        {{-- <td>{{ $loop->iteration }}</td> --}}
-                                                        <td class="nowrap">{{ $v->order_id }}</td>
-                                                        <td class="nowrap">{{ $v->user->name }}</td>
-                                                        <td class="nowrap">
-                                                            <ul class="list-unstyled mb-0">
-                                                                @foreach ($v->carts as $carts)
-                                                                    <li>{{ $carts->produk->namaProduk }} x
-                                                                        {{ $carts->jumlah }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </td>
-                                                        <td class="nowrap">Rp. {{ $v->total_price }}</td>
+                                                <tr class="text-center">
+                                                    <td class="nowrap ">{{ $v['order_id'] }}</td>
+                                                    <td class="nowrap">{{ $v['user'] }}</td>
+                                                    <td class="nowrap">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li>{{ $v['produk'] }}</li>
+
+                                                        </ul>
+                                                    </td>
+                                                    <td class="nowrap">{{ $v['urgensi'] }}</td>
+                                                    <td class="nowrap">{{ $v['waktu'] }}</td>
+                                                    <td class="nowrap">{{ $v['totalSkor'] }}</td>
+                                                    <td class="nowrap">{{ $loop->iteration }}</td>
 
 
-                                                        <td class="nowrap">{{ $v->created_at->format('d/m/Y') }}</td>
-                                                    </tr>
-                                                @endif
+
+                                                    <td class="nowrap">
+
+                                                        <form action="{{ route('pesanan.selesai', $v['id']) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-primary  btn-sm">
+                                                                Selesai
+
+                                                            </button>
+                                                            <button type="submit" class="btn btn-danger  btn-sm">
+                                                                Pembeli
+
+                                                            </button>
+                                                        </form>
+
+                                                    </td>
+                                                </tr>
                                             @endforeach
-                                </div>
-                                {{-- </thead> --}}
-                                <tbody class="datatabel">
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
 
-
-
-
-                        <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <div class="d-flex flex-wrap py-2 mr-3">
-                                <div class="text-center pagination">
-                                    <div id="contentx"></div>
+                                        </thead>
+                                        <tbody class="datatabel">
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center py-3">
-                                <ul class="pagination twbs-pagination">
-                                </ul>
+
+
+
+
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="d-flex flex-wrap py-2 mr-3">
+                                    <div class="text-center pagination">
+                                        <div id="contentx"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center py-3">
+                                    <ul class="pagination twbs-pagination">
+                                    </ul>
+                                </div>
                             </div>
+
+
+                            <!--end::Table-->
                         </div>
-
-
-                        <!--end::Table-->
+                        <!--end::Table container-->
                     </div>
-                    <!--end::Table container-->
+                    <!--begin::Body-->
+
                 </div>
-                <!--begin::Body-->
+                <!--end::Tables Widget 11-->
+
 
             </div>
-            <!--end::Tables Widget 11-->
-
-
+            <!--end::Content container-->
         </div>
-        <!--end::Content container-->
-    </div>
-    <!--end::Content-->
+        <!--end::Content-->
     </div>
     <!--end::Content wrapper-->
 

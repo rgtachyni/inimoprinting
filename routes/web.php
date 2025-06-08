@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AlgoritmaGreedyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController as Auths;
 use App\Http\Controllers\AuthController as Authz;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\WishlistController;
 use App\Http\Controllers\PesananController;
+use App\Models\AlgoritmaGreedy;
 use Faker\Provider\ar_EG\Payment;
 
 // Route::get('/footer', function () {
@@ -27,12 +29,14 @@ Route::post('/register', [Authz::class, 'registerCreate'])->name('registercreate
 
 // keranjang
 Route::post('/cart/add/{id}', [App\Http\Controllers\Admin\CartController::class, 'addToCart'])->name('cart.add');
-Route::post('/cart/jumlah', [App\Http\Controllers\Admin\CartController::class, 'jumlah'])->name('jumlah');
+// Route::post('/cart/jumlah', [App\Http\Controllers\Admin\CartController::class, 'jumlah'])->name('jumlah');
 Route::get('/cart', [App\Http\Controllers\Admin\CartController::class, 'viewCart'])->name('cart.view');
 Route::delete('/cart/{id}', [App\Http\Controllers\Admin\CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::get('/transaction', [App\Http\Controllers\Admin\CartController::class, 'transaction'])->name('transaction.view');
 Route::delete('/cart/remove/{id}', [App\Http\Controllers\Admin\CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::post('/cart/update', [CartController::class, 'update'])->name('cartUpdate');
+// Route::post('/cart/update', [CartController::class, 'update'])->name('cartUpdate');
+Route::post('/cart/updateQty', [CartController::class, 'qty'])->name('qty');
+
 
 Route::get('/pesanan/selesai', [CartController::class, 'selesai'])->name('selesai');
 Route::get('/pesanan/belumbayar', [CartController::class, 'belumBayar'])->name('belumBayar');
@@ -41,6 +45,9 @@ Route::get('/pesanan/proses', [CartController::class, 'sedangProses'])->name('se
 Route::get('/pesanan/detailProses', [CartController::class, 'detailProses'])->name('detailProses');
 Route::get('/pesanan/detailBelumBayar/{id}', [CartController::class, 'detailBelumBayar'])->name('detailBelumBayar');
 Route::post('/midtrans/notification', [PaymentController::class, 'paymentNotification'])->name('paymentNotification');
+
+Route::post('/algoritma', [AlgoritmaGreedyController::class, 'hitungSkorPrioritas'])->name('hitungSkorPrioritas');
+Route::get('/Hasilalgoritma', [AlgoritmaGreedyController::class, 'index'])->name('index');
 
 
 Route::get('/checkout/success/{transaction}', [PaymentController::class, 'success'])->name("checkout-success");
@@ -151,6 +158,3 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
         // });
     });
 });
-
-
-

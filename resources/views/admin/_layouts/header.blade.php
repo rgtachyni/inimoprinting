@@ -83,15 +83,15 @@
                         <!--begin::Menu item-->
 
                         <div class="menu-item px-5">
-                            <a href="{{ route('index') }}" class="menu-link px-5">Halaman User</a>
+                            <a href="{{ route('index') }}" class="menu-link ">Halaman User</a>
                         </div>
                         <div class="menu-item px-5">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
 
-                                <button type="submit">logout</button>
+                                <button type="submit" class="bg-white border-0 menu-link ">Logout</button>
                             </form>
-                            {{-- <a href="{{ route('logout') }}" class="menu-link px-5">Logout</a> --}}
+
 
 
                         </div>

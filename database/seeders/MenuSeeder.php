@@ -19,10 +19,9 @@ class MenuSeeder extends Seeder
             ['name' => 'Data Master', 'icon' => ' bi-stack', 'url' => 'data-master', 'index' => 2, 'main_menu' => 'DATA MASTER'],
             ['name' => 'Produk', 'icon' => ' bi-stack', 'url' => 'produk', 'main_menu' => '', 'index' => 21],
             ['name' => 'Pemesanan', 'icon' => ' bi-stack', 'url' => 'pesanan', 'main_menu' => '', 'index' => 22],
-            ['name' => 'Penjadwalan', 'icon' => ' bi-stack', 'url' => 'penjadwalan', 'main_menu' => '', 'index' => 23],
-            ['name' => 'Customer', 'icon' => ' bi-stack', 'url' => 'customer', 'main_menu' => '', 'index' => 24],
-            ['name' => 'History Pesanan', 'icon' => ' bi-stack', 'url' => 'history', 'main_menu' => '', 'index' => 25],
-            ['name' => 'Pengaturan', 'icon' => ' bi-stack', 'url' => 'pengaturan', 'main_menu' => '', 'index' => 26],
+            ['name' => 'Customer', 'icon' => ' bi-stack', 'url' => 'customer', 'main_menu' => '', 'index' => 23],
+            ['name' => 'History Pesanan', 'icon' => ' bi-stack', 'url' => 'history', 'main_menu' => '', 'index' => 24],
+            ['name' => 'Pengaturan', 'icon' => ' bi-stack', 'url' => 'pengaturan', 'main_menu' => '', 'index' => 25],
             
             ['name' => 'User Setting', 'icon' => ' bi-people-fill', 'url' => 'user-settings', 'index' => 4, 'main_menu' => 'USERS'],
             // ['name' => 'Role', 'icon' => ' bi-stack', 'url' => 'roles', 'index' => 41, 'main_menu' => ''],

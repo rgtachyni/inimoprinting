@@ -15,6 +15,7 @@ class paymentTransaksi extends Model
         'cart_id',
         'total_price',
         'status',
+        'urgensi',
         'metode_pembayaran',
         'snap_token',
     ];

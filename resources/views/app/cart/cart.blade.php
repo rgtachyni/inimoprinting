@@ -61,9 +61,9 @@
                                 <li class="{{ Route::is('selesai') ? 'c-active' : '' }}">
                                     <a href="/pesanan/selesai">Selesai</a>
                                 </li>
-                                <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
+                                {{-- <li class="{{ Route::is('dibatalkan') ? 'c-active' : '' }}">
                                     <a href="/pesanan/dibatalkan">Di batalkan</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                     </ul><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-DASHBOARD -->
@@ -86,11 +86,11 @@
                             <div class="col-md-2 c-cart-image">
                                 <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Image</h3>
                             </div>
-                            <div class="col-md-4 c-cart-desc">
+                            <div class="col-md-3 c-cart-desc">
                                 <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Description</h3>
                             </div>
 
-                            <div class="col-md-1 c-cart-qty">
+                            <div class="col-md-2 c-cart-qty">
                                 <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Qty</h3>
                             </div>
                             <div class="col-md-2 c-cart-price">
@@ -110,7 +110,7 @@
                                 <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
                                     <img src="{{ asset('storage/produk/' . $item->produk->gambar) }}" />
                                 </div>
-                                <div class="col-md-4 col-sm-9 col-xs-7 c-cart-desc">
+                                <div class="col-md-3 col-sm-9 col-xs-7 c-cart-desc">
                                     <h3><a href="shop-product-details-2.html"
                                             class="c-font-bold c-theme-link c-font-22 c-font-dark">{{ $item->produk->namaProduk }}</a>
                                     </h3>
@@ -118,30 +118,23 @@
                                     <p>Size: S</p>
                                 </div>
 
-                                <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
-                                    <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">QTY</p>
-                                    <div class="c-input-group c-spinner">
-                                        <input type="text" class="form-control c-item-{{ $item->id }}"
-                                            value="{{ $item->jumlah }}" readonly>
-                                        <div class="c-input-group-btn-vertical">
-                                            <button class="btn btn-default" type="button"
-                                                data-item-id="{{ $item->id }}" data-price="{{ $item->produk->harga }}"
-                                                onclick="changeQty('{{ $item->id }}', 1)"><i
-                                                    class="fa fa-caret-up"></i></button>
-                                            <button class="btn btn-default" type="button"
-                                                data-item-id="{{ $item->id }}"
-                                                onclick="changeQty('{{ $item->id }}', -1)"><i
-                                                    class="fa fa-caret-down"></i></button>
-                                        </div>
-                                    </div>
+                                <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
+                                    <input type="number" value="{{ $item->jumlah }}" min="1"
+                                        class="form-control qty-input" data-price="{{ $item->produk->harga }}"
+                                        data-cart-id="{{ $item->id }}" oninput="handleQtyChange(this)">
+
                                 </div>
                                 <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
                                     <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Unit Price</p>
+                                    {{-- <p class="c-cart-price c-font-bold"id="price">Rp.
+                                        {{ number_format($item->produk->harga * $item->produk->jumlah) }}</p> --}}
                                     <p class="c-cart-price c-font-bold"id="price-{{ $item->harga }}">Rp.
-                                        {{ $item->produk->harga }}</p>
+                                        {{ number_format($item->produk->harga, 0, ',', '.') }}</p>
                                 </div>
                                 <div class="col-md-2 col-sm-3 col-xs-6 c-cart-total">
 
+                                    {{-- <p class="c-cart-price c-font-bold" id="grand-total">Rp.
+                                        {{ number_format($grandTotal) }}</p> --}}
                                     <p class="c-cart-price c-font-bold" id="totalHarga-{{ $item->id }}">Rp.
                                         {{ number_format($item->jumlah * $item->produk->harga, 0, ',', '.') }}</p>
 
@@ -161,21 +154,36 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="c-cart-subtotal-row ">
-                                <div class="col-md-3 col-md-offset-7 col-sm-4 col-xs-4 c-cart-subtotal-border">
-                                    <h3 class="c-font-uppercase c-font-bold c-right c-font-16 c-font-grey-2">Grand Total
-                                    </h3>
-                                </div>
-                                <div class="col-md-2 col-sm-4 col-xs-4 c-cart-subtotal-border ">
-                                    <h3 class="c-font-bold c-font-16" id="grandTotal">Rp.
-                                        {{ number_format($grandTotal, 0, ',', '.') }}</h3>
-                                </div>
-                            </div>
-                        </div>
+
                         <!-- END: SUBTOTAL ITEM ROW -->
                         <form action="{{ route('process') }}" method="POST">
                             @csrf
+                            <div class="row col-md-offset-8 ">
+
+                                <label for="urgensi">Silahkan pilih Urgensi Pesanan !</label>
+                                <div class="form-group  col-md-offset-2">
+                                    <input type="radio" id="normal" name="urgensi" value="normal" required>
+                                    <label for="normal">Normal</label><br>
+                                    <input type="radio" id="express" name="urgensi" value="express">
+                                    <label for="express">Express</label><br>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="c-cart-subtotal-row ">
+                                    <div class="col-md-3 col-md-offset-7 col-sm-4 col-xs-4 c-cart-subtotal-border">
+                                        <h3 class="c-font-uppercase c-font-bold c-right c-font-16 c-font-grey-2">Grand
+                                            Total
+                                        </h3>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-xs-4 c-cart-subtotal-border ">
+                                        <h3 class="c-font-bold c-font-16" id="grandTotal"
+                                            data-original="{{ $grandTotal }}">Rp.
+                                            {{ number_format($grandTotal, 0, ',', '.') }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <input type="hidden" name="total_price" id="total_price" value="{{ $grandTotal }}"> --}}
                             <input type="hidden" name="id">
                             @foreach ($cartIds as $id)
                                 <input type="hidden" name="cart_id[]" value="{{ $id }}">
@@ -185,8 +193,10 @@
                             <input type="hidden" name="last_name" value="">
                             <input type="hidden" name="email" value="{{ Auth::user()->email }}">
                             <input type="hidden" name="phone" value="{{ Auth::user()->phone }}">
-                            <button type="submit" id="bayar" class="btn c-btn btn-lg c-theme-btn">Checkout</button>
+                            <button type="submit" id="bayar"
+                                class="btn c-btn btn-lg c-theme-btn col-md-offset-8 ">Checkout</button>
                         </form>
+
 
                     </div>
                 @endif
@@ -201,44 +211,125 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+
+{{-- <script>
+    function handleQtyChange(inputElement) {
+        // Ambil elemen terkait
+        const cartId = inputElement.dataset.cartId;
+        const unitPrice = parseInt(inputElement.dataset.price);
+        const quantity = parseInt(inputElement.value);
+
+        // Validasi jumlah minimal 1
+        if (quantity < 1) {
+            inputElement.value = 1;
+            return;
+        }
+
+        // Hitung total harga untuk item ini
+        const itemTotal = unitPrice * quantity;
+
+        // Update tampilan total item (jika ada ID total per item)
+        const itemTotalElement = document.querySelector(`#totalHarga-${cartId}`);
+        if (itemTotalElement) {
+            itemTotalElement.textContent = 'Rp. ' + formatRupiah(itemTotal);
+        }
+
+        // Hitung ulang grand total dari semua item
+        let grandTotal = 0;
+        document.querySelectorAll('.qty-input').forEach(el => {
+            const qty = parseInt(el.value) || 0;
+            const price = parseInt(el.dataset.price) || 0;
+            grandTotal += qty * price;
+        });
+
+        // Update tampilan grand total
+        const grandTotalElement = document.getElementById('grandTotal');
+        if (grandTotalElement) {
+            grandTotalElement.textContent = 'Rp. ' + formatRupiah(grandTotal);
+        }
+    }
+
     function formatRupiah(angka) {
         return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
-
-    function changeQty(id, delta) {
-        let input = document.querySelector(`.c-item-${id}`);
-        let currentQty = parseInt(input.value);
-        let newQty = currentQty + delta;
-
-        if (newQty < 1) newQty = 1;
-        if (newQty > 10) newQty = 10;
-
-
-        $.ajax({
-            url: '{{ route('jumlah') }}',
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                cart_id: id,
-                jumlah: newQty
-            },
-            success: function(response) {
-
-                input.value = newQty;
+</script> --}}
+<script>
+    function handleQtyChange(inputElement) {
+        const cartId = inputElement.dataset.cartId;
+        const unitPrice = parseInt(inputElement.dataset.price);
+        let quantity = parseInt(inputElement.value);
+        const itemTotal = unitPrice * quantity;
 
 
-                document.getElementById(`totalHarga-${id}`).innerText = 'Rp. ' + formatRupiah(response
-                    .totalHargaItem);
-
-
-                document.getElementById('grandTotal').innerText = 'Rp. ' + formatRupiah(response
-                    .grandTotal);
-            },
-            error: function(xhr) {
-                alert('Gagal update quantity');
-                console.log(xhr.responseText);
-            }
-        });
+        if (quantity < 1) {
+            inputElement.value = 1;
+            quantity = 1;
+        } // Hitung total harga lokal dulu const itemTotal=unitPrice *
+        quantity;
+        const itemTotalElement = document.querySelector(`#totalHarga-${cartId}`);
+        if (itemTotalElement) {
+            itemTotalElement.textContent = 'Rp. ' + formatRupiah(itemTotal);
+        } // Kirim update ke server via AJAX (fetch)
+        fetch('/cart/updateQty', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token" ]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    cart_id: cartId,
+                    jumlah: quantity
+                })
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update grand total dari response server
+                    const grandTotalElement = document.getElementById('grandTotal');
+                    if (grandTotalElement) {
+                        grandTotalElement.textContent = 'Rp. ' + formatRupiah(data.grand_total);
+                    }
+                } else {
+                    alert('Gagal update jumlah di server');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat mengupdate jumlah');
+            });
     }
+
+    function formatRupiah(angka) {
+        return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const express = document.getElementById('express');
+        const normal = document.getElementById('normal');
+        const grandTotalElem = document.getElementById('grandTotal');
+        const originalTotal = parseFloat(grandTotalElem.dataset.original.replace(/\./g, '').replace(',', '.')); // Ambil dari atribut data-original
+        const amountInput = document.querySelector('input[name="amount"]');
+
+        function updateTotal() {
+            let newTotal = originalTotal;
+
+            if (express.checked) {
+                newTotal = originalTotal * 1.05; // Tambah 5%
+            }
+
+            // Format angka ke Rupiah
+            const formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            });
+
+            grandTotalElem.textContent = formatter.format(newTotal);
+            // grandTotalElem.textContent = formatter.format(newTotal);
+            amountInput.value = Math.round(newTotal); 
+        }
+
+        express.addEventListener('change', updateTotal);
+        normal.addEventListener('change', updateTotal);
+    });
 </script>

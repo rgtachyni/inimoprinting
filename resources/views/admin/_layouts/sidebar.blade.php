@@ -5,10 +5,10 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6  " id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
-        <a href="#">
-            <img alt="Logo" src="{{ asset('logo2.png') }}" class="app-sidebar-logo-default" width="35%"
-                height="auto" />
-            <img alt="Logo" src="{{ asset('logo2.png') }}" class="app-sidebar-logo-minimize" width="80%"
+        <a href="#" class="">
+            <img alt="Logo" src="{{ asset('logo2fix.jpg') }}" class="app-sidebar-logo-default rounded-full "
+                width="40%" height="auto" />
+            <img alt="Logo" src="{{ asset('logo2fix.jpg') }}" class="app-sidebar-logo-minimize " width="80%"
                 height="auto" />
         </a>
         <!--end::Logo image-->

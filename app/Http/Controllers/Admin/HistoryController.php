@@ -22,14 +22,6 @@ class HistoryController extends Controller
         $query = historyPesanan::with(['paymentTransaksi.user'])
             ->where('status', 'done');
 
-        // dd($query->where(function ($q) use ($search) {
-        //     $q->whereHas('paymentTransaksi.user', function ($sub) use ($search) {
-        //         $sub->where('name', 'like', '%' . $search . '%')
-        //             ->orWhere('email', 'like', '%' . $search . '%');
-        //     })
-        //         ->orWhere('kode_transaksi', 'like', '%' . $search . '%');
-        // }));
-
         // Filter jika ada pencarian
         if ($search) {
             $query->where(function ($q) use ($search) {

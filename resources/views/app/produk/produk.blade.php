@@ -23,132 +23,7 @@
                     </div>
                 </div><!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
                 <div class="container">
-                    <div class="c-layout-sidebar-menu c-theme ">
-                        <!-- BEGIN: LAYOUT/SIDEBARS/SHOP-SIDEBAR-MENU -->
-                        <div class="c-sidebar-menu-toggler">
-                            <h3 class="c-title c-font-uppercase c-font-bold">Navigation</h3>
-                            <a href="javascript:;" class="c-content-toggler" data-toggle="collapse"
-                                data-target="#sidebar-menu-1">
-                                <span class="c-line"></span>
-                                <span class="c-line"></span>
-                                <span class="c-line"></span>
-                            </a>
-                        </div>
 
-                        <ul class="c-sidebar-menu collapse " id="sidebar-menu-1">
-                            <li class="c-dropdown c-active c-open">
-                                <a href="javascript:;" class="c-toggler">Kategori<span class="c-arrow"></span></a>
-                                <ul class="c-dropdown-menu">
-                                    <li class="c-active">
-                                        <a href="#">Spanduk</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Stiker</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Buku</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Kertas</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            {{-- <li class="c-dropdown">
-                                <a href="javascript:;" class="c-toggler">Sub Menu Section<span class="c-arrow"></span></a>
-                                <ul class="c-dropdown-menu">
-                                    <li>
-                                        <a href="#">Example Link</a>
-                                    </li>
-                                    <li class="c-dropdown c-dropdown-sub">
-                                        <a href="javascript:;" class="c-toggler c-toggler-sub">Sub Menu
-                                            <span class="c-arrow"></span></a>
-                                        <ul class="c-dropdown-menu">
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Example Link</a>
-                                    </li>
-                                    <li class="c-dropdown">
-                                        <a href="javascript:;" class="c-toggler">Sub Menu<span class="c-arrow"></span></a>
-                                        <ul class="c-dropdown-menu">
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                            <li class="c-dropdown">
-                                                <a href="javascript:;" class="c-toggler">Sub Menu<span
-                                                        class="c-arrow"></span></a>
-                                                <ul class="c-dropdown-menu">
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Example Link</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Example Link</a>
-                                    </li>
-                                </ul>
-                            </li> --}}
-
-
-                            <div class="c-padding-20 c-margin-t-40 c-bg-grey-1 c-bg-img-bottom-right"
-                                style="background-image:url(../../assets/base/img/content/misc/feedback_box_2.png)">
-                                <div class="c-content-title-1 c-margin-t-20">
-                                    <h3 class="c-font-uppercase c-font-bold">Have a question?</h3>
-                                    <div class="c-line-left"></div>
-                                    <form action="#">
-                                        <div class="input-group input-group-lg c-square">
-                                            <input type="text" class="form-control c-square"
-                                                placeholder="Ask a question" />
-                                            <span class="input-group-btn">
-                                                <button class="btn c-theme-btn c-btn-square c-btn-uppercase c-font-bold"
-                                                    type="button">Go!</button>
-                                            </span>
-                                        </div>
-                                    </form>
-                                    <p class="c-font-thin">Ask your questions away and let our dedicated customer service
-                                        help
-                                        you look through our FAQs to get your questions answered!</p>
-                                </div>
-                            </div><!-- END: LAYOUT/SIDEBARS/SHOP-SIDEBAR-MENU -->
-                    </div>
                     <div class="c-layout-sidebar-content ">
                         <div class="card-title">
                             <!--begin::Search-->
@@ -186,9 +61,7 @@
                                         <div class="c-content-product-2 c-bg-white c-border">
                                             <div class="c-content-overlay">
 
-                                                {{-- <div
-                                                class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">
-                                                Sale</div> --}}
+                                              
                                                 <div class="c-overlay-wrapper">
                                                     <div class="c-overlay-content">
                                                         <a href="{{ route('detailProduk', ['id' => $produks->id]) }}"
@@ -198,10 +71,7 @@
                                                 <div class="c-bg-img-center c-overlay-object" data-height="height"
                                                     style="height: 230px; background-image: url({{ asset('storage/produk/' . $produks->gambar) }});">
                                                 </div>
-                                                {{-- <div class="c-bg-img-center c-overlay-object" data-height="height"
-                                                    style="height: 230px, background-size:cover">
-                                                    <img src="{{ asset('storage/produk/' . $produks->gambar) }}">
-                                                </div> --}}
+                                              
                                             </div>
                                             <div class="c-info">
                                                 <p class="c-title c-font-16 c-font-slim namaProduk">
@@ -256,40 +126,40 @@
 
             <script src="../../assets/global/plugins/excanvas.min.js"></script>
             <![endif]-->
-                            <script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
-                            <script src="../../assets/demos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+                                    <script src="../../assets/demos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
 
-                            <!-- END: CORE PLUGINS -->
+                                    <!-- END: CORE PLUGINS -->
 
-                            <!-- BEGIN: LAYOUT PLUGINS -->
-                            <script src="../../assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
-                            <script src="../../assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
-                            <!-- END: LAYOUT PLUGINS -->
+                                    <!-- BEGIN: LAYOUT PLUGINS -->
+                                    <script src="../../assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+                                    <script src="../../assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
+                                    <!-- END: LAYOUT PLUGINS -->
 
-                            <!-- BEGIN: THEME SCRIPTS -->
-                            <script src="../../assets/base/js/components.js" type="text/javascript"></script>
-                            <script src="../../assets/base/js/components-shop.js" type="text/javascript"></script>
-                            <script src="../../assets/base/js/app.js" type="text/javascript"></script>
-                            <script>
-                                $(document).ready(function() {
-                                    App.init(); // init core    
-                                });
-                            </script>
-                            <!-- END: THEME SCRIPTS -->
+                                    <!-- BEGIN: THEME SCRIPTS -->
+                                    <script src="../../assets/base/js/components.js" type="text/javascript"></script>
+                                    <script src="../../assets/base/js/components-shop.js" type="text/javascript"></script>
+                                    <script src="../../assets/base/js/app.js" type="text/javascript"></script>
+                                    <script>
+                                        $(document).ready(function() {
+                                            App.init(); // init core    
+                                        });
+                                    </script>
+                                    <!-- END: THEME SCRIPTS -->
 
-                            <!-- END: LAYOUT/BASE/BOTTOM -->
-                        </body>
-                    </div>
-                    {{-- <script>
+                                    <!-- END: LAYOUT/BASE/BOTTOM -->
+                                </body>
+                            </div>
+                            {{-- <script>
             document.getElementById('cari').addEventListener('keyup', function() {
                 let filter = this.value.toLowerCase();
                 let items = document.querySelectorAll('#tableProduk .produk-item');
@@ -304,43 +174,43 @@
                 });
             });
         </script> --}}
-                    <script>
-                        document.getElementById('cari').addEventListener('keyup', function() {
-                            let filter = this.value.toLowerCase();
-                            let items = document.querySelectorAll('#tableProduk .produk-item');
-                            let found = false;
+                            <script>
+                                document.getElementById('cari').addEventListener('keyup', function() {
+                                    let filter = this.value.toLowerCase();
+                                    let items = document.querySelectorAll('#tableProduk .produk-item');
+                                    let found = false;
 
-                            items.forEach(item => {
-                                let nama = item.querySelector('.namaProduk').textContent.toLowerCase();
-                                if (nama.includes(filter)) {
-                                    item.style.display = '';
-                                    found = true;
-                                } else {
-                                    item.style.display = 'none';
-                                }
-                            });
+                                    items.forEach(item => {
+                                        let nama = item.querySelector('.namaProduk').textContent.toLowerCase();
+                                        if (nama.includes(filter)) {
+                                            item.style.display = '';
+                                            found = true;
+                                        } else {
+                                            item.style.display = 'none';
+                                        }
+                                    });
 
 
-                            let messageId = 'noResultMessage';
-                            let existingMessage = document.getElementById(messageId);
+                                    let messageId = 'noResultMessage';
+                                    let existingMessage = document.getElementById(messageId);
 
-                            if (!found) {
+                                    if (!found) {
 
-                                if (!existingMessage) {
-                                    let noResult = document.createElement('div');
-                                    noResult.id = messageId;
-                                    noResult.style.padding = '20px';
-                                    noResult.style.textAlign = 'center';
-                                    noResult.style.fontSize = '18px';
-                                    noResult.innerText = 'Pencarian tidak ada';
-                                    document.getElementById('tableProduk').appendChild(noResult);
-                                }
-                            } else {
+                                        if (!existingMessage) {
+                                            let noResult = document.createElement('div');
+                                            noResult.id = messageId;
+                                            noResult.style.padding = '20px';
+                                            noResult.style.textAlign = 'center';
+                                            noResult.style.fontSize = '18px';
+                                            noResult.innerText = 'Pencarian tidak ada';
+                                            document.getElementById('tableProduk').appendChild(noResult);
+                                        }
+                                    } else {
 
-                                if (existingMessage) {
-                                    existingMessage.remove();
-                                }
-                            }
-                        });
-                    </script>
+                                        if (existingMessage) {
+                                            existingMessage.remove();
+                                        }
+                                    }
+                                });
+                            </script>
 @endsection

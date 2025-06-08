@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('order_id')->unique(); // Wajib untuk Midtrans
-            $table->integer('total_price'); 
-            $table->string('status')->default('pending'); 
+            $table->integer('total_price');
+            $table->string('status')->default('pending');
+            $table->enum('urgensi', ['normal', 'express'])->default('normal');
             $table->string('metode_pembayaran')->nullable(); // Status pembayaran
             $table->string('snap_token')->nullable(); // Token dari Midtrans
             $table->timestamps();

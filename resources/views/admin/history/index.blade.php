@@ -131,20 +131,19 @@
                             <!--begin::Table-->
                             <div class="py-5">
                                 <div class="table-responsive">
-                                    <table class="table table-row-dashed table-row-gray-300 gy-4">
+                                    <table class="table table-row-dashed table-row-gray-300 gy-4 align-middle">
                                         <thead>
-                                            <tr class="fw-bold fs-6 text-gray-800">
+                                            <tr class="fw-bold fs-6 text-gray-800 text-center">
                                                 <th>Order Id</th>
                                                 <th>Username</th>
                                                 <th>Produk</th>
                                                 <th>Total Harga</th>
-                                                {{-- <th>Pembayaran</th> --}}
                                                 <th>Waktu</th>
 
                                             </tr>
 
                                             @foreach ($history as $key => $v)
-                                                <tr>
+                                                <tr class="text-center">
 
                                                     <td>{{ $v->paymentTransaksi->order_id }}</td>
                                                     <td>{{ $v->paymentTransaksi->user->name }}</td>
@@ -158,7 +157,7 @@
                                                     </td>
 
                                                     <td>Rp. {{ $v->paymentTransaksi->total_price }}</td>
-                                                    <td>{{ $v->created_at }}</td>
+                                                    <td>{{ $v->created_at->format('d/m/Y') }}</td>
 
                                                 </tr>
                                             @endforeach

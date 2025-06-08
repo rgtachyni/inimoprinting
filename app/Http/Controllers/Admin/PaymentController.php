@@ -15,25 +15,42 @@ use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
+
     public function process(Request $request)
     {
         $data = $request->all();
-        // $cartIds = implode(',', $data['cart_id']);
+
         $cartIds = $data['cart_id'];
         $orderid = uniqid();
         $metodePembayaran = $data['jenis_transaksi'] ?? null;
+        $urgensi = $data['urgensi'];
+
+
+        $carts = Cart::with('produk')->whereIn('id', $cartIds)->get();
+        $baseTotal = $carts->sum(function ($item) {
+            return $item->produk->harga * $item->jumlah;
+        });
+        if ($urgensi === 'express') {
+            $grandTotal = $baseTotal + ($baseTotal * 0.05); // Tambah 5%
+        } else {
+            $grandTotal = $baseTotal;
+        }
+
 
         $transaction = paymentTransaksi::create([
             'user_id' => Auth::user()->id,
             'order_id' => $orderid,
-            'total_price' => $data['amount'],
-            // 'cart_id' => $cartIds,
+            // 'total_price' => $data['amount'],
+            'total_price' => round($grandTotal),
             'status' => 'pending',
+            'urgensi' => $urgensi,
+            // 'urgensi' => $data['urgensi'] ?? 'normal',
             'metode_pembayaran' => $metodePembayaran
         ]);
-        // pi
+
+
+
         $transaction->carts()->attach($cartIds);
-        // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
         \Midtrans\Config::$isProduction = config('midtrans.isProduction');
         \Midtrans\Config::$isSanitized = true;
@@ -59,6 +76,51 @@ class PaymentController extends Controller
 
         return redirect()->route('checkout', $transaction->id);
     }
+
+    // public function process(Request $request)
+    // {
+    //     $data = $request->all();
+    //     // $cartIds = implode(',', $data['cart_id']);
+    //     $cartIds = $data['cart_id'];
+    //     $orderid = uniqid();
+    //     $metodePembayaran = $data['jenis_transaksi'] ?? null;
+    //     dd($data);
+    //     $transaction = paymentTransaksi::create([
+    //         'user_id' => Auth::user()->id,
+    //         'order_id' => $orderid,
+    //         'total_price' => $data['amount'],
+    //         'urgensi' => $data['urgensi'],
+    //         'status' => 'pending',
+    //         'metode_pembayaran' => $metodePembayaran
+    //     ]);
+
+    //     $transaction->carts()->attach($cartIds);
+    //     // Set your Merchant Server Key
+    //     \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+    //     \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+    //     \Midtrans\Config::$isSanitized = true;
+    //     \Midtrans\Config::$is3ds = true;
+
+    //     $params = array(
+    //         'transaction_details' => array(
+    //             // 'order_id' => rand(),
+    //             'order_id' => $orderid,
+    //             'gross_amount' => $data['amount'],
+    //         ),
+    //         'customer_details' => array(
+    //             'first_name' => Auth::user()->name,
+    //             'email' => Auth::user()->email,
+    //         ),
+    //         'notification_url' => route('paymentNotification')
+    //     );
+
+    //     // $snapToken = \Midtrans\Snap::getSnapToken($params);
+    //     $snapToken = Snap::getSnapToken($params);
+    //     $transaction->snap_token = $snapToken;
+    //     $transaction->save();
+
+    //     return redirect()->route('checkout', $transaction->id);
+    // }
 
     public function checkout(paymentTransaksi $transaction)
     {
