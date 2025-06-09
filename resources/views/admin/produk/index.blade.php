@@ -136,6 +136,7 @@
                                             <tr class="fw-bold fs-6 text-gray-800">
                                                 <th>No</th>
                                                 <th>Nama</th>
+                                                <th>Kategori</th>
                                                 <th>Harga</th>
                                                 <th>Deskripsi</th>
                                                 <th>Gambar</th>

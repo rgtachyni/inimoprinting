@@ -16,6 +16,8 @@ class CartController extends Controller
 {
     public function addToCart(Request $request, $id)
     {
+        // dd($request->all());
+        $req = $request->all();
 
         $produk = Produk::findOrFail($id);
         $jumlah = $request->input('jumlah', 1);
@@ -26,6 +28,14 @@ class CartController extends Controller
             ->where('status', 'dipilih')
             ->first();
 
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/cart', $filename);
+
+            $req['gambar'] = $filename;
+        }
+
         if ($cart) {
             $cart->jumlah += 1;
             $cart->save();
@@ -34,6 +44,8 @@ class CartController extends Controller
             Cart::create([
                 'user_id' => Auth::id(),
                 'produk_id' => $produk->id,
+                'catatan' => $req['catatan'],
+                'gambar' => $req['gambar'],
                 'jumlah' => $jumlah,
                 'status' => 'dipilih', // tambahkan status default
             ]);

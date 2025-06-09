@@ -7,6 +7,7 @@ use App\Http\Services\Repositories\BaseRepository;
 use App\Http\Services\Repositories\Contracts\BaseRepositoryInterface;
 use App\Http\Services\Repositories\Contracts\GaleriContract;
 use App\Http\Services\Repositories\Contracts\KategoriContract;
+use App\Http\Services\Repositories\Contracts\KategoriProdukContract;
 use App\Http\Services\Repositories\Contracts\KegiatanContract;
 use App\Http\Services\Repositories\Contracts\KomentarContract;
 use App\Http\Services\Repositories\Contracts\KontakContract;
@@ -20,6 +21,7 @@ use App\Http\Services\Repositories\Contracts\SejarahContract;
 use App\Http\Services\Repositories\Contracts\UserMenuContract;
 use App\Http\Services\Repositories\Contracts\WisataContract;
 use App\Http\Services\Repositories\GaleriRepository;
+use App\Http\Services\Repositories\KategoriProdukRepository;
 use App\Http\Services\Repositories\KategoriRepository;
 use App\Http\Services\Repositories\KegiatanRepository;
 use App\Http\Services\Repositories\KomentarRepository;
@@ -70,5 +72,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(pembayaranContract::class, pembayaranRepository::class);
         $this->app->bind(UserMenuContract::class, UserMenuRepository::class);
         $this->app->bind(MenuContract::class, MenuRepository::class);
+        $this->app->bind(KategoriProdukContract::class, KategoriProdukRepository::class);
     }
 }

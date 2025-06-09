@@ -17,13 +17,8 @@
 @endpush
 
 @section('content')
-    <style>
-        .nowrap {
-            white-space: nowrap;
-            vertical-align: top;
-        }
-    </style>
     <!--begin::Content wrapper-->
+
     <div class="d-flex flex-column flex-column-fluid">
         <!--begin::Toolbar-->
         <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -60,9 +55,7 @@
                         <!--end::Item-->
                     </ul>
                     <!--end::Breadcrumb-->
-
                 </div>
-
                 <!--end::Page title-->
             </div>
             <!--end::Toolbar container-->
@@ -78,17 +71,16 @@
                 <div class="card mb-5 mb-xl-8">
                     <div class="card-header align-items-center py-5 gap-2 gap-md-5">
 
-
                         <div class="w-100 mw-150px">
                             <!--begin::Select2-->
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Per Page" id="jumlah">
-                                <option value=""></option>
-                                <option>5</option>
-                                <option>10</option>
-                                <option>25</option>
-                                <option>50</option>
-                                <option>100</option>
+                                {{-- <option value=""></option> --}}
+                                <option value="5" selected>5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
                             </select>
                             <!--end::Select2-->
                         </div>
@@ -117,7 +109,7 @@
                         <!--end::Card title-->
 
                         <!--begin::Card toolbar-->
-                        {{-- <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                             <!--begin::Add product-->
                             <a onclick="createForm()" class="btn btn-primary">
                                 <span class="btn-label">
@@ -126,102 +118,61 @@
                                 Add New
                             </a>
                             <!--end::Add product-->
-                        </div> --}}
+                        </div>
                         <!--end::Card toolbar-->
-
                     </div>
 
 
                     <!--begin::Body-->
                     <div class="card-body py-3">
 
-
                         <!--begin::Table container-->
                         <div class="table-responsive">
-
-                            <form action="{{ route('hitungSkorPrioritas') }}" method="post">
-                                @csrf
-                                <button type="submit" class="border-0 p-4  btn btn-primary">Setel ulang jadwal</button>
-                            </form>
-
-
+                            <!--begin::Table-->
                             <div class="py-5">
                                 <div class="table-responsive">
-                                    <table class="table table-row-dashed table-row-gray-300 gy-4 align-middle">
+                                    <table class="table table-row-dashed table-row-gray-300 gy-4">
                                         <thead>
-                                            <tr class="fw-bold fs-6 text-gray-800 text-center">
-                                                <th>Order Id</th>
-                                                <th>Username</th>
-                                                <th>Alamat</th>
-                                                <th>Nama Produk</th>
-                                                <th>Waktu pemesanan</th>
+                                            <tr class="fw-bold fs-6 text-gray-800">
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th>Action</th>
                                             </tr>
-
-                                            {{-- <div class="d-flex justify-center items-center"> --}}
-                                            @foreach ($data as $key => $v)
-                                                @if ($v->status == 'success')
-                                                    <tr class="text-center">
-                                                        {{-- <td>{{ $loop->iteration }}</td> --}}
-                                                        <td class="nowrap">{{ $v->order_id }}</td>
-                                                        <td class="nowrap">{{ $v->user->name }}</td>
-                                                        <td class="nowrap">
-                                                            <ul class="list-unstyled mb-0">
-                                                                @foreach ($v->carts as $carts)
-                                                                    <li>{{ $carts->produk->namaProduk }} x
-                                                                        {{ $carts->jumlah }}</li>
-                                                                    <li><a href="{{ asset('storage/cart/' . $carts->gambar) }}"
-                                                                            download target="_blank">Unduh</a>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </td>
-                                                        <div>
-                                                            <td class="nowrap text-left">Rp.
-                                                                {{ number_format($v->total_price, 0, ',', '.') }}</td>
-
-
-                                                            <td class="nowrap">{{ $v->created_at->format('d/m/Y') }}</td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-                                </div>
-                                {{-- </thead> --}}
-                                <tbody class="datatabel">
-                                </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <div class="d-flex flex-wrap py-2 mr-3">
-                                <div class="text-center pagination">
-                                    <div id="contentx"></div>
+                                        </thead>
+                                        <tbody class="datatabel">
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center py-3">
-                                <ul class="pagination twbs-pagination">
-                                </ul>
+
+
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="d-flex flex-wrap py-2 mr-3">
+                                    <div class="text-center pagination">
+                                        <div id="contentx"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center py-3">
+                                    <ul class="pagination twbs-pagination">
+                                    </ul>
+                                </div>
                             </div>
+
+
+                            <!--end::Table-->
                         </div>
-
-
-                        <!--end::Table-->
+                        <!--end::Table container-->
                     </div>
-                    <!--end::Table container-->
+                    <!--begin::Body-->
+
                 </div>
-                <!--begin::Body-->
+                <!--end::Tables Widget 11-->
+
 
             </div>
-            <!--end::Tables Widget 11-->
-
-
+            <!--end::Content container-->
         </div>
-        <!--end::Content container-->
-    </div>
-    <!--end::Content-->
+        <!--end::Content-->
     </div>
     <!--end::Content wrapper-->
 
@@ -307,9 +258,9 @@
             }
 
             // $("#pencarian, #show").keyup(function (event) {
-            $("#pencarian, #jumlah").on('keyup change', function(event) {
-                let cari = $('#pencarian').val();
-                let jml = $('#jumlah').val();
+            $("#cari, #jumlah").on('keyup change', function(event) {
+                let cari = $('#cari').val();
+                let jml = $('#jumlah').val() || 5;
                 loadpage(cari, jml);
             });
 
@@ -319,7 +270,6 @@
                 if (valid) {
                     e.preventDefault();
                     let formData = new FormData(formInput);
-                    formData.append('gambar', gambar);
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -353,7 +303,6 @@
                     let id = $('#formId').val();
                     e.preventDefault();
                     let formData = new FormData(formInput);
-                    formData.append('gambar', gambar);
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

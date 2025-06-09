@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Repositories\Contracts\ProdukContract;
+use App\Http\Services\Repositories\Contracts\KategoriProdukContract;
 use Illuminate\Http\Request;
 use App\Traits\Uploadable;
 
-class ProdukController extends Controller
+class KategoriProdukController extends Controller
 {
     use Uploadable;
     protected $repository;
     protected $image_path = 'uploads/produk';
 
 
-    public function __construct(ProdukContract $repository)
+    public function __construct(KategoriProdukContract $repository)
     {
-        $this->title = 'produk';
+        $this->title = 'kategori-produk';
         $this->repository = $repository;
     }
 
@@ -25,6 +25,7 @@ class ProdukController extends Controller
         $this->response = [
             'message' => $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine()
         ];
+        dd($e);
         return view('errors.message', ['message' => $this->response]);
     }
 
@@ -97,17 +98,9 @@ class ProdukController extends Controller
         try {
             $req = $request->all();
             // dd($req);
-            if ($request->hasFile('gambar')) {
-                $image = $request->file('gambar');
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/produk', $filename);
-
-                $req['gambar'] = $filename;
-            }
             $data = $this->repository->store($req);
             return response()->json($data);
         } catch (\Exception $e) {
-            dd($e);
             $message = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
             return response()->json($message);
         }
@@ -128,14 +121,6 @@ class ProdukController extends Controller
     {
         try {
             $req = $request->all();
-            if ($request->hasFile('gambar')) {
-                $image = $request->file('gambar')->getClientOriginalName();
-                $image_name = pathinfo($image, PATHINFO_FILENAME);
-                $image_name = $this->uploadFile2($request->file('gambar'), $this->image_path, $req['gambar_old']);
-                $req['gambar'] = $image_name;
-            } else {
-                $req['gambar'] = $req['gambar_old'];
-            }
             $data = $this->repository->update($req, $id);
             return response()->json($data);
         } catch (\Exception $e) {

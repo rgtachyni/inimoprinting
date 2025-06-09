@@ -74,19 +74,8 @@
                                     {{ $produk->deskripsi }}
                                 </div>
                                 <div class="row c-product-variant">
-                                    <div class="col-sm-12 col-xs-12">
-                                        <p class="c-product-meta-label c-product-margin-1 c-font-uppercase c-font-bold">
-                                            Size:</p>
-                                        <div class="c-product-size">
-                                            <select>
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-xs-12 c-margin-t-20">
+
+                                    {{-- <div class="col-sm-12 col-xs-12 c-margin-t-20">
                                         <div class="c-product-color">
                                             <p class="c-product-meta-label c-font-uppercase c-font-bold">Color:</p>
                                             <select>
@@ -96,12 +85,32 @@
                                                 <option value="White">White</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
+
                                 </div>
                                 <div class="c-product-add-cart c-margin-t-20">
-                                    <form action="{{ route('cart.add', ['id' => $produk->id]) }}" method="POST">
+                                    <form action="{{ route('cart.add', ['id' => $produk->id]) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
+                                            <div class="col-sm-12 col-xs-12 c-margin-t-20">
+                                                <div class="c-product-color">
+                                                    <p class="c-product-meta-label c-font-uppercase c-font-bold">Catatan</p>
+                                                    <textarea name="catatan" id="catatan" rows="4" cols="50"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12 c-margin-t-20">
+                                                <div class="c-product-color">
+                                                    <p class="c-product-meta-label c-font-uppercase c-font-bold">Upload
+                                                        design</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12 c-margin-t-20">
+                                                <div class="c-product-color">
+                                                    <input type="file" id="gambar" name="gambar">
+                                                </div>
+                                            </div>
+
                                             <div class="col-sm-4 col-xs-12">
 
                                                 <div class="c-input-group c-spinner">
@@ -146,7 +155,8 @@
                             data-toggle="tab">Description</a>
                     </li>
                     <li role="presentation">
-                        <a class="c-font-uppercase c-font-bold" href="#tab-2" role="tab" data-toggle="tab">Additional
+                        <a class="c-font-uppercase c-font-bold" href="#tab-2" role="tab"
+                            data-toggle="tab">Additional
                             Information</a>
                     </li>
                     <li role="presentation">
@@ -159,7 +169,7 @@
                 <div role="tabpanel" class="tab-pane fade in active" id="tab-1">
                     <div class="c-product-desc c-center">
                         <div class="container">
-                            <img src="../../assets/base/img/content/shop5/30.png" />
+                            {{-- <img src="../../assets/base/img/content/shop5/30.png" /> --}}
                             <p>
                                 Lorem ipsum dolor sit amet, consectetuer
                                 adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
@@ -184,7 +194,7 @@
                         <div class="container">
                             <div class"row">
                                 <div class="col-md-6">
-                                    <img src="../../assets/base/img/content/shop5/32.png" />
+                                    {{-- <img src="../../assets/base/img/content/shop5/32.png" /> --}}
                                 </div>
                                 <div class="col-md-6">
                                     <div class="c-content-title-1">
@@ -235,7 +245,7 @@
                                         to Cart</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <img src="../../assets/base/img/content/shop5/31.png" />
+                                    {{-- <img src="../../assets/base/img/content/shop5/31.png" /> --}}
                                 </div>
                             </div>
                         </div>
@@ -263,7 +273,7 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="c-user-avatar">
-                                    <img src="../../assets/base/img/content/avatars/team1.jpg" />
+                                    {{-- <img src="../../assets/base/img/content/avatars/team1.jpg" /> --}}
                                 </div>
                                 <div class="c-product-review-name">
                                     <h3 class="c-font-bold c-font-24 c-margin-b-5">Steve</h3>
@@ -290,7 +300,7 @@
                         <div class="row c-margin-t-40">
                             <div class="col-xs-6">
                                 <div class="c-user-avatar">
-                                    <img src="../../assets/base/img/content/avatars/team12.jpg" />
+                                    {{-- <img src="../../assets/base/img/content/avatars/team12.jpg" /> --}}
                                 </div>
                                 <div class="c-product-review-name">
                                     <h3 class="c-font-bold c-font-24 c-margin-b-5">John</h3>
@@ -317,7 +327,7 @@
                         <div class="row c-margin-t-40">
                             <div class="col-xs-6">
                                 <div class="c-user-avatar">
-                                    <img src="../../assets/base/img/content/avatars/team8.jpg" />
+                                    {{-- <img src="../../assets/base/img/content/avatars/team8.jpg" /> --}}
                                 </div>
                                 <div class="c-product-review-name">
                                     <h3 class="c-font-bold c-font-24 c-margin-b-5">Alice</h3>
@@ -383,9 +393,9 @@
                                                 class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Explore</a>
                                         </div>
                                     </div>
-                                    <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
+                                    {{-- <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
                                         style="height: 270px; background-image: url(../../assets/base/img/content/shop5/18.png);">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="c-info">
                                     <p class="c-title c-font-18 c-font-slim">Samsung Galaxy Note 4</p>
@@ -414,9 +424,9 @@
                                                 class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Explore</a>
                                         </div>
                                     </div>
-                                    <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
+                                    {{-- <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
                                         style="height: 270px; background-image: url(../../assets/base/img/content/shop5/27.png);">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="c-info">
                                     <p class="c-title c-font-18 c-font-slim">Samsung Galaxy S4</p>
@@ -445,9 +455,9 @@
                                                 class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Explore</a>
                                         </div>
                                     </div>
-                                    <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
+                                    {{-- <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
                                         style="height: 270px; background-image: url(../../assets/base/img/content/shop5/21.png);">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="c-info">
                                     <p class="c-title c-font-18 c-font-slim">Apple iPhone 5</p>
@@ -481,9 +491,9 @@
                                                 class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Explore</a>
                                         </div>
                                     </div>
-                                    <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
+                                    {{-- <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
                                         style="height: 270px; background-image: url(../../assets/base/img/content/shop5/22.png);">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="c-info">
                                     <p class="c-title c-font-18 c-font-slim">HTC</p>
@@ -512,9 +522,9 @@
                                                 class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Explore</a>
                                         </div>
                                     </div>
-                                    <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
+                                    {{-- <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
                                         style="height: 270px; background-image: url(../../assets/base/img/content/shop5/20.png);">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="c-info">
                                     <p class="c-title c-font-18 c-font-slim">Apple iPhone 6</p>
@@ -546,9 +556,9 @@
                                                 class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Explore</a>
                                         </div>
                                     </div>
-                                    <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
+                                    {{-- <div class="c-bg-img-center-contain c-overlay-object" data-height="height"
                                         style="height: 270px; background-image: url(../../assets/base/img/content/shop5/24.png);">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="c-info">
                                     <p class="c-title c-font-18 c-font-slim">Apple iPhone 6+</p>

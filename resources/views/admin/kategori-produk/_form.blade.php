@@ -28,47 +28,8 @@
                                 <span class="required">Nama</span>
                             </label>
                             <div class="position-relative">
-                                <input type="text" class="form-control" name="namaProduk" id="namaProduk" />
+                                <input type="text" class="form-control" name="nama" id="nama" />
                             </div>
-                        </div>
-                        <div class="col-md-12 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Nama</span>
-                            </label>
-                            <div class="position-relative">
-                                <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select roles user"
-                                    name="kategoriProduk_id" id="kategoriProduk_id">
-                                    <option value="">Pilih Kategori Produk...</option>
-                                    @foreach (Helper::getData('kategori_produks') as $v)
-                                        <option value="{{ $v->id }}">{{ $v->nama }}
-                                            {{ $v->role->nama ?? null }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Harga</span>
-                            </label>
-                            <div class="position-relative">
-                                <input type="text" class="form-control" name="harga" id="harga" />
-                            </div>
-                        </div>
-                        <div class="col-md-12 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                <span class="required">Deskripsi</span>
-                            </label>
-                            <div class="position-relative">
-                                <textarea class="form-control" name="deskripsi" id="deskripsi" rows="4"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 fv-row">
-                            <label class="required fs-6 fw-semibold mb-2">Upload Gambar</label>
-                            <input type="file" class="form-control" placeholder="pilih gambar" name="gambar"
-                                id="gambar" />
-                            <input type="hidden" name="gambar_old" id="gambar_old" />
                         </div>
 
 
@@ -119,10 +80,7 @@
                     $('#saveBtn').hide();
                     $('#updateBtn').show();
                     $('#formId').val(data.id);
-                    $('#namaProduk').val(data.namaProduk);
-                    $('#harga').val(data.harga);
-                    $('#deskripsi').val(data.deskripsi);
-                    $('#gambar_old').val(data.gambar);
+                    $('#nama').val(data.nama);
                 },
                 error: function() {
                     toast("Tidak dapat menampilkan data", "error", 1500);

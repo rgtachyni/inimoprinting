@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\Repositories\Contracts\LowonganContract;
 use App\Http\Services\Repositories\Contracts\PelamarContract;
 use App\Http\Services\Repositories\ProdukRepository;
+use App\Models\kategoriProduk;
 use App\Models\Produk;
 use App\Models\Wilayah;
 use App\Models\customer;
@@ -26,13 +27,16 @@ class HomeController extends Controller
     public function index(Request $r)
     {
         $produk = Produk::all();
+        $kategoriProduk = kategoriProduk::all();
         $user = Auth::user();
-        return view('app.index', compact('produk', 'user'));
+        return view('app.index', compact('produk', 'user', 'kategoriProduk'));
     }
     public function produk(Request $r)
     {
         $produk = Produk::all();
-        return view('app.produk.produk', compact('produk'));
+        $kategoriProduk = kategoriProduk::all();
+
+        return view('app.produk.produk', compact('produk', 'kategoriProduk'));
     }
     public function cariProduk(Request $request)
     {
@@ -66,6 +70,14 @@ class HomeController extends Controller
             "total_data" => $data->total(),
             "html"       => $view,
         ]);
+    }
+
+    public function detailKategori($id)
+    {
+        $produk = Produk::where('kategoriProduk_id', $id)->get();
+        // dd($produk);
+
+        return view('app.produk.detailKategori', compact('produk'));
     }
 
     public function detailProduk($id)

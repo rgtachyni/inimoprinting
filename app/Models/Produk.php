@@ -10,6 +10,7 @@ class Produk extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kategoriProduk_id',
         'namaProduk',
         'harga',
         'deskripsi',
@@ -21,8 +22,13 @@ class Produk extends Model
         return $this->hasMany(wishlist::class);
     }
 
-     public function cart()
+    public function cart()
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function kategori()
+    {
+        return $this->hasOne(kategoriProduk::class, 'id', 'kategoriProduk_id');
     }
 }

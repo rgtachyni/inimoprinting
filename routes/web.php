@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
 // Tampilan User
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('index');
 Route::get('/produk', [App\Http\Controllers\HomeController::class, 'produk'])->name('produk.view');
+Route::get('/detailKategori/{id}', [App\Http\Controllers\HomeController::class, 'detailKategori'])->name('produk.detailkategori');
 Route::get('/store', [App\Http\Controllers\HomeController::class, 'store'])->name('store');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/detailproduk/{id}', [App\Http\Controllers\HomeController::class, 'detailProduk'])->name('detailProduk');
@@ -88,6 +89,15 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin',  'mi
             Route::get('/{id}/edit', 'ProdukController@show')->name('produk.edit');
             Route::post('/{id}', 'ProdukController@update')->name('produk.update');
             Route::delete('/{id}', 'ProdukController@destroy')->name('produk.delete');
+        });
+
+        Route::group(['prefix' => '/kategori-produk'], function () {
+            Route::get('/', 'KategoriProdukController@index')->name('kategori-produk');
+            Route::get('/data', 'KategoriProdukController@data')->name('kategori-produk.data');
+            Route::post('/store', 'KategoriProdukController@store')->name('kategori-produk.store');
+            Route::get('/{id}/edit', 'KategoriProdukController@show')->name('kategori-produk.edit');
+            Route::post('/{id}', 'KategoriProdukController@update')->name('kategori-produk.update');
+            Route::delete('/{id}', 'KategoriProdukController@destroy')->name('kategori-produk.delete');
         });
 
         Route::group(['prefix' => '/penjadwalan'], function () {
