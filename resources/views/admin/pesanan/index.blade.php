@@ -172,7 +172,9 @@
                                                                 @endforeach
                                                             </ul>
                                                         </td>
-                                                        <td class="nowrap">Rp. {{ $v->total_price }}</td>
+                                                        <div>
+                                                        <td class="nowrap text-left">Rp.
+                                                            {{ number_format($v->total_price, 0, ',', '.') }}</td>
 
 
                                                         <td class="nowrap">{{ $v->created_at->format('d/m/Y') }}</td>

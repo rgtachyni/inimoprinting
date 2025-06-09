@@ -76,7 +76,7 @@
                                             <div class="c-info">
                                                 <p class="c-title c-font-16 c-font-slim namaProduk">
                                                     {{ $produks->namaProduk }}</p>
-                                                <p class="c-price c-font-14 c-font-slim">Rp. {{ $produks->harga }}
+                                                <p class="c-price c-font-14 c-font-slim">Rp. {{ number_format($produks->harga,0,',','.') }}
 
                                                 </p>
                                             </div>

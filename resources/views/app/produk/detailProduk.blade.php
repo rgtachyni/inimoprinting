@@ -69,7 +69,7 @@
                                         <a class="c-font-red" href="#">Write a review</a>
                                     </div>
                                 </div>
-                                <div class="c-product-price">Rp. {{ $produk->harga }}</div>
+                                <div class="c-product-price">Rp. {{ number_format($produk->harga, 0, ',', '.') }}</div>
                                 <div class="c-product-short-desc">
                                     {{ $produk->deskripsi }}
                                 </div>
