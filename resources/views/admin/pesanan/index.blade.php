@@ -152,8 +152,9 @@
                                             <tr class="fw-bold fs-6 text-gray-800 text-center">
                                                 <th>Order Id</th>
                                                 <th>Username</th>
-                                                <th>Alamat</th>
+                                                {{-- <th>Alamat</th> --}}
                                                 <th>Nama Produk</th>
+                                                <th>Harga</th>
                                                 <th>Waktu pemesanan</th>
                                             </tr>
 

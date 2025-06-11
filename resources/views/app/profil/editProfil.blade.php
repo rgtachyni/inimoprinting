@@ -142,54 +142,7 @@
 
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Provinsi</label>
-                                <select class="form-control c-square c-theme" name="provinsi" id="provinsi">
-                                    <option value="" disabled
-                                        {{ old('kabupaten', $data->kabupaten ?? '') == '' ? 'selected' : '' }}>
-                                        Pilih</option>
-                                    <option value="sulsel"
-                                        {{ old('provinsi', $data->provinsi ?? '') == 'sulsel' ? 'selected' : '' }}>Sulsesl
-                                    </option>
-                                    <option value="sulbar"
-                                        {{ old('provinsi', $data->provinsi ?? '') == 'sulbar' ? 'selected' : '' }}>
-                                        Sulbar</option>
-                                    <option value="papua"
-                                        {{ old('provinsi', $data->provinsi ?? '') == 'papua' ? 'selected' : '' }}>
-                                        Papua</option>
-                                    <option value="Jawa"
-                                        {{ old('provinsi', $data->provinsi ?? '') == 'jawa' ? 'selected' : '' }}>Jawa
-                                    </option>
-                                    {{-- <option value="5">China</option> --}}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Kabupaten</label>
-                                <select class="form-control c-square c-theme" id="kabupaten" name="kabupaten">
-                                    <option value="" disabled
-                                        {{ old('kabupaten', $data->kabupaten ?? '') == '' ? 'selected' : '' }}>
-                                        Pilih</option>
-                                    <option value="makassar"
-                                        {{ old('kabupaten', $data->kabupaten ?? '') == 'makassar' ? 'selected' : '' }}>
-                                        Makassar
-                                    </option>
-                                    <option value="gowa"
-                                        {{ old('kabupaten', $data->kabupaten ?? '') == 'gowa' ? 'selected' : '' }}>Gowa
-                                    </option>
-                                    <option value="timika"
-                                        {{ old('kabupaten', $data->kabupaten ?? '') == 'timika' ? 'selected' : '' }}>Timika
-                                    </option>
-                                    <option value="jayapura"
-                                        {{ old('kabupaten', $data->kabupaten ?? '') == 'jayapura' ? 'selected' : '' }}>
-                                        Jayapura
-                                    </option>
-                                    {{-- <option value="5">China</option> --}}
-                                </select>
-                            </div>
-                        </div>
+
                         {{-- <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="control-label">Kecamatan</label>
@@ -202,18 +155,12 @@
                                 </select>
                             </div>
                         </div> --}}
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Kode pos</label>
-                                <input type="text" class="form-control c-square c-theme" placeholder=""
-                                    id="kodePos" name="kodePos" value="{{ old('kodePos', $data->kodePos ?? '') }}">
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="control-label">Alamat</label>
-                                <textarea id="alamat" name="alamat" rows="4" cols="105"> {{ old('alamat', $data->alamat ?? '') }}"
+                                <textarea id="alamat" name="alamat" rows="4" cols="105"
+                                    placeholder="SIlahkan isi alamat lengkap seperti kabupaten, provinsi, kota , dll"> {{ old('alamat', $data->alamat ?? '') }}
 
                                 </textarea>
                             </div>

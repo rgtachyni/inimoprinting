@@ -297,13 +297,13 @@
                                 </ul>
                                 <div class="c-tab-content">
                                     <div class="c-bg-img-center1"
-                                        style="background-image: url(../../assets/base/img/content/backgrounds/bg-62.jpg)">
+                                        style="">
                                         <div class="container">
                                             <div class="tab-content">
                                                 <div class="tab-pane fade in active" id="c-tab2-opt1-1">
                                                     <div class="c-tab-pane">
                                                         <img class="img-responsive"
-                                                            src="../../assets/base/img/content/stock2/3.jpg"
+                                                            src=""
                                                             alt="" />
 
                                                         {{-- <h4 class="c-font-30 c-font-thin c-font-uppercase c-font-bold">Modern
@@ -324,7 +324,7 @@
                                                 <div class="tab-pane fade" id="c-tab2-opt1-2">
                                                     <div class="c-tab-pane">
                                                         <img class="img-responsive"
-                                                            src="../../assets/base/img/content/stock2/04.jpg"
+                                                            src=""
                                                             alt="" />
 
 
@@ -342,7 +342,7 @@
                                                 <div class="tab-pane fade" id="c-tab2-opt1-3">
                                                     <div class="c-tab-pane">
                                                         <img class="img-responsive"
-                                                            src="../../assets/base/img/content/stock2/5.jpg"
+                                                            src=""
                                                             alt="" />
 
 
@@ -358,7 +358,7 @@
                                                 <div class="tab-pane fade" id="c-tab2-opt1-4">
                                                     <div class="c-tab-pane">
                                                         <img class="img-responsive"
-                                                            src="../../assets/base/img/content/stock2/06.jpg"
+                                                            src=""
                                                             alt="" />
 
 
@@ -373,7 +373,7 @@
                                                 <div class="tab-pane fade" id="c-tab2-opt1-5">
                                                     <div class="c-tab-pane">
                                                         <img class="img-responsive"
-                                                            src="../../assets/base/img/content/stock2/6.jpg"
+                                                            src=""
                                                             alt="" />
 
 
@@ -461,8 +461,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
-
                             </div>
                         </div>
                     </div>
@@ -570,12 +568,12 @@
         </div>
         <!-- END: PAGE CONTAINER -->
     @endsection
-
+    {{-- 
     <script src="path/to/jquery.js"></script>
     <script src="path/to/jquery.themepunch.tools.min.js"></script>
-    <script src="path/to/jquery.themepunch.revolution.min.js"></script>
+    <script src="path/to/jquery.themepunch.revolution.min.js"></script> --}}
 
-    <script>
+    {{-- <script>
         jQuery(document).ready(function() {
             jQuery('.tp-banner').show().revolution({
                 delay: 5000,
@@ -586,4 +584,4 @@
                 forceFullWidth: "on"
             });
         });
-    </script>
+    </script> --}}

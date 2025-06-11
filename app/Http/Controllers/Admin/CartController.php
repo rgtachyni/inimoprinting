@@ -17,7 +17,13 @@ class CartController extends Controller
     public function addToCart(Request $request, $id)
     {
         // dd($request->all());
-        $req = $request->all();
+        $validatedData = $request->validate([
+            'catatan' => 'required|string|max:255',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'jumlah' => 'required|integer|min:1',
+        ]);
+        // dd($validatedData['jumlah']);
+        // $req = $request->all();
 
         $produk = Produk::findOrFail($id);
         $jumlah = $request->input('jumlah', 1);
@@ -33,21 +39,20 @@ class CartController extends Controller
             $filename = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/cart', $filename);
 
-            $req['gambar'] = $filename;
+            $validatedData['gambar'] = $filename;
         }
 
         if ($cart) {
             $cart->jumlah += 1;
             $cart->save();
         } else {
-
             Cart::create([
                 'user_id' => Auth::id(),
                 'produk_id' => $produk->id,
-                'catatan' => $req['catatan'],
-                'gambar' => $req['gambar'],
+                'catatan' => $validatedData['catatan'] ?? null,
+                'gambar' => $validatedData['gambar'] ?? null,
                 'jumlah' => $jumlah,
-                'status' => 'dipilih', // tambahkan status default
+                'status' => 'dipilih',
             ]);
         }
 

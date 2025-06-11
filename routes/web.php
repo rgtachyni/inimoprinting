@@ -11,16 +11,7 @@ use App\Http\Controllers\PesananController;
 use App\Models\AlgoritmaGreedy;
 use Faker\Provider\ar_EG\Payment;
 
-// Route::get('/footer', function () {
-//     return view('app._layouts.footer');
-// });
 
-// Auth::routes();
-
-// Route::get('/auth/login', [Auths::class, 'index']);
-// Route::post('/auth/login', [Auths::class, 'login'])->name('login');
-
-// Route::get('/auth/logout', [Auths::class, 'logout'])->name('logout');
 Route::post('/auth/logout', [Auths::class, 'logout'])->name('logout');
 Route::get('/login', [Authz::class, 'login'])->name('login');
 Route::post('/proses-login', [Authz::class, 'prosesLogin'])->name('prosesLogin');

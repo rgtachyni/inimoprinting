@@ -67,7 +67,7 @@
                              <li>{{ $data->namaLengkap ?? '-' }}</li>
                              <li>{{ $data->jkel ?? '-' }}</li>
                              <li>{{ $data->tanggalLahir ?? '-' }}</li>
-                             <li>{{ $data->provinsi ?? '-' }}, {{ $data->kabupaten ?? '-' }}</li>
+                             {{-- <li>{{ $data->provinsi ?? '-' }}, {{ $data->kabupaten ?? '-' }}</li> --}}
                              <li>{{ $data->alamat ?? '-' }}</li>
                              <li>Phone: {{ $data->noHp ?? '-' }}</li>
                              <li>Email: <a href="mailto:jango@themehats.com"

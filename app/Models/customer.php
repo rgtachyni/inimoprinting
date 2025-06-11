@@ -18,9 +18,9 @@ class customer extends Model
         'noHp',
         'tanggalLahir',
         'jkel',
-        'provinsi',
-        'kabupaten',
-        'kodePos',
+        // 'provinsi',
+        // 'kabupaten',
+        // 'kodePos',
         'alamat'
 
     ];

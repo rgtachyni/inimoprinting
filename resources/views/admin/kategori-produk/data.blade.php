@@ -2,6 +2,8 @@
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $v->nama }}</td>
+        <td> <img src="{{ asset('storage/kategori/' . $v->gambar) }}" alt="1" width="10%"></td>
+        {{-- <td>{{ $v->gambar }}</td> --}}
 
         <td>
             <a onclick="editForm({{ $v->id }})" class="">

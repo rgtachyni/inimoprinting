@@ -10,7 +10,7 @@
                     {{-- <h4 class="">Page Sub Title Goes Here</h4> --}}
                 </div>
                 <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-                    <li><a href="shop-product-details-2.html">Product Details 2</a></li>
+                    <li><a href="shop-product-details-2.html">Product Details </a></li>
                     <li>/</li>
                     <li class="c-state_active">Inimo printing</li>
 
@@ -89,31 +89,35 @@
 
                                 </div>
                                 <div class="c-product-add-cart c-margin-t-20">
-                                    <form action="{{ route('cart.add', ['id' => $produk->id]) }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('cart.add', ['id' => $produk->id]) }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
+                                       
                                         <div class="row">
                                             <div class="col-sm-12 col-xs-12 c-margin-t-20">
                                                 <div class="c-product-color">
                                                     <p class="c-product-meta-label c-font-uppercase c-font-bold">Catatan</p>
-                                                    <textarea name="catatan" id="catatan" rows="4" cols="50"></textarea>
+                                                    <textarea name="catatan" id="catatan" rows="4" cols="50"
+                                                        placeholder="Tambahkan pada catatan jika perlu: Warna, size, bahan, dll"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-xs-12 c-margin-t-20">
                                                 <div class="c-product-color">
                                                     <p class="c-product-meta-label c-font-uppercase c-font-bold">Upload
                                                         design</p>
+                                                    <input type="file" id="gambar" name="gambar">
 
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-xs-12 c-margin-t-20">
                                                 <div class="c-product-color">
-                                                    <input type="file" id="gambar" name="gambar">
+
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-4 col-xs-12">
-
                                                 <div class="c-input-group c-spinner">
+                                                    <p class="c-product-meta-label c-font-uppercase c-font-bold">Jumlah </p>
                                                     <input type="number" id="c-item-1" name="jumlah" value="1"
                                                         min="1" class="form-control" />
                                                     <div class="c-input-group-btn-vertical">
@@ -135,6 +139,7 @@
                                                 class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">Add
                                                 to Cart</button>
                                         </div>
+
                                     </form>
                                 </div>
                             </div>

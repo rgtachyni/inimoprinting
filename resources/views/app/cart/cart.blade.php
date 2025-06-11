@@ -114,8 +114,8 @@
                                     <h3><a href="shop-product-details-2.html"
                                             class="c-font-bold c-theme-link c-font-22 c-font-dark">{{ $item->produk->namaProduk }}</a>
                                     </h3>
-                                    <p>Color: Blue</p>
-                                    <p>Size: S</p>
+                                    <p>{{ $item->catatan }}</p>
+                                    {{-- <p>Size: S</p> --}}
                                 </div>
 
                                 <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
@@ -304,11 +304,12 @@
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const express = document.getElementById('express');
         const normal = document.getElementById('normal');
         const grandTotalElem = document.getElementById('grandTotal');
-        const originalTotal = parseFloat(grandTotalElem.dataset.original.replace(/\./g, '').replace(',', '.')); // Ambil dari atribut data-original
+        const originalTotal = parseFloat(grandTotalElem.dataset.original.replace(/\./g, '').replace(',',
+            '.')); // Ambil dari atribut data-original
         const amountInput = document.querySelector('input[name="amount"]');
 
         function updateTotal() {
@@ -326,7 +327,7 @@
 
             grandTotalElem.textContent = formatter.format(newTotal);
             // grandTotalElem.textContent = formatter.format(newTotal);
-            amountInput.value = Math.round(newTotal); 
+            amountInput.value = Math.round(newTotal);
         }
 
         express.addEventListener('change', updateTotal);

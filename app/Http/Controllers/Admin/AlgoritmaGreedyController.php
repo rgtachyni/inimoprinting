@@ -44,6 +44,11 @@ class AlgoritmaGreedyController extends Controller
                 $totalPrice = $item->total_price;
                 $user = $item->user->name;
                 $id = $item->id;
+                $gambar = $item->carts->first()?->produk?->gambar ?? 'default-image.jpg';
+                // dd($gambar);
+
+
+
 
 
 
@@ -58,8 +63,8 @@ class AlgoritmaGreedyController extends Controller
                     ['paymenttransaksi_id' => $item->id],
                     ['waktuPengerjaan' => $waktu, 'skor' => $totalSkor]
                 );
-                
-            // dd($waktu);
+
+                // dd($waktu);
                 return [
                     'produk' => $produkListWithQty ?? 'Tidak diketahui',
                     'volume' => $volume,
@@ -73,8 +78,9 @@ class AlgoritmaGreedyController extends Controller
                     'total_price' => $totalPrice,
                     'user' => $user,
                     'id' => $id,
-                    // 'waktuPengerjaan'=>$waktuPengerjaan
-                  
+                    'gambar' => $gambar
+                    
+
                 ];
             });
 

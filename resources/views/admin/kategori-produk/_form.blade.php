@@ -30,6 +30,12 @@
                             <div class="position-relative">
                                 <input type="text" class="form-control" name="nama" id="nama" />
                             </div>
+                            <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+                                <span class="required">Gambar</span>
+                            </label>
+                            <div class="position-relative">
+                                <input type="file" id="gambar" name="gambar">
+                            </div>
                         </div>
 
 
@@ -81,6 +87,7 @@
                     $('#updateBtn').show();
                     $('#formId').val(data.id);
                     $('#nama').val(data.nama);
+                    $('#gambar').val(data.gambar);
                 },
                 error: function() {
                     toast("Tidak dapat menampilkan data", "error", 1500);

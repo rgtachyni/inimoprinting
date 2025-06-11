@@ -69,7 +69,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="c-bg-img-center c-overlay-object" data-height="height"
-                                                    style="height: 230px; background-image: url({{ asset('storage/produk/' . $produks->gambar) }});">
+                                                    style="height: 230px; background-image: url({{ asset('storage/kategori/' . $produks->gambar) }});">
                                                 </div>
 
                                             </div>
@@ -98,40 +98,40 @@
 
             <script src="../../assets/global/plugins/excanvas.min.js"></script>
             <![endif]-->
-                                                            <script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
-                                                            <script src="../../assets/demos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/jquery.easing.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/reveal-animate/wow.js" type="text/javascript"></script>
+                                                                <script src="../../assets/demos/default/js/scripts/reveal-animate/reveal-animate.js" type="text/javascript"></script>
 
-                                                            <!-- END: CORE PLUGINS -->
+                                                                <!-- END: CORE PLUGINS -->
 
-                                                            <!-- BEGIN: LAYOUT PLUGINS -->
-                                                            <script src="../../assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
-                                                            <script src="../../assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
-                                                            <!-- END: LAYOUT PLUGINS -->
+                                                                <!-- BEGIN: LAYOUT PLUGINS -->
+                                                                <script src="../../assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/slider-for-bootstrap/js/bootstrap-slider.js" type="text/javascript"></script>
+                                                                <script src="../../assets/plugins/js-cookie/js.cookie.js" type="text/javascript"></script>
+                                                                <!-- END: LAYOUT PLUGINS -->
 
-                                                            <!-- BEGIN: THEME SCRIPTS -->
-                                                            <script src="../../assets/base/js/components.js" type="text/javascript"></script>
-                                                            <script src="../../assets/base/js/components-shop.js" type="text/javascript"></script>
-                                                            <script src="../../assets/base/js/app.js" type="text/javascript"></script>
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                    App.init(); // init core    
-                                                                });
-                                                            </script>
-                                                            <!-- END: THEME SCRIPTS -->
+                                                                <!-- BEGIN: THEME SCRIPTS -->
+                                                                <script src="../../assets/base/js/components.js" type="text/javascript"></script>
+                                                                <script src="../../assets/base/js/components-shop.js" type="text/javascript"></script>
+                                                                <script src="../../assets/base/js/app.js" type="text/javascript"></script>
+                                                                <script>
+                                                                    $(document).ready(function() {
+                                                                        App.init(); // init core    
+                                                                    });
+                                                                </script>
+                                                                <!-- END: THEME SCRIPTS -->
 
-                                                            <!-- END: LAYOUT/BASE/BOTTOM -->
-                                                        </body>
-                                                    </div>
-                                                    {{-- <script>
+                                                                <!-- END: LAYOUT/BASE/BOTTOM -->
+                                                            </body>
+                                                        </div>
+                                                        {{-- <script>
             document.getElementById('cari').addEventListener('keyup', function() {
                 let filter = this.value.toLowerCase();
                 let items = document.querySelectorAll('#tableProduk .produk-item');
@@ -146,43 +146,43 @@
                 });
             });
         </script> --}}
-                                                    <script>
-                                                        document.getElementById('cari').addEventListener('keyup', function() {
-                                                            let filter = this.value.toLowerCase();
-                                                            let items = document.querySelectorAll('#tableProduk .produk-item');
-                                                            let found = false;
+                                                        <script>
+                                                            document.getElementById('cari').addEventListener('keyup', function() {
+                                                                let filter = this.value.toLowerCase();
+                                                                let items = document.querySelectorAll('#tableProduk .produk-item');
+                                                                let found = false;
 
-                                                            items.forEach(item => {
-                                                                let nama = item.querySelector('.namaProduk').textContent.toLowerCase();
-                                                                if (nama.includes(filter)) {
-                                                                    item.style.display = '';
-                                                                    found = true;
+                                                                items.forEach(item => {
+                                                                    let nama = item.querySelector('.namaProduk').textContent.toLowerCase();
+                                                                    if (nama.includes(filter)) {
+                                                                        item.style.display = '';
+                                                                        found = true;
+                                                                    } else {
+                                                                        item.style.display = 'none';
+                                                                    }
+                                                                });
+
+
+                                                                let messageId = 'noResultMessage';
+                                                                let existingMessage = document.getElementById(messageId);
+
+                                                                if (!found) {
+
+                                                                    if (!existingMessage) {
+                                                                        let noResult = document.createElement('div');
+                                                                        noResult.id = messageId;
+                                                                        noResult.style.padding = '20px';
+                                                                        noResult.style.textAlign = 'center';
+                                                                        noResult.style.fontSize = '18px';
+                                                                        noResult.innerText = 'Pencarian tidak ada';
+                                                                        document.getElementById('tableProduk').appendChild(noResult);
+                                                                    }
                                                                 } else {
-                                                                    item.style.display = 'none';
+
+                                                                    if (existingMessage) {
+                                                                        existingMessage.remove();
+                                                                    }
                                                                 }
                                                             });
-
-
-                                                            let messageId = 'noResultMessage';
-                                                            let existingMessage = document.getElementById(messageId);
-
-                                                            if (!found) {
-
-                                                                if (!existingMessage) {
-                                                                    let noResult = document.createElement('div');
-                                                                    noResult.id = messageId;
-                                                                    noResult.style.padding = '20px';
-                                                                    noResult.style.textAlign = 'center';
-                                                                    noResult.style.fontSize = '18px';
-                                                                    noResult.innerText = 'Pencarian tidak ada';
-                                                                    document.getElementById('tableProduk').appendChild(noResult);
-                                                                }
-                                                            } else {
-
-                                                                if (existingMessage) {
-                                                                    existingMessage.remove();
-                                                                }
-                                                            }
-                                                        });
-                                                    </script>
+                                                        </script>
 @endsection

@@ -98,6 +98,13 @@ class KategoriProdukController extends Controller
         try {
             $req = $request->all();
             // dd($req);
+            if ($request->hasFile('gambar')) {
+                $image = $request->file('gambar');
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/kategori', $filename);
+
+                $req['gambar'] = $filename;
+            }
             $data = $this->repository->store($req);
             return response()->json($data);
         } catch (\Exception $e) {

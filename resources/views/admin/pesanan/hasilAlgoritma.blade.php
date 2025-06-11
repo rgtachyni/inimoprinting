@@ -173,6 +173,13 @@
                                                         <ul class="list-unstyled mb-0">
                                                             <li>{{ $v['produk'] }}</li>
 
+                                                            <li>
+                                                                <a href="{{ asset('storage/cart/' . $v['gambar']) }}"
+                                                                    download target="_blank">Unduh
+                                                                </a>
+                                                            </li>
+
+
                                                         </ul>
                                                     </td>
                                                     <td class="nowrap">{{ $v['urgensi'] }}</td>

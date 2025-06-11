@@ -18,15 +18,14 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('gambar');
             $table->string('username');
-           
             $table->string('namaLengkap');
              $table->string('email');
             $table->string('noHp');
             $table->date('tanggalLahir');
             $table->enum('jkel', ['lakilaki', 'perempuan']);
-            $table->enum('provinsi', ['sulsel', 'sulbar', 'papua', 'jawa']);
-            $table->enum('kabupaten', ['makassar', 'gowa', 'timika', 'jayapura']);
-            $table->integer('kodePos');
+            // $table->enum('provinsi', ['sulsel', 'sulbar', 'papua', 'jawa']);
+            // $table->enum('kabupaten', ['makassar', 'gowa', 'timika', 'jayapura']);
+            // $table->integer('kodePos');
             $table->string('alamat');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

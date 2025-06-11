@@ -17,62 +17,100 @@ class ProdukSeeder extends Seeder
     {
         $produk = [
             [
-                'namaProduk' => 'stiker',
-                'harga' => '20000',
+                'namaProduk' => 'Thank card 9 x 9 cm',
+                'harga' => '650',
                 'kategoriProduk_id' => 1,
-                'deskripsi' => 'Stiker adalah label yang melekat pada suatu permukaan. Ini bisa berupa media informasi visual seperti lembaran kertas atau plastik yang ditempelkan. Stiker dapat digunakan untuk dekorasi, promosi, atau fungsional sesuai kebutuhan. ',
-                'gambar' => 'stiker.jpg'
+                'deskripsi' => 'Tersedia dalam beberapa pilihan bahan, ukuran 9 x 9 cm
+                    bisa di cetak 1 muka maupun 2 muka,
+                    Print Full color',
+                'gambar' => 'tycard1.png'
             ],
             [
-                'namaProduk' => 'spanduk',
-                'harga' => '5000',
+                'namaProduk' => 'Thank card 14,5 x 10,5 cm',
+                'harga' => '30000',
                 'kategoriProduk_id' => 1,
-                'deskripsi' => 'Spanduk adalah media komunikasi visual yang digunakan untuk menyampaikan informasi, promosi, atau pesan lainnya kepada publik, biasanya dengan ukuran panjang dan lebar yang signifikan. Spanduk sering dipasang di tempat-tempat strategis seperti jalanan, depan toko, atau area acara untuk menarik perhatian dan menyampaikan pesan secara jelas. ',
-                'gambar' => 'spanduk.jpg'
+                'deskripsi' => 'Tersedia dalam beberapa pilihan bahan, ukuran 9 x 9 cm
+                    bisa di cetak 1 muka maupun 2 muka,
+                    Print Full color',
+                'gambar' => 'tycard2.png'
             ],
-           
             [
-                'namaProduk' => 'tumbler',
+                'namaProduk' => 'Thank card 14 x 14 cm',
+                'harga' => '33000',
+                'kategoriProduk_id' => 1,
+                'deskripsi' => 'Tersedia dalam beberapa pilihan bahan, ukuran 9 x 9 cm
+                    bisa di cetak 1 muka maupun 2 muka,
+                    Print Full color',
+                'gambar' => 'tycard3.png'
+            ],
+            [
+                'namaProduk' => 'Thank card 14 x 14 cm',
+                'harga' => '33000',
+                'kategoriProduk_id' => 1,
+                'deskripsi' => 'Tersedia dalam beberapa pilihan bahan, ukuran 9 x 9 cm
+                    bisa di cetak 1 muka maupun 2 muka,
+                    Print Full color',
+                'gambar' => 'tycard3.png'
+            ],
+            [
+                'namaProduk' => 'Plakat 20 mm',
+                'harga' => '325000',
+                'kategoriProduk_id' => 2,
+                'deskripsi' => 'Plakat akrilik dengan model seperti gambar,
+Ketebalan akrilik 20 mm-P 02,
+Tinggi plakat kurang lebih 21 cm,
+Dicetak menggunakan mesin UV flatbed,
+Bisa print dengan foto
+    ',
+                'gambar' => 'plakat1.png'
+            ],
+            [
+                'namaProduk' => 'Plakat 20 mm- P 12',
+                'harga' => '325000',
+                'kategoriProduk_id' => 2,
+                'deskripsi' => 'Plakat akrilik dengan model seperti gambar,
+Ketebalan akrilik 20 mm,
+Tinggi plakat kurang lebih 21 cm,
+Dicetak menggunakan mesin UV flatbed,
+Bisa print dengan foto
+    ',
+                'gambar' => 'plakat2.png'
+            ],
+            [
+                'namaProduk' => 'Plakat 20 mm',
+                'harga' => '325000',
+                'kategoriProduk_id' => 2,
+                'deskripsi' => 'Plakat akrilik dengan model seperti gambar,
+Ketebalan akrilik 20 mm,
+Tinggi plakat kurang lebih 21 cm,
+Dicetak menggunakan mesin UV flatbed,
+Bisa print dengan foto
+    ',
+                'gambar' => 'plakat3.png'
+            ],
+            [
+                'namaProduk' => 'Kaos anak',
                 'harga' => '75000',
-                'kategoriProduk_id' => 1,
-                'deskripsi' => 'Tumbler adalah wadah minuman berbentuk silinder yang dirancang untuk digunakan saat bepergian. Biasanya terbuat dari plastik, kaca, atau baja nirkarat, dan sering memiliki insulasi untuk menjaga suhu minuman panas atau dingin. Tumbler memiliki tutup rapat, sehingga aman dibawa dan diminum tanpa tumpah',
-                'gambar' => 'tumblare.png'
+                'kategoriProduk_id' => 3,
+                'deskripsi' => 'T Shirt Custom Anak dengan metode DTF (Direct transfer Film), 
+Tersedian berbagai Warna dan ukuran,
+Ukuran 100 (2-3 tahun) | 110 (4-5 tahun) | 120 (6-7 tahun),
+Ukuran desain maksimal 30 x 21 cm,
+Bisa Satuan
+    ',
+                'gambar' => 'baju1.png'
             ],
             [
-                'namaProduk' => 'stempel',
-                'harga' => '55000',
-                'kategoriProduk_id' => 1,
-                'deskripsi' => 'Stempel, atau cap, adalah alat yang digunakan untuk membuat rekaman tanda (gambar, tanda tangan) dengan menekannya pada kertas atau permukaan lainnya. Stempel berfungsi sebagai tanda pengenal, pengesahan, dan alat pertanggungjawaban dalam berbagai dokumen resmi. ',
-                'gambar' => 'stempel.png'
+                'namaProduk' => 'T-shirt ',
+                'harga' => '75000',
+                'kategoriProduk_id' => 3,
+                'deskripsi' => 'T Shirt dengan metode DTF (Direct transfer Film),
+Ukuran desain maksimal 29 x 20 cm,
+Bisa Satuan
+    ',
+                'gambar' => 'baju2.png'
             ],
-            [
-                'namaProduk' => 'id card',
-                'harga' => '2000',
-                'kategoriProduk_id' => 1,
-                'deskripsi' => 'ID Card adalah kartu identitas yang berfungsi untuk mengidentifikasi seseorang, baik itu sebagai karyawan, pelajar, atau anggota suatu organisasi. ID Card biasanya berisi informasi seperti nama, foto, jabatan (untuk karyawan), dan nomor identitas. ',
-                'gambar' => 'idcard.png'
-            ],
-            [
-                'namaProduk' => 'akrilik',
-                'harga' => '2000',
-                'kategoriProduk_id' => 1,
-                'deskripsi' => 'Akrilik adalah sejenis plastik polimer transparan yang sering digunakan sebagai alternatif kaca karena ringan, mudah dibentuk, dan tahan benturan. Ia memiliki kejernihan yang tinggi, seperti kaca, namun lebih ringan dan tidak mudah pecah.  ',
-                'gambar' => 'akrilik.png'
-            ],
-            [
-                'namaProduk' => 'baju',
-                'harga' => '105000',
-                'kategoriProduk_id' => 1,
-                'deskripsi' => 'Baju, dalam bahasa Indonesia, mengacu pada pakaian yang menutupi bagian atas tubuh, seperti kemeja, atasan, atau blus. Pakaian secara umum adalah segala sesuatu yang dikenakan pada tubuh manusia, terbuat dari bahan seperti kain, tekstil, atau bahkan kulit hewan. Pakaian berfungsi untuk melindungi tubuh dari cuaca, menjaga kebersihan, meningkatkan keamanan, dan memberikan kenyamanan. ',
-                'gambar' => 'baju.png'
-            ],
-            [
-                'namaProduk' => 'ganci',
-                'harga' => '60000',
-                'kategoriProduk_id' => 1,
-                'deskripsi' => 'Ganci (singkatan dari gantungan kunci) adalah alat kecil yang digunakan untuk menggantungkan kunci atau objek kecil lainnya. Ganci biasanya terbuat dari logam, plastik, atau karet, dan berfungsi untuk memudahkan kita menyimpan kunci dan memperindah penampilan. ',
-                'gambar' => 'ganci.png'
-            ],
+
         ];
         foreach ($produk as $key => $produks) {
             Produk::create([

@@ -151,8 +151,7 @@
                                                     <td>{{ $v->namaLengkap }}</td>
                                                     <td>{{ $v->email }}</td>
                                                     <td>{{ $v->noHp }}</td>
-                                                    <td>{{ $v->alamat }}, {{ $v->kabupaten }}, {{ $v->provinsi }},
-                                                        {{ $v->kodePos }}</td>
+                                                    <td>{{ $v->alamat }}</td>
                                                 </tr>
                                             @endforeach
                                         </thead>
